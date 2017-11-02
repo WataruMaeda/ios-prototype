@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
   }
 }
 
-// MARK: UISearchBar
+// MARK: - UISearchBar
 
 extension HomeViewController: UISearchBarDelegate {
   
@@ -35,7 +35,7 @@ extension HomeViewController: UISearchBarDelegate {
   }
 }
 
-// MARK: UICollectionView
+// MARK: - UICollectionView
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
   
@@ -68,12 +68,43 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let identifer = "cell"
-    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: identifer)
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifer, for: indexPath)
-    cell.backgroundColor = .red
-    
+    collectionView.register(FlickerCell.self, forCellWithReuseIdentifier: identifer)
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifer, for: indexPath) as? FlickerCell else { return UICollectionViewCell() }
+    cell.setup()
     return cell
   }
 }
 
+// MARK: - UICollectionViewCell
 
+class FlickerCell: UICollectionViewCell {
+  var imageView = UIImageView()
+  var overlay = UIView()
+  var label = UILabel()
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    initViews()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)!
+    initViews()
+  }
+  
+  private func initViews() {
+    addSubview(imageView)
+    addSubview(overlay)
+    addSubview(label)
+  }
+  
+  override func draw(_ rect: CGRect) {
+    imageView.frame = rect
+    overlay.frame = rect
+    label.frame = rect
+  }
+  
+  func setup() {
+    
+  }
+}
