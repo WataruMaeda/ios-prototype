@@ -98,7 +98,7 @@
 			children = (
 				A5304A3F1FABAC400059E844 /* AppDelegate.swift */,
 				A5304A561FABACF30059E844 /* common */,
-				A5304A551FABACE90059E844 /* searvices */,
+				A5304A551FABACE90059E844 /* services */,
 				A5304A541FABACC90059E844 /* models */,
 				A5304A531FABACA50059E844 /* views */,
 			);
@@ -132,12 +132,12 @@
 			path = models;
 			sourceTree = "<group>";
 		};
-		A5304A551FABACE90059E844 /* searvices */ = {
+		A5304A551FABACE90059E844 /* services */ = {
 			isa = PBXGroup;
 			children = (
 				A5E89B4A1FABBF05006D50FA /* Service.swift */,
 			);
-			path = searvices;
+			path = services;
 			sourceTree = "<group>";
 		};
 		A5304A561FABACF30059E844 /* common */ = {
