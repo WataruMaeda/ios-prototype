@@ -7,15 +7,24 @@
 //
 
 import UIKit
+import SDWebImage
+import SafariServices
 
 class HomeViewController: UIViewController {
   
   var cv: UICollectionView!
+  var photos = [Photo]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupSearchBar()
     setupCollectionView()
+    Service.shared.getRecentPhotos { (success, result) in
+      if success {
+        self.photos = Photo.createFromJsons(dics: result)
+        self.cv.reloadData()
+      }
+    }
   }
 }
 
@@ -48,8 +57,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     cvLayout.minimumInteritemSpacing = space / 2
     cvLayout.sectionInset = UIEdgeInsetsMake(space, space, space, space)
     cvLayout.itemSize = CGSize(
-      width: (view.frame.size.width - space * 5) / 4,
-      height: (view.frame.size.width - space * 5) / 4)
+      width: (view.frame.size.width - space * 4) / 3,
+      height: (view.frame.size.width - space * 4) / 3)
     
     // Collection View
     cv = UICollectionView(frame:CGRect(x: 0, y: 0,
@@ -59,19 +68,37 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     cv.backgroundColor = .white
     cv.delegate = self
     cv.dataSource = self
+    cv.register(FlickerCell.self, forCellWithReuseIdentifier: "cell")
     view.addSubview(cv)
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 50
+    return photos.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let identifer = "cell"
-    collectionView.register(FlickerCell.self, forCellWithReuseIdentifier: identifer)
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifer, for: indexPath) as? FlickerCell else { return UICollectionViewCell() }
-    cell.setup()
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? FlickerCell else { return UICollectionViewCell() }
+    cell.setup(photos[indexPath.row])
     return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let sheet = UIAlertController(
+      title: "Open with..",
+      message: nil,
+      preferredStyle: .actionSheet
+    )
+    sheet.addAction(UIAlertAction(title: "Map", style: .default) {action in
+      // Show map
+    })
+    sheet.addAction(UIAlertAction(title: "Web", style: .default) {action in
+      // Show web
+      if let url = URL(string: self.photos[indexPath.row].url_o) {
+        self.navigationController?.present(SFSafariViewController(url: url), animated: true, completion: nil)
+      }
+    })
+    sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) {action in})
+    present(sheet, animated: true, completion: nil)
   }
 }
 
@@ -93,6 +120,7 @@ class FlickerCell: UICollectionViewCell {
   }
   
   private func initViews() {
+    backgroundColor = .darkGray
     addSubview(imageView)
     addSubview(overlay)
     addSubview(label)
@@ -102,9 +130,18 @@ class FlickerCell: UICollectionViewCell {
     imageView.frame = rect
     overlay.frame = rect
     label.frame = rect
+    imageView.clipsToBounds = true
+    imageView.contentMode = .scaleAspectFill
+    overlay.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+    label.textColor = .white
+    label.textAlignment = .center
+    label.numberOfLines = 2
   }
   
-  func setup() {
-    
+  func setup(_ photo: Photo) {
+    if let url = URL(string: photo.url_o) {
+      imageView.sd_setImage(with: url, completed: nil)
+    }
+    label.text = photo.title
   }
 }

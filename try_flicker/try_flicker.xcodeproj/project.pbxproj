@@ -15,8 +15,8 @@
 		A5304A4A1FABAC400059E844 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5304A481FABAC400059E844 /* LaunchScreen.storyboard */; };
 		A5304A5A1FABB09F0059E844 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5304A591FABB09F0059E844 /* HomeViewController.swift */; };
 		A5304A5C1FABB6B30059E844 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5304A5B1FABB6B30059E844 /* MapViewController.swift */; };
-		A5304A5E1FABB6DC0059E844 /* Searvice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5304A5D1FABB6DC0059E844 /* Searvice.swift */; };
-		A5304A601FABB6E60059E844 /* Flicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5304A5F1FABB6E60059E844 /* Flicker.swift */; };
+		A56627FD1FABCE5600885BB7 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56627FC1FABCE5600885BB7 /* Photo.swift */; };
+		A5E89B4B1FABBF05006D50FA /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E89B4A1FABBF05006D50FA /* Service.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +31,8 @@
 		A5304A4B1FABAC400059E844 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5304A591FABB09F0059E844 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A5304A5B1FABB6B30059E844 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		A5304A5D1FABB6DC0059E844 /* Searvice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searvice.swift; sourceTree = "<group>"; };
-		A5304A5F1FABB6E60059E844 /* Flicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flicker.swift; sourceTree = "<group>"; };
+		A56627FC1FABCE5600885BB7 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		A5E89B4A1FABBF05006D50FA /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		D53535D6BB1841B6BD90ECBE /* Pods_try_flicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_try_flicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -127,7 +127,7 @@
 		A5304A541FABACC90059E844 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				A5304A5F1FABB6E60059E844 /* Flicker.swift */,
+				A56627FC1FABCE5600885BB7 /* Photo.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -135,7 +135,7 @@
 		A5304A551FABACE90059E844 /* searvices */ = {
 			isa = PBXGroup;
 			children = (
-				A5304A5D1FABB6DC0059E844 /* Searvice.swift */,
+				A5E89B4A1FABBF05006D50FA /* Service.swift */,
 			);
 			path = searvices;
 			sourceTree = "<group>";
@@ -295,12 +295,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5304A601FABB6E60059E844 /* Flicker.swift in Sources */,
+				A56627FD1FABCE5600885BB7 /* Photo.swift in Sources */,
+				A5E89B4B1FABBF05006D50FA /* Service.swift in Sources */,
 				A5304A421FABAC400059E844 /* ViewController.swift in Sources */,
 				A5304A401FABAC400059E844 /* AppDelegate.swift in Sources */,
 				A5304A5A1FABB09F0059E844 /* HomeViewController.swift in Sources */,
 				A5304A5C1FABB6B30059E844 /* MapViewController.swift in Sources */,
-				A5304A5E1FABB6DC0059E844 /* Searvice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
