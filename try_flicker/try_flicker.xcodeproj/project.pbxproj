@@ -54,14 +54,78 @@
 		A5304A3E1FABAC400059E844 /* try_flicker */ = {
 			isa = PBXGroup;
 			children = (
-				A5304A3F1FABAC400059E844 /* AppDelegate.swift */,
-				A5304A411FABAC400059E844 /* ViewController.swift */,
-				A5304A431FABAC400059E844 /* Main.storyboard */,
-				A5304A461FABAC400059E844 /* Assets.xcassets */,
-				A5304A481FABAC400059E844 /* LaunchScreen.storyboard */,
-				A5304A4B1FABAC400059E844 /* Info.plist */,
+				A5304A571FABAD0B0059E844 /* Assets */,
+				A5304A511FABAC7F0059E844 /* Classes */,
+				A5304A521FABAC920059E844 /* Supporting Files */,
 			);
 			path = try_flicker;
+			sourceTree = "<group>";
+		};
+		A5304A511FABAC7F0059E844 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A5304A3F1FABAC400059E844 /* AppDelegate.swift */,
+				A5304A561FABACF30059E844 /* common */,
+				A5304A551FABACE90059E844 /* searvices */,
+				A5304A541FABACC90059E844 /* models */,
+				A5304A531FABACA50059E844 /* views */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		A5304A521FABAC920059E844 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A5304A4B1FABAC400059E844 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A5304A531FABACA50059E844 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				A5304A411FABAC400059E844 /* ViewController.swift */,
+				A5304A581FABAD5D0059E844 /* GUI */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		A5304A541FABACC90059E844 /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		A5304A551FABACE90059E844 /* searvices */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = searvices;
+			sourceTree = "<group>";
+		};
+		A5304A561FABACF30059E844 /* common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		A5304A571FABAD0B0059E844 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				A5304A461FABAC400059E844 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		A5304A581FABAD5D0059E844 /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+				A5304A431FABAC400059E844 /* Main.storyboard */,
+				A5304A481FABAC400059E844 /* LaunchScreen.storyboard */,
+			);
+			path = GUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,7 +339,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = try_flicker/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/try_flicker/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Wataru-Maeda.try-flicker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -289,7 +353,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = try_flicker/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/try_flicker/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Wataru-Maeda.try-flicker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
