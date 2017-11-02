@@ -95,10 +95,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
       preferredStyle: .actionSheet
     )
     sheet.addAction(UIAlertAction(title: "Map", style: .default) {action in
-      // Show map
+      let mapVc = MapViewController()
+      mapVc.photo = self.photos[indexPath.row]
+      self.navigationController?.pushViewController(mapVc, animated: true)
     })
     sheet.addAction(UIAlertAction(title: "Web", style: .default) {action in
-      // Show web
       if let url = URL(string: self.photos[indexPath.row].url_o) {
         self.navigationController?.present(SFSafariViewController(url: url), animated: true, completion: nil)
       }
