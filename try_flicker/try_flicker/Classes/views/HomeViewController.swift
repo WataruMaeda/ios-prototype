@@ -41,6 +41,12 @@ extension HomeViewController: UISearchBarDelegate {
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     print(searchText)
+    Service.shared.searchPhotos(searchText) { (success, result) in
+      if success {
+        self.photos = Photo.createFromJsons(dics: result)
+        self.cv.reloadData()
+      }
+    }
   }
 }
 

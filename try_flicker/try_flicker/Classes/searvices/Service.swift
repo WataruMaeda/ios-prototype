@@ -30,4 +30,18 @@ class Service: NSObject {
         completion(true, photo)
     }
   }
+  
+  func searchPhotos(_ text: String, completion:
+    @escaping (_ success: Bool,_ result: [[String:Any]]) -> Void) {
+    let method = "method=flickr.photos.search"
+    Alamofire.request(
+      host + method + format + api_key + "&tags=\(text)&extras=url_o")
+      .responseJSON { response in
+        guard let resut = response.result.value as? [String: Any],
+          let photos = resut["photos"] as? [String: Any],
+          let photo = photos["photo"] as? [[String:Any]]
+          else { return completion(false, [[:]]) }
+        completion(true, photo)
+    }
+  }
 }
