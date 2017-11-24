@@ -41,5 +41,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+<key>NSCameraUsageDescription</key>
+  <string>Accessing your library for picking video</string>
+<key>NSMicrophoneUsageDescription</key>
+  <string>Accessing your microohone for using video record function</string>
+<key>NSPhotoLibraryUsageDescription</key>
+  <string>Accessing your library for picking video</string>
 </dict>
 </plist>
