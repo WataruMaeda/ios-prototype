@@ -8,6 +8,8 @@
 
 import UIKit
 
+let cellId = "PageMenuCell"
+
 struct PageMenuOption {
   
   var frame: CGRect
@@ -32,32 +34,12 @@ struct PageMenuOption {
 
 class PageMenu: UIViewController {
 
-  // MARK: - Model
-  
+  fileprivate var option = PageMenuOption(frame: UIScreen.main.bounds)
   fileprivate var viewControllers = [UIViewController]()
   
-  fileprivate var option = PageMenuOption(frame: UIScreen.main.bounds)
-  
-  // MARK: - View
-  
-  fileprivate lazy var collectionView: UICollectionView = {
-    let cv = UICollectionView()
-    cv.dataSource = self
-    cv.delegate = self
-    return cv
-  }()
-  
-  fileprivate lazy var scrollView: UIScrollView = {
-    let scroll = UIScrollView()
-    scroll.delegate = self
-    scroll.isPagingEnabled = false
-    scroll.isUserInteractionEnabled = false
-    return scroll
-  }()
-  
-  fileprivate lazy var menuBorderLine = UIView()
-  
-  // MARK: - Life Cycle
+  fileprivate var scrollView: UIScrollView!
+  fileprivate var menuBorderLine: UIView!
+  fileprivate var collectionView: UICollectionView!
   
   convenience init() {
     self.init(viewControllers: [], option: PageMenuOption(frame: .zero))
@@ -80,16 +62,16 @@ extension PageMenu {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.addSubview(scrollView)
-    view.addSubview(collectionView)
+    setupMenus()
+    setupPageView()
   }
 }
 
-// MARK: - Menu Items (ScrollView)
+// MARK: - ScrollView (Menu Items)
 
 extension PageMenu: UIScrollViewDelegate {
   
-  fileprivate func setupMenuItems() {
+  fileprivate func setupMenus() {
     
     // Resize scroll view based on screen width
     setupBaseScrollView()
@@ -99,9 +81,16 @@ extension PageMenu: UIScrollViewDelegate {
     
     // Setup borderline
     setupBorderline()
+    
+    // Add Subview
+    view.addSubview(scrollView)
   }
   
   private func setupBaseScrollView() {
+    scrollView = UIScrollView()
+    scrollView.delegate = self
+    scrollView.isPagingEnabled = false
+    scrollView.isUserInteractionEnabled = false
     scrollView.frame = CGRect(x: 0, y: 0,
                               width: view.frame.size.width,
                               height: option.menuItemHeight ?? 40)
@@ -110,11 +99,14 @@ extension PageMenu: UIScrollViewDelegate {
   private func setupMenuButtons() {
     var menuX = 0 as CGFloat
     for i in 0..<viewControllers.count {
+      
       // Init Menu button
       let menuButton = UIButton()
       menuButton.tag = i
       menuButton.titleEdgeInsets = option.menuTitleInset ?? .zero
       menuButton.setTitle(viewControllers[i].title, for: .normal)
+      menuButton.setTitleColor(.black, for: .normal)
+      menuButton.addTarget(self, action: #selector(selectedMenuItem), for: .touchUpInside)
       
       // Resize Menu item based on option
       let buttonSize = menuButton.sizeThatFits(
@@ -122,15 +114,18 @@ extension PageMenu: UIScrollViewDelegate {
                height: option.menuItemHeight!))
       menuButton.frame = CGRect(x: menuX, y: 0,
                                 width: buttonSize.width,
-                                height: buttonSize.height)
-      menuX += buttonSize.width
+                                height: option.menuItemHeight!)
       scrollView.addSubview(menuButton)
+      
+      // Update x position
+      menuX += buttonSize.width
     }
     scrollView.contentSize.width = menuX
   }
   
   private func setupBorderline() {
     guard let firstMenuButton = scrollView.viewWithTag(0) as? UIButton else { return }
+    menuBorderLine = UIView()
     menuBorderLine.backgroundColor = .darkGray
     menuBorderLine.frame = CGRect(
       x: firstMenuButton.frame.origin.x,
@@ -142,17 +137,45 @@ extension PageMenu: UIScrollViewDelegate {
   func updateMenuTitle(title: String, menuIndex: Int) {
     
   }
+  
+  @objc func selectedMenuItem(_ sender: UIButton) {
+    print("tspped Menu Item (\(sender.titleLabel?.text ?? "")")
+  }
 }
 
-// MARK: - Item (CollectionView)
+// MARK: - CollectionView (Page View)
 
 extension PageMenu: UICollectionViewDelegate, UICollectionViewDataSource {
   
+  func setupPageView() {
+    let collectionViewLayout = UICollectionViewFlowLayout()
+    collectionViewLayout.scrollDirection = .horizontal
+    collectionView = UICollectionView(
+      frame: CGRect(x: 0,
+                    y: scrollView.frame.maxY,
+                    width: view.frame.size.width,
+                    height: view.frame.size.height - scrollView.frame.maxY),
+      collectionViewLayout: collectionViewLayout)
+    collectionView.delegate = self
+    collectionView.dataSource = self
+    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+    view.addSubview(collectionView)
+  }
+  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    return UICollectionViewCell()
+    let cell = collectionView.dequeueReusableCell(
+                  withReuseIdentifier: cellId, for: indexPath)
+    let viewController = viewControllers[indexPath.row]
+    cell.addSubview(viewController.view)
+    viewController.didMove(toParentViewController: self)
+    return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return viewControllers.count
+  }
+  
+  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    return collectionView.bounds.size
   }
 }
