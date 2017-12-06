@@ -32,7 +32,7 @@ struct PageMenuOption {
   }
 }
 
-class PageMenu: UIViewController {
+class PageMenu: UIView {
 
   fileprivate var option = PageMenuOption(frame: UIScreen.main.bounds)
   fileprivate var viewControllers = [UIViewController]()
@@ -46,9 +46,12 @@ class PageMenu: UIViewController {
   }
   
   init(viewControllers: [UIViewController], option: PageMenuOption) {
-    super.init(nibName: nil, bundle: nil)
+    super.init(frame: option.frame)
     self.viewControllers = viewControllers
     self.option = option
+    backgroundColor = .white
+    setupMenus()
+    setupPageView()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -59,13 +62,6 @@ class PageMenu: UIViewController {
 // MARK: - Controller
 
 extension PageMenu {
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    view.backgroundColor = .white
-    setupMenus()
-    setupPageView()
-  }
 }
 
 // MARK: - ScrollView (Menu Items)
@@ -84,7 +80,7 @@ extension PageMenu: UIScrollViewDelegate {
     setupBorderline()
     
     // Add Subview
-    view.addSubview(scrollView)
+    addSubview(scrollView)
   }
   
   private func setupBaseScrollView() {
@@ -93,7 +89,7 @@ extension PageMenu: UIScrollViewDelegate {
     scrollView.delegate = self
     scrollView.isPagingEnabled = false
     scrollView.frame = CGRect(x: 0, y: 0,
-                              width: view.frame.size.width,
+                              width: frame.size.width,
                               height: option.menuItemHeight ?? 40)
   }
   
@@ -150,32 +146,31 @@ extension PageMenu: UICollectionViewDelegate, UICollectionViewDataSource {
   
   func setupPageView() {
     // CollectionView Layout
-    let collectionViewHeight = view.frame.size.height - scrollView.frame.maxY
+    let collectionViewHeight = frame.size.height - scrollView.frame.maxY
     let collectionViewLayout = UICollectionViewFlowLayout()
     collectionViewLayout.scrollDirection = .horizontal
     collectionViewLayout.minimumLineSpacing = 0
     collectionViewLayout.minimumInteritemSpacing = 0
     collectionViewLayout.sectionInset = .zero
     collectionViewLayout.itemSize = CGSize(
-      width: view.frame.size.width,
+      width: frame.size.width,
       height: collectionViewHeight)
     
     // CollectionView
     collectionView = UICollectionView(
       frame: CGRect(x: 0,
                     y: scrollView.frame.maxY,
-                    width: view.frame.size.width,
+                    width: frame.size.width,
                     height: collectionViewHeight),
       collectionViewLayout: collectionViewLayout)
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.isPagingEnabled = true
     collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-    view.addSubview(collectionView)
+    addSubview(collectionView)
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
     let cell = collectionView.dequeueReusableCell(
                   withReuseIdentifier: cellId, for: indexPath)
     let viewController = viewControllers[indexPath.row]

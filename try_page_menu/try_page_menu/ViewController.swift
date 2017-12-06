@@ -20,8 +20,7 @@ class ViewController: UIViewController {
     let pageMenu = PageMenu(
       viewControllers: viewControllers,
       option: PageMenuOption(frame: view.bounds))
-    view.addSubview(pageMenu.view)
-    pageMenu.didMove(toParentViewController: self)
+    view.addSubview(pageMenu)
   }
 }
 
