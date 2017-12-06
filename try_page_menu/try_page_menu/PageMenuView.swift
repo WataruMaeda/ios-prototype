@@ -10,31 +10,35 @@ import UIKit
 
 let cellId = "PageMenuCell"
 
+// MARK: - Page Menu Option
+
 struct PageMenuOption {
   
   var frame: CGRect
   var menuItemHeight: CGFloat?
-  var menuItemsWidth: CGFloat?
-  var menuTitleInset: UIEdgeInsets?
-  var menuBorderHeight: CGFloat?
+  var menuItemWidth: CGFloat?
+  var menuTitleMargin: CGFloat?
+  var menuIndicatorHeight: CGFloat?
   
   init(frame: CGRect,
-       menuItemHeight: CGFloat = 40,
-       menuItemsWidth: CGFloat = 0,
-       menuTitleInset: UIEdgeInsets = .zero,
-       menuBorderHeight: CGFloat = 2
+       menuItemHeight: CGFloat = 44,
+       menuItemWidth: CGFloat = 0,
+       menuTitleMargin: CGFloat = 20,
+       menuIndicatorHeight: CGFloat = 3
        ) {
     self.frame = frame
     self.menuItemHeight = menuItemHeight
-    self.menuItemsWidth = menuItemsWidth
-    self.menuTitleInset = menuTitleInset
-    self.menuBorderHeight = menuBorderHeight
+    self.menuItemWidth = menuItemWidth
+    self.menuTitleMargin = menuTitleMargin
+    self.menuIndicatorHeight = menuIndicatorHeight
   }
 }
 
-class PageMenu: UIView {
+// MARK: - Page Menu
 
-  fileprivate var option = PageMenuOption(frame: UIScreen.main.bounds)
+class PageMenuView: UIView {
+
+  private var option = PageMenuOption(frame: .zero)
   fileprivate var viewControllers = [UIViewController]()
   
   fileprivate var scrollView: UIScrollView!
@@ -59,14 +63,9 @@ class PageMenu: UIView {
   }
 }
 
-// MARK: - Controller
+// MARK: - Scroll View (Menu Buttons)
 
-extension PageMenu {
-}
-
-// MARK: - ScrollView (Menu Items)
-
-extension PageMenu: UIScrollViewDelegate {
+extension PageMenuView: UIScrollViewDelegate {
   
   fileprivate func setupMenus() {
     
@@ -88,47 +87,54 @@ extension PageMenu: UIScrollViewDelegate {
     scrollView.backgroundColor = .white
     scrollView.delegate = self
     scrollView.isPagingEnabled = false
+    scrollView.showsHorizontalScrollIndicator = false
     scrollView.frame = CGRect(x: 0, y: 0,
                               width: frame.size.width,
-                              height: option.menuItemHeight ?? 40)
+                              height: option.menuItemHeight ?? 44)
   }
   
   private func setupMenuButtons() {
     var menuX = 0 as CGFloat
-    for i in 0..<viewControllers.count {
-      
+    for i in 1...viewControllers.count {
       // Init Menu button
       let menuButton = UIButton()
       menuButton.tag = i
-      menuButton.titleEdgeInsets = option.menuTitleInset ?? .zero
-      menuButton.setTitle(viewControllers[i].title, for: .normal)
+      menuButton.setTitle(viewControllers[i - 1].title, for: .normal)
       menuButton.setTitleColor(.black, for: .normal)
       menuButton.addTarget(self, action: #selector(selectedMenuItem(_:)), for: .touchUpInside)
       
       // Resize Menu item based on option
-      let buttonSize = menuButton.sizeThatFits(
-        CGSize(width: CGFloat.greatestFiniteMagnitude,
-               height: option.menuItemHeight!))
+      var buttonWidth = 0 as CGFloat
+      if option.menuItemWidth == 0 {
+        // based on title text
+        buttonWidth = menuButton.sizeThatFits(
+          CGSize(width: CGFloat.greatestFiniteMagnitude,
+                 height: option.menuItemHeight!)).width + option.menuTitleMargin! / 2
+      } else {
+        // based on specified width
+        buttonWidth = option.menuItemWidth! + option.menuTitleMargin! / 2
+      }
       menuButton.frame = CGRect(x: menuX, y: 0,
-                                width: buttonSize.width,
+                                width: buttonWidth,
                                 height: option.menuItemHeight!)
       scrollView.addSubview(menuButton)
       
       // Update x position
-      menuX += buttonSize.width
+      menuX += buttonWidth
     }
     scrollView.contentSize.width = menuX
   }
   
   private func setupBorderline() {
-    guard let firstMenuButton = scrollView.viewWithTag(0) as? UIButton else { return }
+    guard let firstMenuButton = scrollView.viewWithTag(1) as? UIButton else { return }
     menuBorderLine = UIView()
     menuBorderLine.backgroundColor = .darkGray
     menuBorderLine.frame = CGRect(
       x: firstMenuButton.frame.origin.x,
-      y: firstMenuButton.frame.maxY,
+      y: firstMenuButton.frame.maxY - option.menuIndicatorHeight!,
       width: firstMenuButton.frame.size.width,
-      height: 2)
+      height: option.menuIndicatorHeight!)
+    scrollView.addSubview(menuBorderLine)
   }
   
   func updateMenuTitle(title: String, menuIndex: Int) {
@@ -140,9 +146,9 @@ extension PageMenu: UIScrollViewDelegate {
   }
 }
 
-// MARK: - CollectionView (Page View)
+// MARK: - Collection View (Menu Items)
 
-extension PageMenu: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
   
   func setupPageView() {
     // CollectionView Layout
@@ -171,8 +177,7 @@ extension PageMenu: UICollectionViewDelegate, UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(
-                  withReuseIdentifier: cellId, for: indexPath)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
     let viewController = viewControllers[indexPath.row]
     cell.addSubview(viewController.view)
     return cell

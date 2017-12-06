@@ -17,9 +17,9 @@ class ViewController: UIViewController {
   
   func initPageMenu() {
     let viewControllers = getViewControllers()
-    let pageMenu = PageMenu(
+    let pageMenu = PageMenuView(
       viewControllers: viewControllers,
-      option: PageMenuOption(frame: view.bounds))
+      option: PageMenuOption(frame: CGRect(x: 0, y: 20, width: view.frame.size.width, height: view.frame.size.height - 20), menuTitleMargin: 30))
     view.addSubview(pageMenu)
   }
 }
