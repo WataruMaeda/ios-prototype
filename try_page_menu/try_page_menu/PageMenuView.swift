@@ -172,12 +172,12 @@ extension PageMenuView: UIScrollViewDelegate {
     let selectedButtonMaxX = menuButton.frame.maxX
     if selectedButtonMinX < currentMenuOffsetMinX {
       // out of screen (left)
-      UIView.animate(withDuration: 0.4, delay: 0.0, options: [.curveEaseIn], animations: {
+      UIView.animate(withDuration: 0.3, delay: 0.0, options: [.curveEaseIn], animations: {
         self.menuScrollView.contentOffset.x = selectedButtonMinX
       }, completion: nil)
     } else if selectedButtonMaxX > currentMenuOffsetMaxX {
       // out of screen (right)
-      UIView.animate(withDuration: 0.4, delay: 0.0, options: [.curveEaseIn], animations: {
+      UIView.animate(withDuration: 0.3, delay: 0.0, options: [.curveEaseIn], animations: {
         let newOffsetX = selectedButtonMinX - (collectionPagingWidth - menuButton.frame.size.width)
         self.menuScrollView.contentOffset.x = newOffsetX
       }, completion: nil)

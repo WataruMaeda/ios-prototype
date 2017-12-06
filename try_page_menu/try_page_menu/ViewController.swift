@@ -19,7 +19,11 @@ class ViewController: UIViewController {
     let viewControllers = getViewControllers()
     let pageMenu = PageMenuView(
       viewControllers: viewControllers,
-      option: PageMenuOption(frame: CGRect(x: 0, y: 20, width: view.frame.size.width, height: view.frame.size.height - 20), menuTitleMargin: 100))
+      option: PageMenuOption(
+        frame: CGRect(x: 0, y: 20,
+                      width: view.frame.size.width,
+                      height: view.frame.size.height - 20),
+        menuTitleMargin: 40))
     view.addSubview(pageMenu)
   }
 }
@@ -30,7 +34,7 @@ extension ViewController {
   
   func getViewControllers() -> [UIViewController] {
     var viewControllers = [UIViewController]()
-    for i in 1 ..< 10 {
+    for i in 1 ..< 50 {
       let viewController = getViewController(withId: i)
       viewControllers.append(viewController)
     }
@@ -44,7 +48,7 @@ extension ViewController {
 
   func getViewController(withId: Int) -> UIViewController {
     let viewController = ButttonViewController()
-    viewController.title = "ViewController-\(withId)"
+    viewController.title = "View-\(withId)"
     viewController.view.backgroundColor = getRandomColor()
     return viewController
   }
