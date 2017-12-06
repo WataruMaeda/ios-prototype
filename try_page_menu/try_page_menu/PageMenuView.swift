@@ -96,11 +96,13 @@ extension PageMenuView: UIScrollViewDelegate {
   private func setupMenuButtons() {
     var menuX = 0 as CGFloat
     for i in 1...viewControllers.count {
-      // Init Menu button
-      let menuButton = UIButton()
+      let viewIndex = i - 1
+      
+      // Menu button
+      let menuButton = UIButton(type: .custom)
       menuButton.tag = i
-      menuButton.setTitle(viewControllers[i - 1].title, for: .normal)
-      menuButton.setTitleColor(.black, for: .normal)
+      menuButton.setTitle(viewControllers[viewIndex].title, for: .normal)
+      menuButton.setTitleColor((viewIndex == 0) ? .black : .lightGray, for: .normal)
       menuButton.addTarget(self, action: #selector(selectedMenuItem(_:)), for: .touchUpInside)
       
       // Resize Menu item based on option
@@ -137,8 +139,8 @@ extension PageMenuView: UIScrollViewDelegate {
     scrollView.addSubview(menuBorderLine)
   }
   
-  func updateMenuTitle(title: String, menuIndex: Int) {
-//    let buttonIndex = menuIndex + 1
+  func updateMenuTitle(title: String, menuButtonIndex: Int) {
+    
   }
   
   private func updateIndicatorPosition(menuButtonIndex: Int) {
@@ -148,13 +150,24 @@ extension PageMenuView: UIScrollViewDelegate {
     rect.size.width = menuButton.frame.size.width
     UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseIn], animations: {
       self.menuBorderLine.frame = rect
-    }) { _ in}
+    }, completion: nil)
+  }
+  
+  private func updateButtonStatus(menuButtonIndex: Int) {
+    guard let menuButton = scrollView.viewWithTag(menuButtonIndex) as? UIButton else { return }
+    for subview in scrollView.subviews {
+      if let button = subview as? UIButton {
+        button.setTitleColor(.lightGray, for: .normal)
+      }
+    }
+    menuButton.setTitleColor(.darkGray, for: .normal)
   }
   
   @objc func selectedMenuItem(_ sender: UIButton) {
     let buttonIndex = sender.tag
     let viewIndex = sender.tag - 1
     updateIndicatorPosition(menuButtonIndex: buttonIndex)
+    updateButtonStatus(menuButtonIndex: buttonIndex)
     collectionView.scrollToItem(
       at: IndexPath.init(row: viewIndex, section: 0),
       at: .left,
@@ -171,8 +184,8 @@ extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
     let collectionViewHeight = frame.size.height - scrollView.frame.maxY
     let collectionViewLayout = UICollectionViewFlowLayout()
     collectionViewLayout.scrollDirection = .horizontal
-    collectionViewLayout.minimumLineSpacing = 0
     collectionViewLayout.minimumInteritemSpacing = 0
+    collectionViewLayout.minimumLineSpacing = 0
     collectionViewLayout.sectionInset = .zero
     collectionViewLayout.itemSize = CGSize(
       width: frame.size.width,
@@ -194,8 +207,11 @@ extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-    let viewController = viewControllers[indexPath.row]
-    cell.addSubview(viewController.view)
+    guard let controllerView = viewControllers[indexPath.row].view else {
+      return UICollectionViewCell()
+    }
+    controllerView.frame = cell.bounds
+    cell.addSubview(controllerView)
     return cell
   }
   
@@ -213,5 +229,6 @@ extension PageMenuView {
     let collectionViewWidth = scrollView.bounds.size.width
     let viewIndex = Int(ceil(offsetX / collectionViewWidth))
     updateIndicatorPosition(menuButtonIndex: viewIndex + 1)
+    updateButtonStatus(menuButtonIndex: viewIndex + 1)
   }
 }
