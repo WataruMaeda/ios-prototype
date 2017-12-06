@@ -76,7 +76,7 @@ extension PageMenuView: UIScrollViewDelegate {
     setupMenuButtons()
     
     // Setup borderline
-    setupBorderline()
+    setupIndicatorBorder()
     
     // Add Subview
     addSubview(scrollView)
@@ -125,7 +125,7 @@ extension PageMenuView: UIScrollViewDelegate {
     scrollView.contentSize.width = menuX
   }
   
-  private func setupBorderline() {
+  private func setupIndicatorBorder() {
     guard let firstMenuButton = scrollView.viewWithTag(1) as? UIButton else { return }
     menuBorderLine = UIView()
     menuBorderLine.backgroundColor = .darkGray
@@ -138,11 +138,27 @@ extension PageMenuView: UIScrollViewDelegate {
   }
   
   func updateMenuTitle(title: String, menuIndex: Int) {
-    
+//    let buttonIndex = menuIndex + 1
+  }
+  
+  private func updateIndicatorPosition(menuButtonIndex: Int) {
+    guard let menuButton = scrollView.viewWithTag(menuButtonIndex) else { return }
+    var rect = menuBorderLine.frame
+    rect.origin.x = menuButton.frame.minX
+    rect.size.width = menuButton.frame.size.width
+    UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseIn], animations: {
+      self.menuBorderLine.frame = rect
+    }) { _ in}
   }
   
   @objc func selectedMenuItem(_ sender: UIButton) {
-    print("tspped Menu Item (\(sender.titleLabel?.text ?? "")")
+    let buttonIndex = sender.tag
+    let viewIndex = sender.tag - 1
+    updateIndicatorPosition(menuButtonIndex: buttonIndex)
+    collectionView.scrollToItem(
+      at: IndexPath.init(row: viewIndex, section: 0),
+      at: .left,
+      animated: true)
   }
 }
 
@@ -185,5 +201,17 @@ extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return viewControllers.count
+  }
+}
+
+// MARK: - Scroll View (Menu Items)
+
+extension PageMenuView {
+  
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    let offsetX = scrollView.contentOffset.x
+    let collectionViewWidth = scrollView.bounds.size.width
+    let viewIndex = Int(ceil(offsetX / collectionViewWidth))
+    updateIndicatorPosition(menuButtonIndex: viewIndex + 1)
   }
 }
