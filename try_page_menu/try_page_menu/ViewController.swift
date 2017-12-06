@@ -44,7 +44,7 @@ extension ViewController {
 extension ViewController {
 
   func getViewController(withId: Int) -> UIViewController {
-    let viewController = UIViewController()
+    let viewController = ButttonViewController()
     viewController.title = "ViewController-\(withId)"
     viewController.view.backgroundColor = getRandomColor()
     return viewController
