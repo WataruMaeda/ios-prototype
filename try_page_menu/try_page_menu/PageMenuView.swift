@@ -41,7 +41,7 @@ class PageMenuView: UIView {
   private var option = PageMenuOption(frame: .zero)
   fileprivate var viewControllers = [UIViewController]()
   
-  fileprivate var scrollView: UIScrollView!
+  fileprivate var menuScrollView: UIScrollView!
   fileprivate var menuBorderLine: UIView!
   fileprivate var collectionView: UICollectionView!
   
@@ -63,7 +63,7 @@ class PageMenuView: UIView {
   }
 }
 
-// MARK: - Scroll View (Menu Buttons)
+// MARK: - Scroll View
 
 extension PageMenuView: UIScrollViewDelegate {
   
@@ -79,16 +79,16 @@ extension PageMenuView: UIScrollViewDelegate {
     setupIndicatorBorder()
     
     // Add Subview
-    addSubview(scrollView)
+    addSubview(menuScrollView)
   }
   
   private func setupBaseScrollView() {
-    scrollView = UIScrollView()
-    scrollView.backgroundColor = .white
-    scrollView.delegate = self
-    scrollView.isPagingEnabled = false
-    scrollView.showsHorizontalScrollIndicator = false
-    scrollView.frame = CGRect(x: 0, y: 0,
+    menuScrollView = UIScrollView()
+    menuScrollView.backgroundColor = .white
+    menuScrollView.delegate = self
+    menuScrollView.isPagingEnabled = false
+    menuScrollView.showsHorizontalScrollIndicator = false
+    menuScrollView.frame = CGRect(x: 0, y: 0,
                               width: frame.size.width,
                               height: option.menuItemHeight ?? 44)
   }
@@ -119,16 +119,16 @@ extension PageMenuView: UIScrollViewDelegate {
       menuButton.frame = CGRect(x: menuX, y: 0,
                                 width: buttonWidth,
                                 height: option.menuItemHeight!)
-      scrollView.addSubview(menuButton)
+      menuScrollView.addSubview(menuButton)
       
       // Update x position
       menuX += buttonWidth
     }
-    scrollView.contentSize.width = menuX
+    menuScrollView.contentSize.width = menuX
   }
   
   private func setupIndicatorBorder() {
-    guard let firstMenuButton = scrollView.viewWithTag(1) as? UIButton else { return }
+    guard let firstMenuButton = menuScrollView.viewWithTag(1) as? UIButton else { return }
     menuBorderLine = UIView()
     menuBorderLine.backgroundColor = .darkGray
     menuBorderLine.frame = CGRect(
@@ -136,7 +136,7 @@ extension PageMenuView: UIScrollViewDelegate {
       y: firstMenuButton.frame.maxY - option.menuIndicatorHeight!,
       width: firstMenuButton.frame.size.width,
       height: option.menuIndicatorHeight!)
-    scrollView.addSubview(menuBorderLine)
+    menuScrollView.addSubview(menuBorderLine)
   }
   
   func updateMenuTitle(title: String, menuButtonIndex: Int) {
@@ -144,7 +144,7 @@ extension PageMenuView: UIScrollViewDelegate {
   }
   
   private func updateIndicatorPosition(menuButtonIndex: Int) {
-    guard let menuButton = scrollView.viewWithTag(menuButtonIndex) else { return }
+    guard let menuButton = menuScrollView.viewWithTag(menuButtonIndex) else { return }
     var rect = menuBorderLine.frame
     rect.origin.x = menuButton.frame.minX
     rect.size.width = menuButton.frame.size.width
@@ -154,8 +154,8 @@ extension PageMenuView: UIScrollViewDelegate {
   }
   
   private func updateButtonStatus(menuButtonIndex: Int) {
-    guard let menuButton = scrollView.viewWithTag(menuButtonIndex) as? UIButton else { return }
-    for subview in scrollView.subviews {
+    guard let menuButton = menuScrollView.viewWithTag(menuButtonIndex) as? UIButton else { return }
+    for subview in menuScrollView.subviews {
       if let button = subview as? UIButton {
         button.setTitleColor(.lightGray, for: .normal)
       }
@@ -163,11 +163,33 @@ extension PageMenuView: UIScrollViewDelegate {
     menuButton.setTitleColor(.darkGray, for: .normal)
   }
   
+  private func updateMenuScrollOffsetIfNeeded(menuButtonIndex: Int) {
+    guard let menuButton = menuScrollView.viewWithTag(menuButtonIndex) else { return }
+    let collectionPagingWidth = collectionView.frame.size.width
+    let currentMenuOffsetMinX = menuScrollView.contentOffset.x
+    let currentMenuOffsetMaxX = currentMenuOffsetMinX + collectionPagingWidth
+    let selectedButtonMinX = menuButton.frame.minX
+    let selectedButtonMaxX = menuButton.frame.maxX
+    if selectedButtonMinX < currentMenuOffsetMinX {
+      // out of screen (left)
+      UIView.animate(withDuration: 0.4, delay: 0.0, options: [.curveEaseIn], animations: {
+        self.menuScrollView.contentOffset.x = selectedButtonMinX
+      }, completion: nil)
+    } else if selectedButtonMaxX > currentMenuOffsetMaxX {
+      // out of screen (right)
+      UIView.animate(withDuration: 0.4, delay: 0.0, options: [.curveEaseIn], animations: {
+        let newOffsetX = selectedButtonMinX - (collectionPagingWidth - menuButton.frame.size.width)
+        self.menuScrollView.contentOffset.x = newOffsetX
+      }, completion: nil)
+    }
+  }
+  
   @objc func selectedMenuItem(_ sender: UIButton) {
     let buttonIndex = sender.tag
     let viewIndex = sender.tag - 1
     updateIndicatorPosition(menuButtonIndex: buttonIndex)
     updateButtonStatus(menuButtonIndex: buttonIndex)
+    updateMenuScrollOffsetIfNeeded(menuButtonIndex: buttonIndex)
     collectionView.scrollToItem(
       at: IndexPath.init(row: viewIndex, section: 0),
       at: .left,
@@ -175,13 +197,13 @@ extension PageMenuView: UIScrollViewDelegate {
   }
 }
 
-// MARK: - Collection View (Menu Items)
+// MARK: - Collection View
 
 extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
   
   func setupPageView() {
     // CollectionView Layout
-    let collectionViewHeight = frame.size.height - scrollView.frame.maxY
+    let collectionViewHeight = frame.size.height - menuScrollView.frame.maxY
     let collectionViewLayout = UICollectionViewFlowLayout()
     collectionViewLayout.scrollDirection = .horizontal
     collectionViewLayout.minimumInteritemSpacing = 0
@@ -194,7 +216,7 @@ extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
     // CollectionView
     collectionView = UICollectionView(
       frame: CGRect(x: 0,
-                    y: scrollView.frame.maxY,
+                    y: menuScrollView.frame.maxY,
                     width: frame.size.width,
                     height: collectionViewHeight),
       collectionViewLayout: collectionViewLayout)
@@ -225,10 +247,12 @@ extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
 extension PageMenuView {
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    if scrollView == menuScrollView { return }
     let offsetX = scrollView.contentOffset.x
     let collectionViewWidth = scrollView.bounds.size.width
-    let viewIndex = Int(ceil(offsetX / collectionViewWidth))
-    updateIndicatorPosition(menuButtonIndex: viewIndex + 1)
-    updateButtonStatus(menuButtonIndex: viewIndex + 1)
+    let buttonIndex = Int(ceil(offsetX / collectionViewWidth)) + 1
+    updateIndicatorPosition(menuButtonIndex: buttonIndex)
+    updateButtonStatus(menuButtonIndex: buttonIndex)
+    updateMenuScrollOffsetIfNeeded(menuButtonIndex: buttonIndex)
   }
 }
