@@ -24,8 +24,7 @@ struct PageMenuOption {
        menuItemHeight: CGFloat = 44,
        menuItemWidth: CGFloat = 0,
        menuTitleMargin: CGFloat = 20,
-       menuIndicatorHeight: CGFloat = 3
-       ) {
+       menuIndicatorHeight: CGFloat = 3) {
     self.frame = frame
     self.menuItemHeight = menuItemHeight
     self.menuItemWidth = menuItemWidth
@@ -106,16 +105,7 @@ extension PageMenuView: UIScrollViewDelegate {
       menuButton.addTarget(self, action: #selector(selectedMenuItem(_:)), for: .touchUpInside)
       
       // Resize Menu item based on option
-      var buttonWidth = 0 as CGFloat
-      if option.menuItemWidth == 0 {
-        // based on title text
-        buttonWidth = menuButton.sizeThatFits(
-          CGSize(width: CGFloat.greatestFiniteMagnitude,
-                 height: option.menuItemHeight!)).width + option.menuTitleMargin! / 2
-      } else {
-        // based on specified width
-        buttonWidth = option.menuItemWidth! + option.menuTitleMargin! / 2
-      }
+      let buttonWidth = getMenuButtonWidth(button: menuButton)
       menuButton.frame = CGRect(x: menuX, y: 0,
                                 width: buttonWidth,
                                 height: option.menuItemHeight!)
@@ -139,8 +129,24 @@ extension PageMenuView: UIScrollViewDelegate {
     menuScrollView.addSubview(menuBorderLine)
   }
   
-  func updateMenuTitle(title: String, menuButtonIndex: Int) {
-    
+  func updateMenuTitle(title: String, viewIndex: Int) {
+    let buttonIndex = viewIndex + 1
+    guard let menuButton = menuScrollView.viewWithTag(buttonIndex)
+      as? UIButton else { return }
+    menuButton.setTitle(title, for: .normal)
+    var rect = menuButton.frame
+    rect.size.width = getMenuButtonWidth(button: menuButton)
+    menuButton.frame = rect
+    var minX = menuButton.frame.minX
+    for i in buttonIndex...viewControllers.count {
+      guard let button = menuScrollView.viewWithTag(i) as? UIButton else { continue }
+      var origin = button.frame.origin
+      origin.x = minX
+      button.frame.origin = origin
+      minX = button.frame.maxX
+    }
+    let currentButtonIndex = getCurrentMenuButtonIndex()
+    updateIndicatorPosition(menuButtonIndex: currentButtonIndex)
   }
   
   private func updateIndicatorPosition(menuButtonIndex: Int) {
@@ -240,19 +246,37 @@ extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return viewControllers.count
   }
-}
-
-// MARK: - Scroll View (Menu Items)
-
-extension PageMenuView {
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     if scrollView == menuScrollView { return }
-    let offsetX = scrollView.contentOffset.x
-    let collectionViewWidth = scrollView.bounds.size.width
-    let buttonIndex = Int(ceil(offsetX / collectionViewWidth)) + 1
+    let buttonIndex = getCurrentMenuButtonIndex()
     updateIndicatorPosition(menuButtonIndex: buttonIndex)
     updateButtonStatus(menuButtonIndex: buttonIndex)
     updateMenuScrollOffsetIfNeeded(menuButtonIndex: buttonIndex)
+  }
+}
+
+// MARK: - Supporting Functions
+
+extension PageMenuView {
+  
+  func getCurrentMenuButtonIndex() -> Int {
+    let offsetX = menuScrollView.contentOffset.x
+    let collectionViewWidth = menuScrollView.bounds.size.width
+    return Int(ceil(offsetX / collectionViewWidth)) + 1
+  }
+  
+  func getMenuButtonWidth(button: UIButton) -> CGFloat {
+    var buttonWidth = 0 as CGFloat
+    if option.menuItemWidth == 0 {
+      // based on title text
+      buttonWidth = button.sizeThatFits(
+        CGSize(width: CGFloat.greatestFiniteMagnitude,
+               height: option.menuItemHeight!)).width + option.menuTitleMargin! / 2
+    } else {
+      // based on specified width
+      buttonWidth = option.menuItemWidth! + option.menuTitleMargin! / 2
+    }
+    return buttonWidth
   }
 }
