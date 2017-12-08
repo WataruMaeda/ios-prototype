@@ -17,13 +17,10 @@ class ViewController: UIViewController {
   
   func initPageMenu() {
     let viewControllers = getViewControllers()
+    let option = getPageMenuOption()
     let pageMenu = PageMenuView(
       viewControllers: viewControllers,
-      option: PageMenuOption(
-        frame: CGRect(x: 0, y: 20,
-                      width: view.frame.size.width,
-                      height: view.frame.size.height - 20),
-        menuTitleMargin: 40))
+      option: option)
     view.addSubview(pageMenu)
   }
 }
@@ -31,6 +28,21 @@ class ViewController: UIViewController {
 // MARK: - Model
 
 extension ViewController {
+  
+  func getPageMenuOption() -> PageMenuOption {
+    var option = PageMenuOption(frame: CGRect(x: 0, y: 20,
+                                              width: view.frame.size.width,
+                                              height: view.frame.size.height - 20))
+    option.menuTitleMargin = 40
+    option.menuItemHeight = 60
+    option.menuTitleFont = .boldSystemFont(ofSize: 20)
+    option.menuTitleColorNormal = .lightGray
+    option.menuTitleColorSelected = .white
+    option.menuItemBackgroundColorNormal = .darkGray
+    option.menuItemBackgroundColorSelected = .orange
+    option.menuIndicatorColor = .white
+    return option
+  }
   
   func getViewControllers() -> [UIViewController] {
     var viewControllers = [UIViewController]()

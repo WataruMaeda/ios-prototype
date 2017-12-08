@@ -15,21 +15,39 @@ let cellId = "PageMenuCell"
 struct PageMenuOption {
   
   var frame: CGRect
-  var menuItemHeight: CGFloat?
-  var menuItemWidth: CGFloat?
-  var menuTitleMargin: CGFloat?
-  var menuIndicatorHeight: CGFloat?
+  var menuItemHeight: CGFloat
+  var menuItemWidth: CGFloat
+  var menuItemBackgroundColorNormal: UIColor
+  var menuItemBackgroundColorSelected: UIColor
+  var menuTitleMargin: CGFloat
+  var menuTitleFont: UIFont
+  var menuTitleColorNormal: UIColor
+  var menuTitleColorSelected: UIColor
+  var menuIndicatorHeight: CGFloat
+  var menuIndicatorColor: UIColor
   
   init(frame: CGRect,
        menuItemHeight: CGFloat = 44,
        menuItemWidth: CGFloat = 0,
+       menuItemBackgroundColorNormal: UIColor = .white,
+       menuItemBackgroundColorSelected: UIColor = .white,
        menuTitleMargin: CGFloat = 20,
-       menuIndicatorHeight: CGFloat = 3) {
+       menuTitleFont: UIFont = .systemFont(ofSize: 16),
+       menuTitleColorNormal: UIColor = .lightGray,
+       menuTitleColorSelected: UIColor = .black,
+       menuIndicatorHeight: CGFloat = 3,
+       menuIndicatorColor: UIColor = .darkGray) {
     self.frame = frame
     self.menuItemHeight = menuItemHeight
     self.menuItemWidth = menuItemWidth
+    self.menuItemBackgroundColorNormal = menuItemBackgroundColorNormal
+    self.menuItemBackgroundColorSelected = menuItemBackgroundColorSelected
     self.menuTitleMargin = menuTitleMargin
+    self.menuTitleFont = menuTitleFont
+    self.menuTitleColorNormal = menuTitleColorNormal
+    self.menuTitleColorSelected = menuTitleColorSelected
     self.menuIndicatorHeight = menuIndicatorHeight
+    self.menuIndicatorColor = menuIndicatorColor
   }
 }
 
@@ -67,29 +85,21 @@ class PageMenuView: UIView {
 extension PageMenuView: UIScrollViewDelegate {
   
   fileprivate func setupMenus() {
-    
-    // Resize scroll view based on screen width
     setupBaseScrollView()
-    
-    // Setup Menu Buttons
     setupMenuButtons()
-    
-    // Setup borderline
     setupIndicatorBorder()
-    
-    // Add Subview
     addSubview(menuScrollView)
   }
   
   private func setupBaseScrollView() {
     menuScrollView = UIScrollView()
-    menuScrollView.backgroundColor = .white
+    menuScrollView.backgroundColor = option.menuItemBackgroundColorNormal
     menuScrollView.delegate = self
     menuScrollView.isPagingEnabled = false
     menuScrollView.showsHorizontalScrollIndicator = false
     menuScrollView.frame = CGRect(x: 0, y: 0,
                               width: frame.size.width,
-                              height: option.menuItemHeight ?? 44)
+                              height: option.menuItemHeight)
   }
   
   private func setupMenuButtons() {
@@ -100,15 +110,20 @@ extension PageMenuView: UIScrollViewDelegate {
       // Menu button
       let menuButton = UIButton(type: .custom)
       menuButton.tag = i
+      menuButton.setBackgroundColor(option.menuItemBackgroundColorNormal, forState: .normal)
+      menuButton.setBackgroundColor(option.menuItemBackgroundColorSelected, forState: .selected)
       menuButton.setTitle(viewControllers[viewIndex].title, for: .normal)
-      menuButton.setTitleColor((viewIndex == 0) ? .black : .lightGray, for: .normal)
+      menuButton.setTitleColor(option.menuTitleColorNormal, for: .normal)
+      menuButton.setTitleColor(option.menuTitleColorSelected, for: .selected)
+      menuButton.titleLabel?.font = option.menuTitleFont
       menuButton.addTarget(self, action: #selector(selectedMenuItem(_:)), for: .touchUpInside)
+      menuButton.isSelected = (viewIndex == 0)
       
       // Resize Menu item based on option
       let buttonWidth = getMenuButtonWidth(button: menuButton)
       menuButton.frame = CGRect(x: menuX, y: 0,
                                 width: buttonWidth,
-                                height: option.menuItemHeight!)
+                                height: option.menuItemHeight)
       menuScrollView.addSubview(menuButton)
       
       // Update x position
@@ -120,12 +135,12 @@ extension PageMenuView: UIScrollViewDelegate {
   private func setupIndicatorBorder() {
     guard let firstMenuButton = menuScrollView.viewWithTag(1) as? UIButton else { return }
     menuBorderLine = UIView()
-    menuBorderLine.backgroundColor = .darkGray
+    menuBorderLine.backgroundColor = option.menuIndicatorColor
     menuBorderLine.frame = CGRect(
       x: firstMenuButton.frame.origin.x,
-      y: firstMenuButton.frame.maxY - option.menuIndicatorHeight!,
+      y: firstMenuButton.frame.maxY - option.menuIndicatorHeight,
       width: firstMenuButton.frame.size.width,
-      height: option.menuIndicatorHeight!)
+      height: option.menuIndicatorHeight)
     menuScrollView.addSubview(menuBorderLine)
   }
   
@@ -164,8 +179,10 @@ extension PageMenuView: UIScrollViewDelegate {
     for subview in menuScrollView.subviews {
       if let button = subview as? UIButton {
         button.setTitleColor(.lightGray, for: .normal)
+        button.isSelected = false
       }
     }
+    menuButton.isSelected = true
     menuButton.setTitleColor(.darkGray, for: .normal)
   }
   
@@ -272,11 +289,25 @@ extension PageMenuView {
       // based on title text
       buttonWidth = button.sizeThatFits(
         CGSize(width: CGFloat.greatestFiniteMagnitude,
-               height: option.menuItemHeight!)).width + option.menuTitleMargin! / 2
+               height: option.menuItemHeight)).width + option.menuTitleMargin / 2
     } else {
       // based on specified width
-      buttonWidth = option.menuItemWidth! + option.menuTitleMargin! / 2
+      buttonWidth = option.menuItemWidth + option.menuTitleMargin / 2
     }
     return buttonWidth
+  }
+}
+
+// MARK: - UIButton Extension
+
+extension UIButton {
+  
+  func setBackgroundColor(_ color: UIColor, forState: UIControlState) {
+    UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
+    UIGraphicsGetCurrentContext()?.setFillColor(color.cgColor)
+    UIGraphicsGetCurrentContext()?.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
+    let colorImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    setBackgroundImage(colorImage, for: forState)
   }
 }
