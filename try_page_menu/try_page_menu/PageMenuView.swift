@@ -261,8 +261,8 @@ extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
 extension PageMenuView {
   
   func getCurrentMenuButtonIndex() -> Int {
-    let offsetX = menuScrollView.contentOffset.x
-    let collectionViewWidth = menuScrollView.bounds.size.width
+    let offsetX = collectionView.contentOffset.x
+    let collectionViewWidth = collectionView.bounds.size.width
     return Int(ceil(offsetX / collectionViewWidth)) + 1
   }
   
