@@ -73,6 +73,7 @@ class PageMenuView: UIView {
     backgroundColor = .white
     setupMenus()
     setupPageView()
+    setupNotification()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -80,7 +81,22 @@ class PageMenuView: UIView {
   }
 }
 
-// MARK: - Scroll View
+// MARK: - Notification Center
+
+extension PageMenuView {
+  
+  func setupNotification() {
+    // For rotation
+    NotificationCenter.default.addObserver(self, selector: #selector(didChangeRotation), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+  }
+  
+  override func removeFromSuperview() {
+    super.removeFromSuperview()
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+  }
+}
+
+// MARK: - Scroll View (Menu Buttons)
 
 extension PageMenuView: UIScrollViewDelegate {
   
@@ -220,7 +236,7 @@ extension PageMenuView: UIScrollViewDelegate {
   }
 }
 
-// MARK: - Collection View
+// MARK: - Collection View (ViewControllers)
 
 extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
   
@@ -295,6 +311,32 @@ extension PageMenuView {
       buttonWidth = option.menuItemWidth + option.menuTitleMargin / 2
     }
     return buttonWidth
+  }
+  
+  @objc func didChangeRotation() {
+    // Menu
+    menuScrollView.frame = CGRect(x: 0, y: 0,
+                                  width: frame.size.width,
+                                  height: option.menuItemHeight)
+    
+    // CollectionView Layout
+    let collectionViewHeight = frame.size.height - menuScrollView.frame.maxY
+    let collectionViewLayout = UICollectionViewFlowLayout()
+    collectionViewLayout.scrollDirection = .horizontal
+    collectionViewLayout.minimumInteritemSpacing = 0
+    collectionViewLayout.minimumLineSpacing = 0
+    collectionViewLayout.sectionInset = .zero
+    collectionViewLayout.itemSize = CGSize(
+      width: frame.size.width,
+      height: collectionViewHeight)
+    
+    // CollectionView
+    collectionView.frame = CGRect(x: 0,
+                                  y: menuScrollView.frame.maxY,
+                                  width: frame.size.width,
+                                  height: collectionViewHeight)
+    collectionView.collectionViewLayout = collectionViewLayout
+    collectionView.collectionViewLayout.invalidateLayout()
   }
 }
 

@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     let pageMenu = PageMenuView(
       viewControllers: viewControllers,
       option: option)
+    pageMenu.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     view.addSubview(pageMenu)
   }
 }
@@ -30,10 +31,12 @@ class ViewController: UIViewController {
 extension ViewController {
   
   func getPageMenuOption() -> PageMenuOption {
-    var option = PageMenuOption(frame: CGRect(x: 0, y: 20,
-                                              width: view.frame.size.width,
-                                              height: view.frame.size.height - 20))
-    option.menuTitleMargin = 40
+    var option = PageMenuOption(frame:
+      CGRect(x: 0, y: 20,
+             width: view.frame.size.width,
+             height: view.frame.size.height - 20))
+    option.menuTitleMargin = 0
+    option.menuItemWidth = view.frame.size.width / 3
     option.menuItemHeight = 60
     option.menuTitleFont = .boldSystemFont(ofSize: 20)
     option.menuTitleColorNormal = .lightGray
