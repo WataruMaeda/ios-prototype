@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol PageMenuViewDelegate: class {
+  func willMoveToPage(_ pageMenu: PageMenuView, from viewController: UIViewController, index currentViewControllerIndex : Int)
+  func didMoveToPage(_ pageMenu: PageMenuView, to viewController: UIViewController, index currentViewControllerIndex: Int)
+}
+
 let cellId = "PageMenuCell"
 
 // MARK: - Page Menu Option
@@ -55,6 +60,8 @@ struct PageMenuOption {
 
 class PageMenuView: UIView {
 
+  var delegate: PageMenuViewDelegate?
+  
   private var option = PageMenuOption(frame: .zero)
   fileprivate var viewControllers = [UIViewController]()
   
@@ -121,19 +128,19 @@ extension PageMenuView: UIScrollViewDelegate {
   private func setupMenuButtons() {
     var menuX = 0 as CGFloat
     for i in 1...viewControllers.count {
-      let viewIndex = i - 1
+      let viewControllerIndex = i - 1
       
       // Menu button
       let menuButton = UIButton(type: .custom)
       menuButton.tag = i
       menuButton.setBackgroundColor(option.menuItemBackgroundColorNormal, forState: .normal)
       menuButton.setBackgroundColor(option.menuItemBackgroundColorSelected, forState: .selected)
-      menuButton.setTitle(viewControllers[viewIndex].title, for: .normal)
+      menuButton.setTitle(viewControllers[viewControllerIndex].title, for: .normal)
       menuButton.setTitleColor(option.menuTitleColorNormal, for: .normal)
       menuButton.setTitleColor(option.menuTitleColorSelected, for: .selected)
       menuButton.titleLabel?.font = option.menuTitleFont
       menuButton.addTarget(self, action: #selector(selectedMenuItem(_:)), for: .touchUpInside)
-      menuButton.isSelected = (viewIndex == 0)
+      menuButton.isSelected = (viewControllerIndex == 0)
       
       // Resize Menu item based on option
       let buttonWidth = getMenuButtonWidth(button: menuButton)
@@ -160,8 +167,8 @@ extension PageMenuView: UIScrollViewDelegate {
     menuScrollView.addSubview(menuBorderLine)
   }
   
-  func updateMenuTitle(title: String, viewIndex: Int) {
-    let buttonIndex = viewIndex + 1
+  func updateMenuTitle(title: String, viewControllerIndex: Int) {
+    let buttonIndex = viewControllerIndex + 1
     guard let menuButton = menuScrollView.viewWithTag(buttonIndex)
       as? UIButton else { return }
     menuButton.setTitle(title, for: .normal)
@@ -224,13 +231,19 @@ extension PageMenuView: UIScrollViewDelegate {
   }
   
   @objc func selectedMenuItem(_ sender: UIButton) {
+    // PageMenuViewDelegate [WillMoveToPage]
+    let currentViewControllerIndex = getCurrentMenuButtonIndex() - 1
+    delegate?.willMoveToPage(self,
+                             from: viewControllers[currentViewControllerIndex],
+                             index: currentViewControllerIndex)
+    
     let buttonIndex = sender.tag
-    let viewIndex = sender.tag - 1
+    let nextViewControllerIndex = sender.tag - 1
     updateIndicatorPosition(menuButtonIndex: buttonIndex)
     updateButtonStatus(menuButtonIndex: buttonIndex)
     updateMenuScrollOffsetIfNeeded(menuButtonIndex: buttonIndex)
     collectionView.scrollToItem(
-      at: IndexPath.init(row: viewIndex, section: 0),
+      at: IndexPath.init(row: nextViewControllerIndex, section: 0),
       at: .left,
       animated: true)
   }
@@ -280,12 +293,38 @@ extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
     return viewControllers.count
   }
   
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    if scrollView == menuScrollView { return }
+    
+    // PageMenuViewDelegate [WillMoveToPage]
+    let viewControllerIndex = getCurrentMenuButtonIndex() - 1
+    delegate?.willMoveToPage(self,
+                             from: viewControllers[viewControllerIndex],
+                             index: viewControllerIndex)
+  }
+  
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     if scrollView == menuScrollView { return }
     let buttonIndex = getCurrentMenuButtonIndex()
     updateIndicatorPosition(menuButtonIndex: buttonIndex)
     updateButtonStatus(menuButtonIndex: buttonIndex)
     updateMenuScrollOffsetIfNeeded(menuButtonIndex: buttonIndex)
+    
+    // PageMenuViewDelegate [DidMoveToPage]
+    let viewControllerIndex = buttonIndex - 1
+    delegate?.didMoveToPage(self,
+                            to: viewControllers[viewControllerIndex],
+                            index: viewControllerIndex)
+  }
+  
+  func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+    if scrollView == menuScrollView { return }
+    
+    // PageMenuViewDelegate [DidMoveToPage]
+    let viewControllerIndex = getCurrentMenuButtonIndex() - 1
+    delegate?.didMoveToPage(self,
+                            to: viewControllers[viewControllerIndex],
+                            index: viewControllerIndex)
   }
 }
 

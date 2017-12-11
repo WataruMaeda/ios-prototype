@@ -21,8 +21,23 @@ class ViewController: UIViewController {
     let pageMenu = PageMenuView(
       viewControllers: viewControllers,
       option: option)
+    pageMenu.delegate = self
     pageMenu.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     view.addSubview(pageMenu)
+  }
+}
+
+// MARK: - PageMenuViewDelegate
+
+extension ViewController: PageMenuViewDelegate {
+  
+  func willMoveToPage(_ pageMenu: PageMenuView, from viewController: UIViewController, index currentViewControllerIndex: Int) {
+    print(viewController.title!)
+  }
+  
+  func didMoveToPage(_ pageMenu: PageMenuView, to viewController: UIViewController, index currentViewControllerIndex: Int) {
+    print(viewController.title!)
+    print("---")
   }
 }
 
@@ -35,8 +50,6 @@ extension ViewController {
       CGRect(x: 0, y: 20,
              width: view.frame.size.width,
              height: view.frame.size.height - 20))
-    option.menuTitleMargin = 0
-    option.menuItemWidth = view.frame.size.width / 3
     option.menuItemHeight = 60
     option.menuTitleFont = .boldSystemFont(ofSize: 20)
     option.menuTitleColorNormal = .lightGray
