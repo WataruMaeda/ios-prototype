@@ -50,44 +50,36 @@ extension ViewController {
       CGRect(x: 0, y: 20,
              width: view.frame.size.width,
              height: view.frame.size.height - 20))
-    option.menuItemHeight = 60
-    option.menuTitleFont = .boldSystemFont(ofSize: 20)
+    option.menuItemHeight = 44
+    option.menuTitleFont = .boldSystemFont(ofSize: 16)
     option.menuTitleColorNormal = .lightGray
-    option.menuTitleColorSelected = .white
-    option.menuItemBackgroundColorNormal = .darkGray
-    option.menuItemBackgroundColorSelected = .orange
-    option.menuIndicatorColor = .white
+    option.menuTitleColorSelected = .black
+    option.menuItemBackgroundColorNormal = .white
+    option.menuItemBackgroundColorSelected = .white
+    option.menuIndicatorColor = .black
     return option
   }
   
-  func getViewControllers() -> [UIViewController] {
-    var viewControllers = [UIViewController]()
-    for i in 1 ..< 50 {
-      let viewController = getViewController(withId: i)
-      viewControllers.append(viewController)
+  func getViewControllers() -> [AnimalListViewController] {
+    var viewControllers = [AnimalListViewController]()
+    for name in ["dolphin", "whale", "turtle", "shark", "stingray", "dolphin", "whale", "turtle", "shark", "stingray"] {
+      let animals = getAnimals(name: name)
+      let animalViewController = AnimalListViewController.initFromStoryboard(animals: animals)
+      animalViewController.title = name
+      viewControllers.append(animalViewController)
     }
     return viewControllers
   }
-}
-
-// MARK: - Supporting functions
-
-extension ViewController {
-
-  func getViewController(withId: Int) -> UIViewController {
-    let viewController = ButttonViewController()
-    viewController.title = "View-\(withId)"
-    viewController.view.backgroundColor = getRandomColor()
-    return viewController
-  }
   
-  func getRandomColor() -> UIColor {
-    let randomRed:CGFloat = CGFloat(drand48())
-    let randomGreen:CGFloat = CGFloat(drand48())
-    let randomBlue:CGFloat = CGFloat(drand48())
-    return UIColor(red: randomRed,
-                   green: randomGreen,
-                   blue: randomBlue,
-                   alpha: 1.0)
+  func getAnimals(name: String) -> [Animal] {
+    var animals = [Animal]()
+    for i in 0...6 {
+      let animal = Animal(
+        image: "\(name)\(i)",
+        name: "\(name)(\(i+1))",
+        details: "Explore the \(name) list to learn fun facts and more about your favorite marine life. ")
+      animals.append(animal)
+    }
+    return animals
   }
 }
