@@ -13,8 +13,6 @@ protocol PageMenuViewDelegate: class {
   func didMoveToPage(_ pageMenu: PageMenuView, to viewController: UIViewController, index currentViewControllerIndex: Int)
 }
 
-let cellId = "PageMenuCell"
-
 // MARK: - Page Menu Option
 
 struct PageMenuOption {
@@ -62,7 +60,8 @@ class PageMenuView: UIView {
 
   var delegate: PageMenuViewDelegate?
   
-  private var option = PageMenuOption(frame: .zero)
+  fileprivate let cellId = "PageMenuCell"
+  fileprivate var option = PageMenuOption(frame: .zero)
   fileprivate var viewControllers = [UIViewController]()
   
   fileprivate var menuScrollView: UIScrollView!
@@ -80,7 +79,7 @@ class PageMenuView: UIView {
     backgroundColor = .white
     setupMenus()
     setupPageView()
-    setupNotification()
+    setuOrientationpNotification()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -88,33 +87,18 @@ class PageMenuView: UIView {
   }
 }
 
-// MARK: - Notification Center
-
-extension PageMenuView {
-  
-  func setupNotification() {
-    // For rotation
-    NotificationCenter.default.addObserver(self, selector: #selector(didChangeRotation), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-  }
-  
-  override func removeFromSuperview() {
-    super.removeFromSuperview()
-    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-  }
-}
-
-// MARK: - Scroll View (Menu Buttons)
+// MARK: - Scroll View (Buttons)
 
 extension PageMenuView: UIScrollViewDelegate {
   
   fileprivate func setupMenus() {
-    setupBaseScrollView()
+    setupMenuScrollView()
     setupMenuButtons()
-    setupIndicatorBorder()
+    setupMenuIndicatorBorder()
     addSubview(menuScrollView)
   }
   
-  private func setupBaseScrollView() {
+  fileprivate func setupMenuScrollView() {
     menuScrollView = UIScrollView()
     menuScrollView.backgroundColor = option.menuItemBackgroundColorNormal
     menuScrollView.delegate = self
@@ -125,7 +109,7 @@ extension PageMenuView: UIScrollViewDelegate {
                               height: option.menuItemHeight)
   }
   
-  private func setupMenuButtons() {
+  fileprivate func setupMenuButtons() {
     var menuX = 0 as CGFloat
     for i in 1...viewControllers.count {
       let viewControllerIndex = i - 1
@@ -155,7 +139,7 @@ extension PageMenuView: UIScrollViewDelegate {
     menuScrollView.contentSize.width = menuX
   }
   
-  private func setupIndicatorBorder() {
+  fileprivate func setupMenuIndicatorBorder() {
     guard let firstMenuButton = menuScrollView.viewWithTag(1) as? UIButton else { return }
     menuBorderLine = UIView()
     menuBorderLine.backgroundColor = option.menuIndicatorColor
@@ -187,7 +171,7 @@ extension PageMenuView: UIScrollViewDelegate {
     updateIndicatorPosition(menuButtonIndex: currentButtonIndex)
   }
   
-  private func updateIndicatorPosition(menuButtonIndex: Int) {
+  fileprivate func updateIndicatorPosition(menuButtonIndex: Int) {
     guard let menuButton = menuScrollView.viewWithTag(menuButtonIndex) else { return }
     var rect = menuBorderLine.frame
     rect.origin.x = menuButton.frame.minX
@@ -197,7 +181,7 @@ extension PageMenuView: UIScrollViewDelegate {
     }, completion: nil)
   }
   
-  private func updateButtonStatus(menuButtonIndex: Int) {
+  fileprivate func updateButtonStatus(menuButtonIndex: Int) {
     guard let menuButton = menuScrollView.viewWithTag(menuButtonIndex) as? UIButton else { return }
     for subview in menuScrollView.subviews {
       if let button = subview as? UIButton {
@@ -209,7 +193,7 @@ extension PageMenuView: UIScrollViewDelegate {
     menuButton.setTitleColor(.darkGray, for: .normal)
   }
   
-  private func updateMenuScrollOffsetIfNeeded(menuButtonIndex: Int) {
+  fileprivate func updateMenuScrollOffsetIfNeeded(menuButtonIndex: Int) {
     guard let menuButton = menuScrollView.viewWithTag(menuButtonIndex) else { return }
     let collectionPagingWidth = collectionView.frame.size.width
     let currentMenuOffsetMinX = menuScrollView.contentOffset.x
@@ -230,13 +214,14 @@ extension PageMenuView: UIScrollViewDelegate {
     }
   }
   
-  @objc func selectedMenuItem(_ sender: UIButton) {
+  @objc fileprivate func selectedMenuItem(_ sender: UIButton) {
     // PageMenuViewDelegate [WillMoveToPage]
     let currentViewControllerIndex = getCurrentMenuButtonIndex() - 1
     delegate?.willMoveToPage(self,
                              from: viewControllers[currentViewControllerIndex],
                              index: currentViewControllerIndex)
     
+    // Move to selected page
     let buttonIndex = sender.tag
     let nextViewControllerIndex = sender.tag - 1
     updateIndicatorPosition(menuButtonIndex: buttonIndex)
@@ -253,7 +238,7 @@ extension PageMenuView: UIScrollViewDelegate {
 
 extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
   
-  func setupPageView() {
+  fileprivate func setupPageView() {
     // CollectionView Layout
     let collectionViewHeight = frame.size.height - menuScrollView.frame.maxY
     let collectionViewLayout = UICollectionViewFlowLayout()
@@ -328,32 +313,20 @@ extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
   }
 }
 
-// MARK: - Supporting Functions
+// MARK: - Device Orientation
 
 extension PageMenuView {
   
-  func getCurrentMenuButtonIndex() -> Int {
-    let offsetX = collectionView.contentOffset.x
-    let collectionViewWidth = collectionView.bounds.size.width
-    return Int(ceil(offsetX / collectionViewWidth)) + 1
+  fileprivate func setuOrientationpNotification() {
+    NotificationCenter.default.addObserver(self, selector: #selector(didChangeRotation), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
   }
   
-  func getMenuButtonWidth(button: UIButton) -> CGFloat {
-    var buttonWidth = 0 as CGFloat
-    if option.menuItemWidth == 0 {
-      // based on title text
-      buttonWidth = button.sizeThatFits(
-        CGSize(width: CGFloat.greatestFiniteMagnitude,
-               height: option.menuItemHeight)).width + option.menuTitleMargin / 2
-    } else {
-      // based on specified width
-      buttonWidth = option.menuItemWidth + option.menuTitleMargin / 2
-    }
-    return buttonWidth
+  override func removeFromSuperview() {
+    super.removeFromSuperview()
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
   }
   
-  @objc func didChangeRotation() {
-    // Menu
+  @objc fileprivate func didChangeRotation() {
     menuScrollView.frame = CGRect(x: 0, y: 0,
                                   width: frame.size.width,
                                   height: option.menuItemHeight)
@@ -376,6 +349,42 @@ extension PageMenuView {
                                   height: collectionViewHeight)
     collectionView.collectionViewLayout = collectionViewLayout
     collectionView.collectionViewLayout.invalidateLayout()
+    
+    // Adjust to collection view offset
+    let currentViewControllerIndex = getCurrentMenuButtonIndex() - 1
+    collectionView.scrollToItem(
+      at: IndexPath.init(row: currentViewControllerIndex, section: 0),
+      at: .left,
+      animated: true)
+    
+    // Adjust to menu button offset
+    let buttonIndex = currentViewControllerIndex + 1
+    updateMenuScrollOffsetIfNeeded(menuButtonIndex: buttonIndex)
+  }
+}
+
+// MARK: - Supporting Functions
+
+extension PageMenuView {
+  
+  fileprivate func getCurrentMenuButtonIndex() -> Int {
+    let offsetX = collectionView.contentOffset.x
+    let collectionViewWidth = collectionView.bounds.size.width
+    return Int(ceil(offsetX / collectionViewWidth)) + 1
+  }
+  
+  fileprivate func getMenuButtonWidth(button: UIButton) -> CGFloat {
+    var buttonWidth = 0 as CGFloat
+    if option.menuItemWidth == 0 {
+      // based on title text
+      buttonWidth = button.sizeThatFits(
+        CGSize(width: CGFloat.greatestFiniteMagnitude,
+               height: option.menuItemHeight)).width + option.menuTitleMargin / 2
+    } else {
+      // based on specified width
+      buttonWidth = option.menuItemWidth + option.menuTitleMargin / 2
+    }
+    return buttonWidth
   }
 }
 
@@ -383,7 +392,7 @@ extension PageMenuView {
 
 extension UIButton {
   
-  func setBackgroundColor(_ color: UIColor, forState: UIControlState) {
+  fileprivate func setBackgroundColor(_ color: UIColor, forState: UIControlState) {
     UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
     UIGraphicsGetCurrentContext()?.setFillColor(color.cgColor)
     UIGraphicsGetCurrentContext()?.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
