@@ -32,7 +32,6 @@
         <!--Animal List View Controller-->
         <scene sceneID="KZo-SZ-Yjm">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CiV-ab-l4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="AnimalListViewController" id="pbG-vf-Aqj" customClass="AnimalListViewController" customModule="try_page_menu" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TMV-zL-a2Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -86,6 +85,7 @@
                         <outlet property="tableView" destination="XMj-fG-Ls2" id="0yB-2M-vUh"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CiV-ab-l4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1372" y="40.929535232383813"/>
         </scene>
