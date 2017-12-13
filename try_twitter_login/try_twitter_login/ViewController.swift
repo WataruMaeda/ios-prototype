@@ -7,10 +7,25 @@
 //
 
 import UIKit
+import SafariServices
+import TwitterKit
 
 class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    initTwitterLoginButton()
+  }
+  
+  func initTwitterLoginButton() {
+    let logInButton = TWTRLogInButton(logInCompletion: { session, error in
+      if (session != nil) {
+        print("signed in as \(String(describing: session?.userName))");
+      } else {
+        print("error: \(String(describing: error?.localizedDescription))");
+      }
+    })
+    logInButton.center = self.view.center
+    self.view.addSubview(logInButton)
   }
 }
