@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import SafariServices
 import TwitterKit
+import SafariServices
 
 class ViewController: UIViewController {
 
@@ -54,7 +54,6 @@ class ViewController: UIViewController {
             self.setProfileImage(stringUrl: profileUrl)
           })
         }
-        
       } else {
         print("error: \(String(describing: error?.localizedDescription))");
       }
