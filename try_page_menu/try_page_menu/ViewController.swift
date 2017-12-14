@@ -51,11 +51,14 @@ extension ViewController {
              width: view.frame.size.width,
              height: view.frame.size.height - 20))
     option.menuItemHeight = 44
+    option.menuItemWidth = 0
+    option.menuItemBackgroundColorNormal = .white
+    option.menuItemBackgroundColorSelected = .white
+    option.menuTitleMargin = 40
     option.menuTitleFont = .boldSystemFont(ofSize: 16)
     option.menuTitleColorNormal = .lightGray
     option.menuTitleColorSelected = .black
-    option.menuItemBackgroundColorNormal = .white
-    option.menuItemBackgroundColorSelected = .white
+    option.menuIndicatorHeight = 3
     option.menuIndicatorColor = .black
     return option
   }
