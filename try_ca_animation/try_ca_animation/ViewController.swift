@@ -10,16 +10,44 @@ import UIKit
 
 class ViewController: UIViewController {
 
+  let shapeLayer = CAShapeLayer()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    view.backgroundColor = .black
+    
+    let circulerPath = UIBezierPath(arcCenter: view.center, radius: 100, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
+    
+    // Track layer
+    let trackLayer = CAShapeLayer()
+    trackLayer.path = circulerPath.cgPath
+    trackLayer.fillColor = UIColor.clear.cgColor
+    trackLayer.strokeColor = UIColor.lightGray.cgColor
+    trackLayer.lineWidth = 10
+    view.layer.addSublayer(trackLayer)
+    
+    // Circle layer
+    shapeLayer.path = circulerPath.cgPath
+    shapeLayer.fillColor = UIColor.clear.cgColor
+    shapeLayer.strokeColor = UIColor.red.cgColor
+    shapeLayer.lineWidth = 10
+    shapeLayer.lineCap = kCALineCapRound
+    shapeLayer.strokeEnd = 0
+    view.layer.addSublayer(shapeLayer)
+    
+    // Add tap gesture
+    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedView)))
   }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+  
+  @objc func tappedView() {
+    let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
+    basicAnimation.toValue = 1
+    basicAnimation.duration = 2
+    
+    basicAnimation.fillMode = kCAFillModeForwards
+    basicAnimation.isRemovedOnCompletion = false
+    
+    shapeLayer.add(basicAnimation, forKey: "strokeAnimation")
   }
-
-
 }
 
