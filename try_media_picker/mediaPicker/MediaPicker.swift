@@ -92,9 +92,15 @@ extension MediaPicker: UIImagePickerControllerDelegate {
             guard let image = picker.allowsEditing ?
                 info[UIImagePickerControllerEditedImage] as? UIImage :
                 info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
+            if picker.sourceType == .camera {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            }
             imageCallback?(image)   // Image callback
         } else if mediaType == kUTTypeMovie as String {
             guard let vidUrl = info[UIImagePickerControllerMediaURL] as? URL else { return }
+            if picker.sourceType == .camera {
+                UISaveVideoAtPathToSavedPhotosAlbum(vidUrl.path, nil, nil, nil)
+            }
             videoCallback?(vidUrl.path)     // Video callback
         }
     }
