@@ -9,17 +9,84 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
-  }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-
-
+    
+    @IBOutlet var mediaView1: MediaView! {
+        didSet {
+            mediaView1.image = #imageLiteral(resourceName: "placeholder")
+            mediaView1.addTapGesture {
+                self.showOptionAlert(mediaView: self.mediaView1)
+            }
+        }
+    }
+    @IBOutlet var mediaView2: MediaView! {
+        didSet {
+            mediaView2.image = #imageLiteral(resourceName: "placeholder")
+            mediaView2.addTapGesture {
+                self.showOptionAlert(mediaView: self.mediaView2)
+            }
+        }
+    }
+    @IBOutlet var mediaView3: MediaView! {
+        didSet {
+            mediaView3.image = #imageLiteral(resourceName: "placeholder")
+            mediaView3.addTapGesture {
+                self.showOptionAlert(mediaView: self.mediaView3)
+            }
+        }
+    }
+    @IBOutlet var mediaView4: MediaView! {
+        didSet {
+            mediaView4.image = #imageLiteral(resourceName: "placeholder")
+            mediaView4.addTapGesture {
+                self.showOptionAlert(mediaView: self.mediaView4)
+            }
+        }
+    }
+    @IBOutlet var mediaView5: MediaView! {
+        didSet {
+            mediaView5.image = #imageLiteral(resourceName: "placeholder")
+            mediaView5.addTapGesture {
+                self.showOptionAlert(mediaView: self.mediaView5)
+            }
+        }
+    }
+    @IBOutlet var mediaView6: MediaView! {
+        didSet {
+            mediaView6.image = #imageLiteral(resourceName: "placeholder")
+            mediaView6.addTapGesture {
+                self.showOptionAlert(mediaView: self.mediaView6)
+            }
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    fileprivate func showOptionAlert(mediaView: MediaView) {
+        let sheet = UIAlertController(title: "Video or image", message: nil, preferredStyle: .actionSheet)
+        sheet.addAction(UIAlertAction(title: "Photo (Camera)", style: .default) {action in
+            MediaPicker.shared.getFromCamera(self, allowsEditing: true, imageCallback: { (image) in
+                mediaView.image = image
+            })
+        })
+        sheet.addAction(UIAlertAction(title: "Photo (Library)", style: .default) {action in
+            MediaPicker.shared.getFromLibrary(self, allowsEditing: true, imageCallback: { (image) in
+                mediaView.image = image
+            })
+        })
+        sheet.addAction(UIAlertAction(title: "Video (Camera)", style: .default) {action in
+            MediaPicker.shared.getFromCamera(self, allowsEditing: true, videoCallback: { (videoUrl) in
+                mediaView.videoUrl = videoUrl
+            })
+        })
+        sheet.addAction(UIAlertAction(title: "Video (Library)", style: .default) {action in
+            MediaPicker.shared.getFromLibrary(self, allowsEditing: true, videoCallback: { (videoUrl) in
+                mediaView.videoUrl = videoUrl
+            })
+        })
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) {action in})
+        present(sheet, animated: true, completion: nil)
+    }
 }
 
