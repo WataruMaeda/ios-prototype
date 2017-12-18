@@ -36,10 +36,10 @@ class ViewController: UIViewController {
     view.layer.addSublayer(shapeLayer)
     
     // Add tap gesture
-    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedView)))
+    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
   }
   
-  @objc func tappedView() {
+  fileprivate func animateCircle() {
     let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
     basicAnimation.toValue = 1
     basicAnimation.duration = 2
@@ -48,6 +48,15 @@ class ViewController: UIViewController {
     basicAnimation.isRemovedOnCompletion = false
     
     shapeLayer.add(basicAnimation, forKey: "strokeAnimation")
+  }
+  
+  func beginDownloadingFile() {
+    
+  }
+  
+  @objc func handleTap() {
+    beginDownloadingFile()
+    animateCircle()
   }
 }
 
