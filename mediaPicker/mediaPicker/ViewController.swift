@@ -13,7 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet var mediaView1: MediaView! {
         didSet {
             mediaView1.image = #imageLiteral(resourceName: "placeholder")
-            mediaView1.addTapGesture {
+            mediaView1.imageView.contentMode = .center
+            mediaView1.handleTapGesture {
                 self.showOptionAlert(mediaView: self.mediaView1)
             }
         }
@@ -21,7 +22,8 @@ class ViewController: UIViewController {
     @IBOutlet var mediaView2: MediaView! {
         didSet {
             mediaView2.image = #imageLiteral(resourceName: "placeholder")
-            mediaView2.addTapGesture {
+            mediaView2.imageView.contentMode = .center
+            mediaView2.handleTapGesture {
                 self.showOptionAlert(mediaView: self.mediaView2)
             }
         }
@@ -29,7 +31,8 @@ class ViewController: UIViewController {
     @IBOutlet var mediaView3: MediaView! {
         didSet {
             mediaView3.image = #imageLiteral(resourceName: "placeholder")
-            mediaView3.addTapGesture {
+            mediaView3.imageView.contentMode = .center
+            mediaView3.handleTapGesture {
                 self.showOptionAlert(mediaView: self.mediaView3)
             }
         }
@@ -37,7 +40,8 @@ class ViewController: UIViewController {
     @IBOutlet var mediaView4: MediaView! {
         didSet {
             mediaView4.image = #imageLiteral(resourceName: "placeholder")
-            mediaView4.addTapGesture {
+            mediaView4.imageView.contentMode = .center
+            mediaView4.handleTapGesture {
                 self.showOptionAlert(mediaView: self.mediaView4)
             }
         }
@@ -45,7 +49,8 @@ class ViewController: UIViewController {
     @IBOutlet var mediaView5: MediaView! {
         didSet {
             mediaView5.image = #imageLiteral(resourceName: "placeholder")
-            mediaView5.addTapGesture {
+            mediaView5.imageView.contentMode = .center
+            mediaView5.handleTapGesture {
                 self.showOptionAlert(mediaView: self.mediaView5)
             }
         }
@@ -53,7 +58,8 @@ class ViewController: UIViewController {
     @IBOutlet var mediaView6: MediaView! {
         didSet {
             mediaView6.image = #imageLiteral(resourceName: "placeholder")
-            mediaView6.addTapGesture {
+            mediaView6.imageView.contentMode = .center
+            mediaView6.handleTapGesture {
                 self.showOptionAlert(mediaView: self.mediaView6)
             }
         }
@@ -68,21 +74,25 @@ class ViewController: UIViewController {
         sheet.addAction(UIAlertAction(title: "Photo (Camera)", style: .default) {action in
             MediaPicker.shared.getFromCamera(self, allowsEditing: true, imageCallback: { (image) in
                 mediaView.image = image
+                mediaView.imageView.contentMode = .scaleAspectFill
             })
         })
         sheet.addAction(UIAlertAction(title: "Photo (Library)", style: .default) {action in
             MediaPicker.shared.getFromLibrary(self, allowsEditing: true, imageCallback: { (image) in
                 mediaView.image = image
+                mediaView.imageView.contentMode = .scaleAspectFill
             })
         })
         sheet.addAction(UIAlertAction(title: "Video (Camera)", style: .default) {action in
             MediaPicker.shared.getFromCamera(self, allowsEditing: true, videoCallback: { (videoUrl) in
-                mediaView.videoUrl = videoUrl
+                mediaView.videofileUrl = videoUrl
+                mediaView.player.volume = 0
             })
         })
         sheet.addAction(UIAlertAction(title: "Video (Library)", style: .default) {action in
             MediaPicker.shared.getFromLibrary(self, allowsEditing: true, videoCallback: { (videoUrl) in
-                mediaView.videoUrl = videoUrl
+                mediaView.videofileUrl = videoUrl
+                mediaView.player.volume = 0
             })
         })
         sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) {action in})

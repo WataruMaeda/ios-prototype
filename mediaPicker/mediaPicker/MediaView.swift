@@ -46,36 +46,37 @@ class MediaView: UIView {
         }
     }
     
-    private var player = AVPlayer() {
+    var player = AVPlayer() {
         didSet {
+            addPlayerObserver()
             playerLayer.player = player
             player.play()
         }
     }
-    private lazy var playerLayer = AVPlayerLayer()
+    lazy var playerLayer = AVPlayerLayer()
     private lazy var tapCallback: () -> () = {}
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         initSubviews()
-        addPlayerObserver()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initSubviews()
-        addPlayerObserver()
     }
+    
+    deinit { removeAll() }
 }
 
 // MARK: - Tap Gesture
 
 extension MediaView {
     
-    func addTapGesture(callback: @escaping () -> ()) {
+    func handleTapGesture(callback: @escaping () -> ()) {
+        tapCallback = callback
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         addGestureRecognizer(tapGesture)
-        tapCallback = callback
     }
     
     @objc private func handleTap() {
@@ -88,17 +89,23 @@ extension MediaView {
 extension MediaView {
     
     private func addPlayerObserver() {
-        NotificationCenter.default.addObserver(self, selector:#selector(playerDidFinishPlaying(notification:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+        NotificationCenter.default.addObserver(self, selector:#selector(playerDidPlayToEndTime(notification:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(playerFailedToPlayToEndTime(notification:)),name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: player.currentItem)
     }
     
     private func removePlayerObserver() {
-        NotificationCenter.default.removeObserver(self,
-                                                  name: Notification.Name.AVPlayerItemDidPlayToEndTime,
-                                                  object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
     }
     
-    @objc func playerDidFinishPlaying(notification: NSNotification) {
+    @objc private func playerFailedToPlayToEndTime(notification: NSNotification) {
         player.seek(to: kCMTimeZero)
+        player.play()
+    }
+    
+    @objc private func playerDidPlayToEndTime(notification: NSNotification) {
+        player.seek(to: kCMTimeZero)
+        player.play()
     }
 }
 
@@ -113,7 +120,9 @@ extension MediaView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
+        backgroundColor = .clear
         playerLayer.frame = bounds
+        playerLayer.videoGravity = .resizeAspectFill
         imageView.frame = bounds
     }
     
@@ -125,6 +134,10 @@ extension MediaView {
     
     override func removeFromSuperview() {
         super.removeFromSuperview()
+        removeAll()
+    }
+    
+    private func removeAll() {
         removePlayerObserver()
         imageView.removeFromSuperview()
         playerLayer.removeFromSuperlayer()
