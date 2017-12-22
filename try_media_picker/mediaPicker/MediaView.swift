@@ -10,10 +10,17 @@ import UIKit
 import AVKit
 import AVFoundation
 
+private enum MediaViewType {
+    case image, localVideo, remoteVideo
+}
+
 class MediaView: UIView {
+    
+    private var type = MediaViewType.image
     
     var image = UIImage() {
         didSet {
+            type = .image
             imageView.image = image
             player.pause()
             imageView.isHidden = false
@@ -28,19 +35,17 @@ class MediaView: UIView {
         return imageView
     }()
     
-    var videofileUrl = "" {
-        didSet {
-            let url = URL(fileURLWithPath: videofileUrl)
-            player = AVPlayer(url: url)
-            imageView.isHidden = true
-            playerLayer.isHidden = false
-        }
-    }
-    
     var videoUrl = "" {
         didSet {
-            guard let url = URL(string: videoUrl) else { return }
-            player = AVPlayer(url: url)
+            if videoUrl.contains("http") {
+                type = .remoteVideo
+                guard let url = URL(string: videoUrl) else { return }
+                player = AVPlayer(url: url)
+            } else {
+                type = .localVideo
+                let url = URL(fileURLWithPath: videoUrl)
+                player = AVPlayer(url: url)
+            }
             imageView.isHidden = true
             playerLayer.isHidden = false
         }
@@ -95,17 +100,31 @@ extension MediaView {
     }
     
     private func removePlayerObserver() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc private func playerFailedToPlayToEndTime(notification: NSNotification) {
-        player.seek(to: kCMTimeZero)
-        player.play()
+        if type == .localVideo || type == .remoteVideo {
+            player.seek(to: kCMTimeZero)
+            player.play()
+            imageView.isHidden = true
+            playerLayer.isHidden = false
+        } else {
+            imageView.isHidden = false
+            playerLayer.isHidden = true
+        }
     }
     
     @objc private func playerDidPlayToEndTime(notification: NSNotification) {
-        player.seek(to: kCMTimeZero)
-        player.play()
+        if type == .localVideo || type == .remoteVideo {
+            player.seek(to: kCMTimeZero)
+            player.play()
+            imageView.isHidden = true
+            playerLayer.isHidden = false
+        } else {
+            imageView.isHidden = false
+            playerLayer.isHidden = true
+        }
     }
 }
 

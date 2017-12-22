@@ -85,13 +85,13 @@ class ViewController: UIViewController {
         })
         sheet.addAction(UIAlertAction(title: "Video (Camera)", style: .default) {action in
             MediaPicker.shared.getFromCamera(self, allowsEditing: true, videoCallback: { (videoUrl) in
-                mediaView.videofileUrl = videoUrl
+                mediaView.videoUrl = videoUrl
                 mediaView.player.volume = 0
             })
         })
         sheet.addAction(UIAlertAction(title: "Video (Library)", style: .default) {action in
             MediaPicker.shared.getFromLibrary(self, allowsEditing: true, videoCallback: { (videoUrl) in
-                mediaView.videofileUrl = videoUrl
+                mediaView.videoUrl = videoUrl
                 mediaView.player.volume = 0
             })
         })
