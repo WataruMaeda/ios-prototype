@@ -43,18 +43,20 @@ class MediaView: UIView {
         return imageView
     }()
     
+    var autoRepeat = true
+    
     var videoUrl = "" {
         didSet {
             type = .video
             if videoUrl.contains("http") {
-                guard let url = URL(string: videoUrl) else { return }
+                guard let url = URL(string: videoUrl) else {
+                    return print("[error] MediaView: Invalid URL")
+                }
                 player = AVPlayer(url: url)
             } else {
-                
                 let url = URL(fileURLWithPath: videoUrl)
                 player = AVPlayer(url: url)
             }
-            
         }
     }
     
@@ -113,7 +115,7 @@ extension MediaView {
     }
     
     @objc private func playerDidPlayToEndTime(notification: NSNotification) {
-        if type == .video {
+        if type == .video && autoRepeat {
             player.seek(to: kCMTimeZero)
             player.play()
         }
@@ -128,7 +130,7 @@ extension MediaView {
     }
 }
 
-// MARK: - UI
+// MARK: - UIView Life Cycle
 
 extension MediaView {
     
@@ -160,5 +162,36 @@ extension MediaView {
         removeMediaViewObserver()
         imageView.removeFromSuperview()
         playerLayer.removeFromSuperlayer()
+    }
+}
+
+// MARK: - AVPLayer
+
+extension MediaView {
+    
+    func isPlaying() -> Bool {
+        return (type == .video && player.rate != 0 && player.error == nil)
+    }
+    
+    func play() {
+        if type == .video { player.play() }
+    }
+    
+    func pause() {
+        if type == .video { player.pause() }
+    }
+    
+    func ready() {
+        if type == .video {
+            player.seek(to: kCMTimeZero)
+            player.pause()
+        }
+    }
+    
+    func restart() {
+        if type == .video {
+            player.seek(to: kCMTimeZero)
+            player.play()
+        }
     }
 }
