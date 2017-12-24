@@ -11,20 +11,28 @@ import AVKit
 import AVFoundation
 
 private enum MediaViewType {
-    case image, localVideo, remoteVideo
+    case image, video
 }
 
 class MediaView: UIView {
     
-    private var type = MediaViewType.image
+    private var type: MediaViewType  = .image {
+        didSet {
+            if type == .image {
+                imageView.isHidden = false
+                playerLayer.isHidden = true
+            } else {
+                imageView.isHidden = true
+                playerLayer.isHidden = false
+            }
+        }
+    }
     
     var image = UIImage() {
         didSet {
             type = .image
             imageView.image = image
             player.pause()
-            imageView.isHidden = false
-            playerLayer.isHidden = true
         }
     }
     
@@ -37,23 +45,22 @@ class MediaView: UIView {
     
     var videoUrl = "" {
         didSet {
+            type = .video
             if videoUrl.contains("http") {
-                type = .remoteVideo
                 guard let url = URL(string: videoUrl) else { return }
                 player = AVPlayer(url: url)
             } else {
-                type = .localVideo
+                
                 let url = URL(fileURLWithPath: videoUrl)
                 player = AVPlayer(url: url)
             }
-            imageView.isHidden = true
-            playerLayer.isHidden = false
+            
         }
     }
     
     var player = AVPlayer() {
         didSet {
-            addPlayerObserver()
+            addMediaViewObserver()
             playerLayer.player = player
             player.play()
         }
@@ -89,42 +96,35 @@ extension MediaView {
     }
 }
 
-// MARK: - Player
+// MARK: - Notification Center
 
 extension MediaView {
     
-    private func addPlayerObserver() {
+    private func addMediaViewObserver() {
         NotificationCenter.default.addObserver(self, selector:#selector(playerDidPlayToEndTime(notification:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
         
-        NotificationCenter.default.addObserver(self, selector:#selector(playerFailedToPlayToEndTime(notification:)),name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: player.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillResignActive), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidBecomeActive), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
-    private func removePlayerObserver() {
+    private func removeMediaViewObserver() {
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc private func playerFailedToPlayToEndTime(notification: NSNotification) {
-        if type == .localVideo || type == .remoteVideo {
+    @objc private func playerDidPlayToEndTime(notification: NSNotification) {
+        if type == .video {
             player.seek(to: kCMTimeZero)
             player.play()
-            imageView.isHidden = true
-            playerLayer.isHidden = false
-        } else {
-            imageView.isHidden = false
-            playerLayer.isHidden = true
         }
     }
     
-    @objc private func playerDidPlayToEndTime(notification: NSNotification) {
-        if type == .localVideo || type == .remoteVideo {
-            player.seek(to: kCMTimeZero)
-            player.play()
-            imageView.isHidden = true
-            playerLayer.isHidden = false
-        } else {
-            imageView.isHidden = false
-            playerLayer.isHidden = true
-        }
+    @objc private func appWillResignActive() {
+        if type == .video { player.pause() }
+    }
+    
+    @objc private func appDidBecomeActive() {
+        if type == .video { player.play() }
     }
 }
 
@@ -157,7 +157,7 @@ extension MediaView {
     }
     
     private func removeAll() {
-        removePlayerObserver()
+        removeMediaViewObserver()
         imageView.removeFromSuperview()
         playerLayer.removeFromSuperlayer()
     }
