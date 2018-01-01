@@ -169,26 +169,26 @@ extension MediaView {
 
 extension MediaView {
     
-    func isPlaying() -> Bool {
+    func isPlayingVideo() -> Bool {
         return (type == .video && player.rate != 0 && player.error == nil)
     }
     
-    func play() {
+    func playVideo() {
         if type == .video { player.play() }
     }
     
-    func pause() {
+    func pauseVideo() {
         if type == .video { player.pause() }
     }
     
-    func ready() {
+    func readyPlayVideo() {
         if type == .video {
             player.seek(to: kCMTimeZero)
             player.pause()
         }
     }
     
-    func restart() {
+    func restartVideo() {
         if type == .video {
             player.seek(to: kCMTimeZero)
             player.play()
