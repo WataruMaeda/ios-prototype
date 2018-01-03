@@ -9,7 +9,7 @@
 import UIKit
 import UserNotifications
 
-enum TimeIntervalType {
+enum TimeIntervalUnit {
   case sec, min, hour, day, week, month
 }
 
@@ -27,7 +27,7 @@ class NotificationManager: NSObject {
                subTitle: String? = nil,
                body: String,
                attachedImage: (name: String, ext: String)? = nil,
-               timeInterval: (time: Int, type: TimeIntervalType, repeats: Bool),
+               timeInterval: (time: Int, unit: TimeIntervalUnit, repeats: Bool),
                notificationIdentifer: String) {
     
     // Get current Authorization status
@@ -78,7 +78,7 @@ extension NotificationManager {
                                       subTitle: String? = nil,
                                       body: String,
                                       attachedImage: (name: String, ext: String)? = nil,
-                                      timeInterval: (time: Int, type: TimeIntervalType, repeats: Bool),
+                                      timeInterval: (time: Int, unit: TimeIntervalUnit, repeats: Bool),
                                       notificationIdentifer: String) {
     
     // Configure notification contents
@@ -91,7 +91,7 @@ extension NotificationManager {
         
         // Configure the trigger
         let trigger = self.getTrigger(timeInterval: timeInterval.time,
-                                 type: timeInterval.type,
+                                 unit: timeInterval.unit,
                                  repeats: timeInterval.repeats)
         
         // Create the request object
@@ -141,14 +141,14 @@ extension NotificationManager {
   }
   
   private func getTrigger(timeInterval: Int,
-                              type: TimeIntervalType,
+                              unit: TimeIntervalUnit,
                               repeats: Bool) -> UNTimeIntervalNotificationTrigger {
     
     // Actual timer itnerval by second
     var timeIntervalBySec = timeInterval
     
     // Convert timer interval to secound
-    switch type {
+    switch unit {
     case .min:
       timeIntervalBySec = timeInterval * 60
     case .hour:
@@ -238,7 +238,7 @@ extension NotificationManager {
   
   fileprivate func showNotificationSettingCompleteAlert(
     _ currentViewContoller: UIViewController,
-    timeInterval: (time: Int, type: TimeIntervalType, repeats: Bool)) {
+    timeInterval: (time: Int, unit: TimeIntervalUnit, repeats: Bool)) {
     let alertMessage = getNotificationSettingCompleteAlertMessage(timeInterval: timeInterval)
     let alert = UIAlertController(
       title: "Notification was set",
@@ -261,10 +261,10 @@ extension NotificationManager {
   }
   
   fileprivate func getNotificationSettingCompleteAlertMessage(
-    timeInterval: (time: Int, type: TimeIntervalType, repeats: Bool)) -> String {
+    timeInterval: (time: Int, unit: TimeIntervalUnit, repeats: Bool)) -> String {
     var timeIntervalUnit = "sec"
     let isMultiple = (timeInterval.time > 1)
-    switch timeInterval.type {
+    switch timeInterval.unit {
       case .sec: timeIntervalUnit = isMultiple ? "seconds" : "second"
       case .min: timeIntervalUnit = isMultiple ? "minutes" : "minute"
       case .hour: timeIntervalUnit = isMultiple ? "hours" : "hour"

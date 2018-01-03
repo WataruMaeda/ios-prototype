@@ -61,7 +61,7 @@ extension ViewController {
         subTitle: "subtitle",
         body: "body",
         attachedImage: (name: "attachment", ext: "png"),
-        timeInterval: (time: 5, type: .sec, repeats: false),
+        timeInterval: (time: 5, unit: .sec, repeats: false),
         notificationIdentifer: "\(selectedTimerInterval)"
       )
     }
