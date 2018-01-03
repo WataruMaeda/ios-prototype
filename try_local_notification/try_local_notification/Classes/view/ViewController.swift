@@ -48,11 +48,13 @@ extension ViewController {
 extension ViewController {
   
   func addTargets() {
-    notificationButton.addHander(control: .touchUpInside) { _ in
-      
-    }
+    var selectedTimerInterval = 1
     pickerView.didSelectItem { (item) in
-      
+      selectedTimerInterval = item
+    }
+    notificationButton.addHander(control: .touchUpInside) { _ in
+      selectedTimerInterval += 1
+      NotificationManager.shared.scedule(idetifer: "hello\(selectedTimerInterval)")
     }
   }
 }

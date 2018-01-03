@@ -15,6 +15,7 @@
 		A5525B041FF9B56F00A7D8F8 /* Button+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5525B031FF9B56F00A7D8F8 /* Button+Helper.swift */; };
 		A5525B061FF9B57B00A7D8F8 /* UIVIew+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5525B051FF9B57B00A7D8F8 /* UIVIew+Helper.swift */; };
 		A5525B081FF9B8DE00A7D8F8 /* TimerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5525B071FF9B8DE00A7D8F8 /* TimerPickerView.swift */; };
+		A5525B0A1FF9C73400A7D8F8 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5525B091FF9C73400A7D8F8 /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		A5525B031FF9B56F00A7D8F8 /* Button+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Helper.swift"; sourceTree = "<group>"; };
 		A5525B051FF9B57B00A7D8F8 /* UIVIew+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+Helper.swift"; sourceTree = "<group>"; };
 		A5525B071FF9B8DE00A7D8F8 /* TimerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPickerView.swift; sourceTree = "<group>"; };
+		A5525B091FF9C73400A7D8F8 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				A5525B021FF9B55800A7D8F8 /* extentions */,
+				A5525B091FF9C73400A7D8F8 /* NotificationManager.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5525B0A1FF9C73400A7D8F8 /* NotificationManager.swift in Sources */,
 				A5525B081FF9B8DE00A7D8F8 /* TimerPickerView.swift in Sources */,
 				A5525B041FF9B56F00A7D8F8 /* Button+Helper.swift in Sources */,
 				A5525AF01FF9AB1100A7D8F8 /* ViewController.swift in Sources */,
