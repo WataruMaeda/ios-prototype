@@ -20,6 +20,7 @@ class NotificationManager: NSObject {
   
   func setup() {
     UNUserNotificationCenter.current().delegate = self
+    setupNotifications()
   }
   
   func scedule(_ currentViewController: UIViewController,
@@ -69,7 +70,22 @@ class NotificationManager: NSObject {
   }
 }
 
-// MARK: - Notification Contents
+// MARK: - Notificaiton Center
+
+extension NotificationManager {
+  
+  fileprivate func setupNotifications() {
+    NotificationCenter.default.addObserver(self, selector: #selector(appDidBecomeActive), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+  }
+  
+  @objc private func appDidBecomeActive() {
+    DispatchQueue.main.async(execute: {
+      UIApplication.shared.applicationIconBadgeNumber = 0
+    })
+  }
+}
+
+// MARK: - Local Notification Contents
 
 extension NotificationManager {
   
