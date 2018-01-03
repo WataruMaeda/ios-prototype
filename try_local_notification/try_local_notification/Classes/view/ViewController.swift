@@ -54,7 +54,16 @@ extension ViewController {
     }
     notificationButton.addHander(control: .touchUpInside) { _ in
       selectedTimerInterval += 1
-      NotificationManager.shared.scedule(idetifer: "hello\(selectedTimerInterval)")
+      // Show local notification
+      NotificationManager.shared.scedule(
+        self,
+        title: "hello",
+        subTitle: "subtitle",
+        body: "body",
+        imageName: "attachment",
+        imageType: "png",
+        idetifer: "\(selectedTimerInterval)"
+      )
     }
   }
 }
