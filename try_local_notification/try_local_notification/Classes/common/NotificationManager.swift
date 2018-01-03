@@ -35,14 +35,14 @@ class NotificationManager: NSObject {
       if status == .authorized {
         // Schedule notification
         self.sceduleNotifiation(currentViewController,
-                           title: title,
-                           body: body,
-                           attachedImage: attachedImage,
-                           timeInterval: timeInterval,
-                           notificationIdentifer: notificationIdentifer)
+                                title: title,
+                                body: body,
+                                attachedImage: attachedImage,
+                                timeInterval: timeInterval,
+                                notificationIdentifer: notificationIdentifer)
       } else if status == .denied {
         // Open notification setting screen
-        self.requestAuthorizationWithAlert(currentViewController)
+        self.showAuthorizationRequestAlert(currentViewController)
       } else if status == .notDetermined {
         // Request Authorization
         self.requestAuthorization({ (granted) in
@@ -56,7 +56,7 @@ class NotificationManager: NSObject {
                                     notificationIdentifer: notificationIdentifer)
           } else {
             // Denied alert
-            self.requestDeniedAlert(currentViewController)
+            self.showAuthorizationDeniedAlert(currentViewController)
           }
         })
       }
@@ -102,8 +102,10 @@ extension NotificationManager {
         // Schedule the request
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error : Error?) in
-          if let theError = error {
-            print(theError.localizedDescription)
+          if let error = error {
+            print(error.localizedDescription)
+          } else {
+            self.showNotificationSettingCompleteAlert(currentViewController, timeInterval: timeInterval)
           }
         }
     }
@@ -177,29 +179,6 @@ extension NotificationManager {
     })
   }
   
-  fileprivate func requestAuthorizationWithAlert(_ currentViewContoller: UIViewController) {
-    let alert = UIAlertController(
-      title: "Turn on Notificaton",
-      message: "For usage of the function, notification settings should be turned on",
-      preferredStyle: .alert
-    )
-    alert.addAction(UIAlertAction(title: "No", style: .cancel) {action in})
-    alert.addAction(UIAlertAction(title: "Turn on", style: .default) {action in
-      self.openNotificationSettings()
-    })
-    currentViewContoller.present(alert, animated: true, completion: nil)
-  }
-  
-  fileprivate func requestDeniedAlert(_ currentViewContoller: UIViewController) {
-    let alert = UIAlertController(
-      title: "Authorization was denied",
-      message: "For usage of the sceduling function, please update notification setting",
-      preferredStyle: .alert
-    )
-    alert.addAction(UIAlertAction(title: "OK", style: .cancel) {action in})
-    currentViewContoller.present(alert, animated: true, completion: nil)
-  }
-  
   fileprivate func openNotificationSettings() {
     guard let settingsUrl = URL(string:UIApplicationOpenSettingsURLString) else { return }
     UIApplication.shared.open(settingsUrl)
@@ -230,7 +209,48 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
   }
 }
 
-// MARK: Supporting Functions
+// MARK: - Alert
+
+extension NotificationManager {
+  
+  fileprivate func showAuthorizationRequestAlert(_ currentViewContoller: UIViewController) {
+    let alert = UIAlertController(
+      title: "Turn on Notificaton",
+      message: "For usage of the function, notification settings should be turned on",
+      preferredStyle: .alert
+    )
+    alert.addAction(UIAlertAction(title: "No", style: .cancel) {action in})
+    alert.addAction(UIAlertAction(title: "Turn on", style: .default) {action in
+      self.openNotificationSettings()
+    })
+    currentViewContoller.present(alert, animated: true, completion: nil)
+  }
+  
+  fileprivate func showAuthorizationDeniedAlert(_ currentViewContoller: UIViewController) {
+    let alert = UIAlertController(
+      title: "Authorization was denied",
+      message: "For usage of the sceduling function, please update notification setting",
+      preferredStyle: .alert
+    )
+    alert.addAction(UIAlertAction(title: "OK", style: .cancel) {action in})
+    currentViewContoller.present(alert, animated: true, completion: nil)
+  }
+  
+  fileprivate func showNotificationSettingCompleteAlert(
+    _ currentViewContoller: UIViewController,
+    timeInterval: (time: Int, type: TimeIntervalType, repeats: Bool)) {
+    let alertMessage = getNotificationSettingCompleteAlertMessage(timeInterval: timeInterval)
+    let alert = UIAlertController(
+      title: "Notification was set",
+      message: alertMessage,
+      preferredStyle: .alert
+    )
+    alert.addAction(UIAlertAction(title: "OK", style: .cancel) {action in})
+    currentViewContoller.present(alert, animated: true, completion: nil)
+  }
+}
+
+// MARK: - Supporting Functions
 
 extension NotificationManager {
   
@@ -238,5 +258,20 @@ extension NotificationManager {
     DispatchQueue.main.async(execute: {
       callback(UIApplication.shared.applicationIconBadgeNumber)
     })
+  }
+  
+  fileprivate func getNotificationSettingCompleteAlertMessage(
+    timeInterval: (time: Int, type: TimeIntervalType, repeats: Bool)) -> String {
+    var timeIntervalUnit = "sec"
+    let isMultiple = (timeInterval.time > 1)
+    switch timeInterval.type {
+      case .sec: timeIntervalUnit = isMultiple ? "seconds" : "second"
+      case .min: timeIntervalUnit = isMultiple ? "minutes" : "minute"
+      case .hour: timeIntervalUnit = isMultiple ? "hours" : "hour"
+      case .day: timeIntervalUnit = isMultiple ? "days" : "day"
+      case .week: timeIntervalUnit = isMultiple ? "weeks" : "week"
+      case .month: timeIntervalUnit = isMultiple ? "months" : "month"
+    }
+    return "After \(timeInterval.time) \(timeIntervalUnit), you will be notified"
   }
 }
