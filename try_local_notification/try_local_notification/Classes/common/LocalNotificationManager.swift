@@ -1,5 +1,5 @@
 //
-//  NotificationManager.swift
+//  LocalNotificationManager.swift
 //  try_local_notification
 //
 //  Created by Wataru Maeda on 2017/12/31.
@@ -13,9 +13,9 @@ enum TimeIntervalUnit {
   case sec, min, hour, day, week, month
 }
 
-class NotificationManager: NSObject {
+class LocalNotificationManager: NSObject {
   
-  static var shared = NotificationManager()
+  static var shared = LocalNotificationManager()
   override private init() {} // Singleton
   
   func setup() {
@@ -72,7 +72,7 @@ class NotificationManager: NSObject {
 
 // MARK: - Notificaiton Center
 
-extension NotificationManager {
+extension LocalNotificationManager {
   
   fileprivate func setupNotifications() {
     NotificationCenter.default.addObserver(self, selector: #selector(appDidBecomeActive), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
@@ -87,7 +87,7 @@ extension NotificationManager {
 
 // MARK: - Local Notification Contents
 
-extension NotificationManager {
+extension LocalNotificationManager {
   
   fileprivate func sceduleNotifiation(_ currentViewController: UIViewController,
                                       title: String,
@@ -187,7 +187,7 @@ extension NotificationManager {
 
 // MARK: - Authorization
 
-extension NotificationManager {
+extension LocalNotificationManager {
   
   fileprivate func getAuthorizationStatus(_ result: @escaping (UNAuthorizationStatus)->()) {
     UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { (settings: UNNotificationSettings) in
@@ -212,13 +212,13 @@ extension NotificationManager {
 
 // MARK: UNUserNotificationCenterDelegate
 
-extension NotificationManager: UNUserNotificationCenterDelegate {
+extension LocalNotificationManager: UNUserNotificationCenterDelegate {
   
   // If app is foreground
   func userNotificationCenter(_ center: UNUserNotificationCenter,
                               willPresent notification: UNNotification,
                               withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    print("NotificationManager: userNotificationCenter: \(notification)")
+    print("LocalNotificationManager: userNotificationCenter: \(notification)")
     // Update the app interface directly.
     // Play a sound.
     completionHandler(UNNotificationPresentationOptions.sound)
@@ -227,7 +227,7 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
 
 // MARK: - Alert
 
-extension NotificationManager {
+extension LocalNotificationManager {
   
   fileprivate func showAuthorizationRequestAlert(_ currentViewContoller: UIViewController) {
     let alert = UIAlertController(
@@ -268,7 +268,7 @@ extension NotificationManager {
 
 // MARK: - Supporting Functions
 
-extension NotificationManager {
+extension LocalNotificationManager {
   
   fileprivate func getCurrentBadgeNumber(_ callback: @escaping (Int)->()) {
     DispatchQueue.main.async(execute: {

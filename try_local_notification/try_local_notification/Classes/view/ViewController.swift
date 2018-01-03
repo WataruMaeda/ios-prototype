@@ -55,7 +55,7 @@ extension ViewController {
     notificationButton.addHander(control: .touchUpInside) { _ in
       selectedTimerInterval += 1
       // Show local notification
-      NotificationManager.shared.scedule(
+      LocalNotificationManager.shared.scedule(
         self,
         title: "hello",
         subTitle: "subtitle",
