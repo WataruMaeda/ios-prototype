@@ -9,6 +9,10 @@
 import UIKit
 import UserNotifications
 
+enum TimeIntervalType {
+  case sec, min, hour, day, week, month
+}
+
 class NotificationManager: NSObject {
   
   static var shared = NotificationManager()
@@ -22,8 +26,8 @@ class NotificationManager: NSObject {
                title: String,
                subTitle: String? = nil,
                body: String,
-               imageName: String? = nil,
-               imageType: String? = nil,
+               attachedImage: (name: String, ext: String)? = nil,
+               timeInterval: (time: Int, type: TimeIntervalType),
                idetifer: String) {
     
     // If current notification status is denied or not determined, ask for turning on
@@ -33,8 +37,8 @@ class NotificationManager: NSObject {
     let content = getNotificationContent(title: title,
                                          subTitle: subTitle,
                                          body: body,
-                                         imageName: imageName,
-                                         imageType: imageType)
+                                         imageName: attachedImage?.name,
+                                         imageExtension: attachedImage?.ext)
     
     // Configure the trigger for 10 sec later.
     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
@@ -55,7 +59,7 @@ class NotificationManager: NSObject {
                                       subTitle: String? = nil,
                                       body: String,
                                       imageName: String? = nil,
-                                      imageType: String? = nil) -> UNMutableNotificationContent {
+                                      imageExtension: String? = nil) -> UNMutableNotificationContent {
     // Create notification contents
     let content = UNMutableNotificationContent()
     content.title = title
@@ -65,13 +69,12 @@ class NotificationManager: NSObject {
     content.body = body
     
     // Attached Image
-    if let url = Bundle.main.url(forResource: imageName, withExtension: imageType) {
+    if let url = Bundle.main.url(forResource: imageName, withExtension: imageExtension) {
       let attachment = try? UNNotificationAttachment(identifier: "attachment", url: url, options: nil)
       if let attachment = attachment {
         content.attachments = [attachment]
       }
     }
-    
     return content
   }
   
@@ -88,12 +91,12 @@ extension NotificationManager {
   func askAuthorizationIfNeeded(_ currentViewContoller: UIViewController) {
     getAuthorizationStatus({ (status) in
       if status ==  .authorized {
-        print("askAuthorizationIfNeeded: Authorized")
+        print("NotificationManager: askAuthorizationIfNeeded: Authorized")
       } else if status == .denied {
-        print("askAuthorizationIfNeeded: Denied")
+        print("NotificationManager: askAuthorizationIfNeeded: Denied")
         self.askAuthorization(currentViewContoller)
       } else {
-        print("askAuthorizationIfNeeded: NotDetermined")
+        print("NotificationManager: askAuthorizationIfNeeded: NotDetermined")
         self.requestAuthorization()
       }
     })
@@ -102,11 +105,11 @@ extension NotificationManager {
   private func askAuthorization(_ currentViewContoller: UIViewController) {
     let alert = UIAlertController(
       title: "Turn on Notificaton",
-      message: "For usage of the function, notification settings should be turned on",
+      message: "For usage of this function, notification settings should be turned on",
       preferredStyle: .alert
     )
     alert.addAction(UIAlertAction(title: "No", style: .cancel) {action in})
-    alert.addAction(UIAlertAction(title: "OK", style: .default) {action in
+    alert.addAction(UIAlertAction(title: "Turn on", style: .default) {action in
       self.openNotificationSettings()
     })
     currentViewContoller.present(alert, animated: true, completion: nil)
@@ -128,7 +131,9 @@ extension NotificationManager {
       options: [.badge, .sound, .alert],
       completionHandler: { (granted, error) in
         if error != nil { return }
-        granted ? print("requestAuthorization: Authorized") : print("requestAuthorization: Denied")
+        granted ?
+          print("NotificationManager: requestAuthorization: Authorized") :
+          print("NotificationManager: requestAuthorization: Denied")
     })
   }
 }
@@ -141,6 +146,7 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
   func userNotificationCenter(_ center: UNUserNotificationCenter,
                               willPresent notification: UNNotification,
                               withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    print("NotificationManager: userNotificationCenter: \(notification)")
     // Update the app interface directly.
     // Play a sound.
     completionHandler(UNNotificationPresentationOptions.sound)

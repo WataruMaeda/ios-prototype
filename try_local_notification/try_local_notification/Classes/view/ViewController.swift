@@ -60,8 +60,8 @@ extension ViewController {
         title: "hello",
         subTitle: "subtitle",
         body: "body",
-        imageName: "attachment",
-        imageType: "png",
+        attachedImage: ("attachment", "png"),
+        timeInterval: (time: 10, type: .sec),
         idetifer: "\(selectedTimerInterval)"
       )
     }
