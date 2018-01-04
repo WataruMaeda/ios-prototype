@@ -18,6 +18,8 @@ class LocalNotificationManager: NSObject {
   static var shared = LocalNotificationManager()
   override private init() {} // Singleton
   
+  private lazy var didTapNotificationCallback: ()->() = {}
+  
   func setup() {
     UNUserNotificationCenter.current().delegate = self
     setupNotifications()
@@ -67,6 +69,15 @@ class LocalNotificationManager: NSObject {
   func cancel(identifers: [String]) {
     let center = UNUserNotificationCenter.current()
     center.removePendingNotificationRequests(withIdentifiers: identifers)
+  }
+}
+
+// MARK: - Notificaiton Handlers
+
+extension LocalNotificationManager {
+  
+  func didTapNotification(_ callback: @escaping () -> ()) {
+    didTapNotificationCallback = callback
   }
 }
 
@@ -210,7 +221,7 @@ extension LocalNotificationManager {
   }
 }
 
-// MARK: UNUserNotificationCenterDelegate
+// MARK: - UNUserNotificationCenterDelegate
 
 extension LocalNotificationManager: UNUserNotificationCenterDelegate {
   
@@ -218,10 +229,16 @@ extension LocalNotificationManager: UNUserNotificationCenterDelegate {
   func userNotificationCenter(_ center: UNUserNotificationCenter,
                               willPresent notification: UNNotification,
                               withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    print("LocalNotificationManager: userNotificationCenter: \(notification)")
-    // Update the app interface directly.
-    // Play a sound.
-    completionHandler(UNNotificationPresentationOptions.sound)
+    // Show alert in the foreground
+//    print(notification.request.content)
+    completionHandler([.badge, .sound, .alert])
+  }
+  
+  func userNotificationCenter(_ center: UNUserNotificationCenter,
+                              didReceive response: UNNotificationResponse,
+                              withCompletionHandler completionHandler: @escaping () -> Void) {
+    print(response.notification.request.content.title)
+    didTapNotificationCallback()
   }
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A508E63E1FFDB03E007BFD5B /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A508E63D1FFDB03E007BFD5B /* TimePickerView.swift */; };
 		A5525AEE1FF9AB1100A7D8F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5525AED1FF9AB1100A7D8F8 /* AppDelegate.swift */; };
 		A5525AF01FF9AB1100A7D8F8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5525AEF1FF9AB1100A7D8F8 /* ViewController.swift */; };
 		A5525AF31FF9AB1100A7D8F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5525AF11FF9AB1100A7D8F8 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A508E63D1FFDB03E007BFD5B /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		A5525AEA1FF9AB1100A7D8F8 /* try_local_notification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = try_local_notification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5525AED1FF9AB1100A7D8F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5525AEF1FF9AB1100A7D8F8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				A5525AEF1FF9AB1100A7D8F8 /* ViewController.swift */,
 				A5525B071FF9B8DE00A7D8F8 /* TimerPickerView.swift */,
+				A508E63D1FFDB03E007BFD5B /* TimePickerView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				A5525B0A1FF9C73400A7D8F8 /* LocalNotificationManager.swift in Sources */,
 				A5525B081FF9B8DE00A7D8F8 /* TimerPickerView.swift in Sources */,
 				A5525B041FF9B56F00A7D8F8 /* Button+Helper.swift in Sources */,
+				A508E63E1FFDB03E007BFD5B /* TimePickerView.swift in Sources */,
 				A5525AF01FF9AB1100A7D8F8 /* ViewController.swift in Sources */,
 				A5525B061FF9B57B00A7D8F8 /* UIVIew+Helper.swift in Sources */,
 				A5525AEE1FF9AB1100A7D8F8 /* AppDelegate.swift in Sources */,
