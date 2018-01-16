@@ -8,6 +8,19 @@
 
 import UIKit
 
+// MARK: - Size
+
+extension UIView {
+  
+  var viewWidth: CGFloat {
+    get { return frame.size.width }
+  }
+  
+  var viewHeight: CGFloat {
+    get { return frame.size.height }
+  }
+}
+
 // MARK: - Anchor
 
 extension UIView {

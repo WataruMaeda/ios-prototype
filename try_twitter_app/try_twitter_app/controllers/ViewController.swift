@@ -12,8 +12,15 @@ class ViewController: UIViewController {
 
   let cellId = "cellId"
   
+  private lazy var tableHeaderView: TableHeaderView = {
+    let headerView = TableHeaderView()
+    headerView.frame = CGRect(x: 0, y: 0, width: view.viewWidth, height: view.viewWidth * 0.6)
+    return headerView
+  }()
+  
   fileprivate lazy var tableView: UITableView = {
     let tableView = UITableView(frame: .zero, style: .plain)
+    tableView.tableHeaderView = tableHeaderView
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
     tableView.dataSource = self
     tableView.delegate = self
@@ -27,7 +34,17 @@ class ViewController: UIViewController {
   }
 }
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
+// MARK: - UIScrollView
+
+extension ViewController {
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    print(tableView.contentOffset.y)
+    tableHeaderView.updateHeaderContentsSize(currentOffsetY: scrollView.contentOffset.y)
+  }
+}
+
+// MARK: - UITableView
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
   
@@ -46,9 +63,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId) else { return UITableViewCell() }
-    cell.backgroundColor = .flatDarkGray
+    cell.backgroundColor = .white
     cell.textLabel?.text = "TEST TEST TEST"
-    cell.textLabel?.textColor = .white
+    cell.textLabel?.textColor = .flatDarkGray
     return cell
   }
 }
