@@ -131,7 +131,7 @@ extension TableHeaderView {
       isInDirectionAppearAnimation = true
       
       // make impact
-      self.generator.impactOccurred()
+      generator.impactOccurred()
       
       // begin rotation animation
       CATransaction.begin()
@@ -143,6 +143,9 @@ extension TableHeaderView {
         }, completion: { finished in
           self.indicator.startAnimating()
           self.isInDirectionAppearAnimation = false
+          
+          // remove layer animation
+          self.directionImageView.layer.removeAllAnimations()
           
           // FIXME: call refresh function in here
           DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
