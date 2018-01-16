@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window = UIWindow(frame: UIScreen.main.bounds)
     let viewController = ViewController()
-    viewController.navigationItem.title = "Twitter Reflesh Sample"
+    viewController.navigationItem.title = "Twitter Refresh Sample"
     window?.rootViewController = NavigationController(rootViewController: viewController)
     window?.makeKeyAndVisible()
     

@@ -14,7 +14,7 @@ class ViewController: UIViewController {
   
   private lazy var tableHeaderView: TableHeaderView = {
     let headerView = TableHeaderView()
-    headerView.frame = CGRect(x: 0, y: 0, width: view.viewWidth, height: view.viewWidth * 0.6)
+    headerView.frame = CGRect(x: 0, y: 0, width: view.viewWidth, height: view.viewWidth * 0.4)
     return headerView
   }()
   
