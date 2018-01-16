@@ -14,11 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-  window = UIWindow(frame: UIScreen.main.bounds)
-  let homeViewController = HomeCollectionViewController(
-    collectionViewLayout: UICollectionViewFlowLayout())
-  window?.rootViewController = UINavigationController(rootViewController: homeViewController)
-  window?.makeKeyAndVisible()
   return true
 }
   
