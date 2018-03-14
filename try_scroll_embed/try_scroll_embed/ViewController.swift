@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
   var headerImage: UIImageView = {
     let imageView = UIImageView()
     imageView.contentMode = .scaleAspectFill
-    imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 200)
+    imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 300)
     imageView.image = #imageLiteral(resourceName: "header")
     return imageView
   }()
@@ -49,34 +49,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
   
   @objc private func exePan(_ recognizer: UIPanGestureRecognizer) {
     
-    print("hahahahahahah")
-    
     if recognizer.state != .changed {
+      
       currentPanY = 0
       tableView.isScrollEnabled = false
       contentViewController.tableView.isScrollEnabled = false
+      
     } else {
-      let currentTranslation = recognizer.translation(in: tableView)
-      let currentYup = currentTranslation.y
-      //      print(currentYup)
+      let headerHeight = 300 as CGFloat
+      let distamceY = recognizer.translation(in: tableView).y
       
-      if (tableView.isScrollEnabled || contentViewController.tableView.isScrollEnabled) {
-        if currentPanY == 0 {
-          currentPanY = currentYup
-        }
+      print(distamceY)
+      
+      // header presenting
+      if tableView.contentOffset.y >= -headerHeight &&
+         tableView.contentOffset.y <= headerHeight {
+        tableView.contentOffset.y = -distamceY
+      // subview's sctoll presenting
+      } else if contentViewController.tableView.contentOffset.y >= 0 {
+        
+        contentViewController.tableView.contentOffset.y = -distamceY - headerHeight
+        contentViewController.tableView.isScrollEnabled = true
+      } else {
+        
       }
       
-      let additionalYup = currentPanY - currentYup
-      if tableView.isScrollEnabled {
-        let offset = tableView.contentOffset.y + additionalYup
-        if offset >= 0 {
-          tableView.contentOffset = CGPoint(x: 0, y: offset)
-        } else {
-          tableView.contentOffset = .zero
-        }
-      } else if contentViewController.tableView.isScrollEnabled {
-        contentViewController.tableView.contentOffset = CGPoint(x: 0, y: additionalYup)
-      }
     }
   }
   

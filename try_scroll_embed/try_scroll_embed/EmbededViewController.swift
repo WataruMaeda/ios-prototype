@@ -29,12 +29,12 @@ class EmbededViewController: UIViewController, UITableViewDelegate, UITableViewD
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 30
+    return 50
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-    cell.textLabel?.text = "TEST TEST TEST"
+    cell.textLabel?.text = "TEST\(indexPath.row)"
     return cell
   }
 }
