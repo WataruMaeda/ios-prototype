@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ScaleImageView.swift
 //  try_scale_img
 //
 //  Created by Wataru Maeda on 2018-03-13.
@@ -8,10 +8,6 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
-}
+class ScaleImageView: UIView {
 
+}

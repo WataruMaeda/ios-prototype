@@ -12,6 +12,8 @@
 		04CD4CED2058CB810089D3CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04CD4CEB2058CB810089D3CC /* Main.storyboard */; };
 		04CD4CEF2058CB810089D3CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04CD4CEE2058CB810089D3CC /* Assets.xcassets */; };
 		04CD4CF22058CB810089D3CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04CD4CF02058CB810089D3CC /* LaunchScreen.storyboard */; };
+		04CD4CFA2058CC080089D3CC /* ScaleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD4CF92058CC080089D3CC /* ScaleImageView.swift */; };
+		C25FBC43E2575E4D0CF2E695 /* Pods_try_scale_img.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D91A57B05B53E0B8389F55B /* Pods_try_scale_img.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,10 @@
 		04CD4CEE2058CB810089D3CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04CD4CF12058CB810089D3CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04CD4CF32058CB810089D3CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04CD4CF92058CC080089D3CC /* ScaleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleImageView.swift; sourceTree = "<group>"; };
+		0D91A57B05B53E0B8389F55B /* Pods_try_scale_img.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_try_scale_img.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		51EBBF778F93FA5DDAE4DA4F /* Pods-try_scale_img.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-try_scale_img.release.xcconfig"; path = "Pods/Target Support Files/Pods-try_scale_img/Pods-try_scale_img.release.xcconfig"; sourceTree = "<group>"; };
+		85D179B55152791D1F0EF1E6 /* Pods-try_scale_img.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-try_scale_img.debug.xcconfig"; path = "Pods/Target Support Files/Pods-try_scale_img/Pods-try_scale_img.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C25FBC43E2575E4D0CF2E695 /* Pods_try_scale_img.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,8 @@
 			children = (
 				04CD4CE62058CB810089D3CC /* try_scale_img */,
 				04CD4CE52058CB810089D3CC /* Products */,
+				22ABB2982318C12942817391 /* Pods */,
+				6C1D2424899B840D79327C47 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +65,30 @@
 			children = (
 				04CD4CE72058CB810089D3CC /* AppDelegate.swift */,
 				04CD4CE92058CB810089D3CC /* ViewController.swift */,
+				04CD4CF92058CC080089D3CC /* ScaleImageView.swift */,
 				04CD4CEB2058CB810089D3CC /* Main.storyboard */,
 				04CD4CEE2058CB810089D3CC /* Assets.xcassets */,
 				04CD4CF02058CB810089D3CC /* LaunchScreen.storyboard */,
 				04CD4CF32058CB810089D3CC /* Info.plist */,
 			);
 			path = try_scale_img;
+			sourceTree = "<group>";
+		};
+		22ABB2982318C12942817391 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				85D179B55152791D1F0EF1E6 /* Pods-try_scale_img.debug.xcconfig */,
+				51EBBF778F93FA5DDAE4DA4F /* Pods-try_scale_img.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6C1D2424899B840D79327C47 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0D91A57B05B53E0B8389F55B /* Pods_try_scale_img.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04CD4CF62058CB810089D3CC /* Build configuration list for PBXNativeTarget "try_scale_img" */;
 			buildPhases = (
+				15126B94921389FBE5709B89 /* [CP] Check Pods Manifest.lock */,
 				04CD4CE02058CB810089D3CC /* Sources */,
 				04CD4CE12058CB810089D3CC /* Frameworks */,
 				04CD4CE22058CB810089D3CC /* Resources */,
+				500A86E74FC5896EDE073625 /* [CP] Embed Pods Frameworks */,
+				E898A927C99496CB60635E5B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,6 +161,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		15126B94921389FBE5709B89 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-try_scale_img-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		500A86E74FC5896EDE073625 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-try_scale_img/Pods-try_scale_img-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Spring/Spring.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Spring.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-try_scale_img/Pods-try_scale_img-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E898A927C99496CB60635E5B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-try_scale_img/Pods-try_scale_img-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		04CD4CE02058CB810089D3CC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -138,6 +222,7 @@
 			files = (
 				04CD4CEA2058CB810089D3CC /* ViewController.swift in Sources */,
 				04CD4CE82058CB810089D3CC /* AppDelegate.swift in Sources */,
+				04CD4CFA2058CC080089D3CC /* ScaleImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +357,7 @@
 		};
 		04CD4CF72058CB810089D3CC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85D179B55152791D1F0EF1E6 /* Pods-try_scale_img.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -286,6 +372,7 @@
 		};
 		04CD4CF82058CB810089D3CC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51EBBF778F93FA5DDAE4DA4F /* Pods-try_scale_img.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
