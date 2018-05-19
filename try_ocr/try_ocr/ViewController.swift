@@ -13,7 +13,13 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    OcrService.detectText(fromImage: #imageLiteral(resourceName: "eng2"))
+    OcrService.detectTexts(from: #imageLiteral(resourceName: "eng2")) { texts in
+      if let texts = texts {
+        print(texts)
+      } else {
+        print("No Texts")
+      }
+    }
   }
 }
 

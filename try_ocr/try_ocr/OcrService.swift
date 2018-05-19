@@ -9,33 +9,63 @@
 import UIKit
 import Alamofire
 
-let url = "https://vision.googleapis.com/v1/images:annotate?key={APIKey}"
+let url = "https://vision.googleapis.com/v1/images:annotate?key={API-Key}"
 
 class OcrService: NSObject {
 
-  static func detectText(fromImage: UIImage) {
+  static func detectTexts(from: UIImage, callback: @escaping ([String]?) -> Void) {
     
-    // get params for post request
-    guard let params = getOcrParams(fromImage) else { return };
+    // get params for request
+    guard let params = getOcrParams(from) else { return };
     
     // post request
     Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { (response) in
       switch response.result {
+        
       case .success:
-        print(response.result.value)
+        let texts = extractTexts(from: response);
+        texts.count > 0 ? callback(texts) : callback(nil)
         
       case .failure(let error):
         print(error)
+        callback(nil)
+      }
+    }
+  }
+}
+
+// MARK: - Parser
+
+fileprivate extension OcrService {
+  
+  static func extractTexts(from: DataResponse<Any>) -> [String] {
+    var texts = [String]()
+    
+    // check response data
+    guard let value = from.result.value as? [String: Any],
+          let responses = value["responses"] as? [[String: Any]] else { return texts }
+    
+    // extract texts from response
+    for response in responses {
+      if let textAnnotations = response["textAnnotations"] as? [[String: Any]] {
+        if let textAnnotation = textAnnotations.first {
+          if let description = textAnnotation["description"] as? String {
+            texts.append(description)
+          }
+        }
       }
     }
     
+    return texts
   }
 }
+
+// MARK: - Supporting Functions
 
 fileprivate extension OcrService {
   
   static func getOcrParams(_ image: UIImage) -> [String: Any]? {
-    guard let base64Image = getBase65Image(image) else {
+    guard let base64Image = convertToBase64(image) else {
       return nil
     }
     return [
@@ -46,7 +76,7 @@ fileprivate extension OcrService {
     ]
   }
   
-  private static func getBase65Image(_ image: UIImage) -> String? {
+  private static func convertToBase64(_ image: UIImage) -> String? {
     guard let pngImage = UIImagePNGRepresentation(image) else { return nil }
     return pngImage.base64EncodedString(options: .lineLength64Characters)
   }
