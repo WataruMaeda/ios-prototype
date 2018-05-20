@@ -1,18 +1,15 @@
 PODS:
+  - ACEDrawingView (2.2.1)
   - Alamofire (4.7.0)
-  - jot (0.1.5):
-    - Masonry (~> 0.6.1)
-  - Masonry (0.6.4)
 
 DEPENDENCIES:
+  - ACEDrawingView
   - Alamofire (~> 4.7)
-  - jot
 
 SPEC CHECKSUMS:
+  ACEDrawingView: fa6e8461682a54db3ac65151474fc77ef7e54fd2
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
-  jot: 0f5dc333defa6ad805d01adc3834b201c22510a7
-  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
 
-PODFILE CHECKSUM: 9d3c25cdc8c7e9bc986f3e6ec4bee8cdc9524df7
+PODFILE CHECKSUM: 44301ce78fa65fd775b7dc1b342458db3c45bf48
 
 COCOAPODS: 1.4.0

@@ -7,6 +7,6 @@ target 'try_ocr' do
 
   # Pods for try_ocr
   pod 'Alamofire', '~> 4.7'
-  pod "jot"
+  pod 'ACEDrawingView'
 
 end

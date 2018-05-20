@@ -7,13 +7,13 @@
 //
 
 import UIKit
-import jot
+import ACEDrawingView
 
 let buttonHeight = 100 as CGFloat
 
 class ViewController: UIViewController {
   
-  let canvas = JotViewController()
+  let canvas = ACEDrawingView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,13 +27,11 @@ class ViewController: UIViewController {
 extension ViewController {
   
   func setupCanvas() {
-    
-    addChildViewController(canvas)
-    view.addSubview(canvas.view)
-    canvas.didMove(toParentViewController: self)
-    canvas.view.frame = CGRect(
+    canvas.frame = CGRect(
       x: 0, y: 0, width: view.viewWidth, height: view.viewHeight - buttonHeight)
-    canvas.state = .drawing
+    canvas.contentMode = .scaleAspectFit
+    canvas.lineWidth = 6
+    view.addSubview(canvas)
   }
   
   func setupMenu() {
@@ -46,7 +44,7 @@ extension ViewController {
         y: view.viewHeight - buttonHeight,
         width: view.viewWidth / 2,
         height: buttonHeight)) {
-          self.canvas.clearDrawing()
+          self.canvas.clear()
     }
     view.addSubview(clearButton)
     
@@ -69,7 +67,9 @@ extension ViewController {
 extension ViewController {
   
   func detectTexts() {
-    guard let image = UIImage.convertToImage(view: canvas.view) else { return }
+    guard let image = UIImage.convertToImage(view: canvas) else { return }
+    
+    // MARK: - * Image for OCR
     OcrService.detectTexts(from: image) { texts in
       if let texts = texts {
         var result = ""
