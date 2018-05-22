@@ -47,9 +47,7 @@ extension UIImage {
     view.layer.render(in: UIGraphicsGetCurrentContext()!)
     let img = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
-    guard let image = img else { return nil }
-    guard let imageData = UIImagePNGRepresentation(image) else { return nil }
-    return UIImage(data: imageData)
+    return img
   }
 }
 

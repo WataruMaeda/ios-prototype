@@ -31,6 +31,7 @@ extension ViewController {
       x: 0, y: 0, width: view.viewWidth, height: view.viewHeight - buttonHeight)
     canvas.contentMode = .scaleAspectFit
     canvas.lineWidth = 6
+    canvas.backgroundColor = .white
     view.addSubview(canvas)
   }
   
