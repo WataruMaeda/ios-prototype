@@ -19,6 +19,22 @@ extension UIView {
   var viewHeight: CGFloat {
     return frame.size.height
   }
+  
+  var viewX: CGFloat {
+    return frame.origin.x
+  }
+  
+  var viewMaxX: CGFloat {
+    return frame.maxX
+  }
+  
+  var viewY: CGFloat {
+    return frame.origin.y
+  }
+  
+  var viewMaxY: CGFloat {
+    return frame.maxY
+  }
 }
 
 // MARK: - UIButton+Ext
@@ -43,6 +59,7 @@ extension UIButton {
 extension UIImage {
   
   static func convertToImage(view: UIView) -> UIImage? {
+    view.backgroundColor = .white
     UIGraphicsBeginImageContext(view.frame.size)
     view.layer.render(in: UIGraphicsGetCurrentContext()!)
     let img = UIGraphicsGetImageFromCurrentImageContext()

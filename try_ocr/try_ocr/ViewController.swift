@@ -27,12 +27,27 @@ class ViewController: UIViewController {
 extension ViewController {
   
   func setupCanvas() {
+    view.backgroundColor = UIColor(red:0.941, green:0.941, blue:0.941, alpha:1.000)
+    
     canvas.frame = CGRect(
-      x: 0, y: 0, width: view.viewWidth, height: view.viewHeight - buttonHeight)
+      x: 0, y: 0, width: view.viewWidth - 32, height: 100)
+    canvas.center = view.center
     canvas.contentMode = .scaleAspectFit
-    canvas.lineWidth = 6
+    canvas.lineWidth = 4
     canvas.backgroundColor = .white
     view.addSubview(canvas)
+    
+    let label = UILabel()
+    label.text = "Sign"
+    label.font = UIFont.boldSystemFont(ofSize: 24)
+    label.sizeToFit()
+    label.frame.origin = CGPoint(x: canvas.viewX, y: canvas.viewY - label.viewHeight - 8)
+    view.addSubview(label)
+    
+    let border = UIView()
+    border.frame = CGRect(x: canvas.viewX, y: canvas.viewMaxY, width: canvas.viewWidth, height: 1)
+    border.backgroundColor = .black
+    view.addSubview(border)
   }
   
   func setupMenu() {
