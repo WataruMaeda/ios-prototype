@@ -23,21 +23,45 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     label = UILabel()
+    label.decoText("011112222<em>3333<em>4444ddddd")
     view.addSubview(label)
-    decoText()
   }
 }
 
-extension ViewController {
+extension UILabel {
   
-  func decoText() {
-    let text = "011112222<em>33334444ddddd"
+  func decoText(_ text: String, color: UIColor) {
     
-//    let range: Range<String.Index> = text.range(of: "<em>")!
-//    let index: Int = text.distance(from: text.startIndex, to: range.lowerBound)
-//    print(index)
+    // devide by tag
+    var texts = text.components(separatedBy: "<em>")
     
-    var arr = text.components(separatedBy: "<em>")
-    print(arr)
+    // if the open/close tag is incollect
+    if texts.count < 3 {
+      self.text = text.replacingOccurrences(of: "<em>", with: "")
+      return;
+    }
+    
+    // remove first/last element
+    texts.removeFirst()
+    texts.removeLast()
+    
+    // remove tags
+    let decoText = text.replacingOccurrences(of: "<em>", with: "")
+    
+    // create attribute text
+    let attrText = NSMutableAttributedString(string: decoText)
+    for txt in texts {
+      if let range = decoText.range(of: txt) {
+        let nsRange = decoText.nsRange(from: range)
+        attrText.addAttribute(.backgroundColor, value: UIColor.yellow, range: nsRange)
+      }
+    }
+    attributedText = attrText
+  }
+}
+
+private extension StringProtocol where Index == String.Index {
+  func nsRange(from range: Range<Index>) -> NSRange {
+    return NSRange(range, in: self)
   }
 }
