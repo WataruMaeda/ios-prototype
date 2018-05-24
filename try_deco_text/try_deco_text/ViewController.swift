@@ -23,37 +23,37 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     label = UILabel()
-    label.decoText("011112222<em>3333<em>4444ddddd")
+    label.decoText("0111122<b>223333<em>444<b>4<em>ddddd", withColor: .yellow)
     view.addSubview(label)
   }
 }
 
 extension UILabel {
   
-  func decoText(_ text: String, color: UIColor) {
+  func decoText(_ text: String, withColor: UIColor) {
     
-    // devide by tag
-    var texts = text.components(separatedBy: "<em>")
+    // devide by em tag
+    var emTexts = text.components(separatedBy: "<em>")
     
     // if the open/close tag is incollect
-    if texts.count < 3 {
+    if emTexts.count < 3 {
       self.text = text.replacingOccurrences(of: "<em>", with: "")
       return;
     }
     
     // remove first/last element
-    texts.removeFirst()
-    texts.removeLast()
+    emTexts.removeFirst()
+    emTexts.removeLast()
     
     // remove tags
     let decoText = text.replacingOccurrences(of: "<em>", with: "")
     
     // create attribute text
     let attrText = NSMutableAttributedString(string: decoText)
-    for txt in texts {
-      if let range = decoText.range(of: txt) {
+    for emText in emTexts {
+      if let range = decoText.range(of: emText) {
         let nsRange = decoText.nsRange(from: range)
-        attrText.addAttribute(.backgroundColor, value: UIColor.yellow, range: nsRange)
+        attrText.addAttribute(.backgroundColor, value: withColor, range: nsRange)
       }
     }
     attributedText = attrText
