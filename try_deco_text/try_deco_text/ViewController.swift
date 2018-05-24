@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     label = UILabel()
     label.decoText(
-      "Baseball was first introduced to Japan in <b>1872<b> and <b>is<b> currently among the country's most popular participatory and spectator sports.",
+      "Baseball was <b>first<b> introduced to Japan in <em>1872<em> and <em>is<em> currently among the country's most <b>popular<b> participatory and spectator sports.",
       backgroundColor: .yellow,
       boldFont: UIFont.boldSystemFont(ofSize: 30)
     )
@@ -56,8 +56,14 @@ extension UILabel {
       emTexts.removeFirst()
       emTexts.removeLast()
       
+      // filter em tag texts
+      var fileteredEmTexts = [String]()
+      for i in 0..<emTexts.count {
+        if i == 0 || i & 2 != 0 { fileteredEmTexts.append(emTexts[i]) }
+      }
+      
       // deco background color
-      for emText in emTexts {
+      for emText in fileteredEmTexts {
         if let range = textWithoutTag.range(of: emText) {
           let nsRange = textWithoutTag.nsRange(from: range)
           attrText.addAttribute(.backgroundColor, value: backgroundColor, range: nsRange)
@@ -72,8 +78,14 @@ extension UILabel {
       bTexts.removeFirst()
       bTexts.removeLast()
       
+      // filter b tag texts
+      var fileteredBTexts = [String]()
+      for i in 0..<bTexts.count {
+        if i == 0 || i & 2 != 0 { fileteredBTexts.append(bTexts[i]) }
+      }
+      
       // deco bold color
-      for bText in bTexts {
+      for bText in fileteredBTexts {
         if let range = textWithoutTag.range(of: bText) {
           let nsRange = textWithoutTag.nsRange(from: range)
           attrText.addAttribute(.font, value: boldFont, range: nsRange)
