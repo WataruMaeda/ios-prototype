@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     label = UILabel()
     label.decoText(
-      "Baseball was <b>first<b> introduced to Japan in <em>1872<em> and <em>is<em> currently among the country's most <b>popular<b> participatory and spectator sports.",
+      "<em>Ba<b>se<b>ball<em> was first introduced to Japan in <em>1872<em> and <em>is<em> currently among the country's most <b>popular<b> participatory and spectator sports.",
       backgroundColor: .yellow,
       boldFont: UIFont.boldSystemFont(ofSize: 30)
     )
@@ -59,7 +59,7 @@ extension UILabel {
       // filter em tag texts
       var fileteredEmTexts = [String]()
       for i in 0..<emTexts.count {
-        if i == 0 || i & 2 != 0 { fileteredEmTexts.append(emTexts[i]) }
+        if i == 0 || i % 2 == 0 { fileteredEmTexts.append(emTexts[i]) }
       }
       
       // deco background color
@@ -81,7 +81,7 @@ extension UILabel {
       // filter b tag texts
       var fileteredBTexts = [String]()
       for i in 0..<bTexts.count {
-        if i == 0 || i & 2 != 0 { fileteredBTexts.append(bTexts[i]) }
+        if i == 0 || i % 2 == 0 { fileteredBTexts.append(bTexts[i]) }
       }
       
       // deco bold color
