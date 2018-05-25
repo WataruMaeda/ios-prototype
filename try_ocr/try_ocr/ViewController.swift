@@ -72,12 +72,9 @@ extension ViewController {
     guard let image = UIImage.convertToImage(view: canvas) else { return }
     
     // MARK: - * Image for OCR
-    OcrService.detectTexts(from: image) { texts in
+    OcrService.detectTexts(self, from: image) { texts in
       if let texts = texts {
-        var result = ""
-        texts.forEach({ result += $0 })
-        UIAlertController.show(self, title: result)
-        print(texts)
+        UIAlertController.show(self, title: texts)
       } else {
         UIAlertController.show(self, title: "Cannot detect text")
       }
