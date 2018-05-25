@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-let url = "https://vision.googleapis.com/v1/images:annotate?key={API-KEY}"
+let url = "https://vision.googleapis.com/v1/images:annotate?key={API-KRY}"
 
 class OcrService: NSObject {
 
