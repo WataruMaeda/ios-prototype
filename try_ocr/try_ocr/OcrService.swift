@@ -19,7 +19,7 @@ class OcrService: NSObject {
     // get texts from Vision API
     extractTextsWithVisionApi(from: from) { (textFromVision) in
       
-      // if Vision API detext texts
+      // if "Vision API" detext texts
       if (textFromVision != nil) {
         return callback(textFromVision)
       }
@@ -30,7 +30,7 @@ class OcrService: NSObject {
         // get texts from Tesseract OCR
         let textFromTesseract = extractTextsWithTesseract(from, language: language)
         
-        // if Vision API detext texts
+        // if "Tesseract" detext texts
         if (textFromTesseract != nil) {
           return callback(textFromTesseract)
         }
