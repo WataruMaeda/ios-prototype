@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ThirdTutorialViewController.swift
 //  try-tutorial
 //
 //  Created by Wataru Maeda on 2018-07-03.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ThirdTutorialViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    view.backgroundColor = .white
   }
 }
-
