@@ -16,6 +16,7 @@
 		04B23F6E20EBE1B9004E1DB0 /* FirstTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B23F6D20EBE1B9004E1DB0 /* FirstTutorialViewController.swift */; };
 		04B23F7020EBE1D1004E1DB0 /* SecondTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B23F6F20EBE1D1004E1DB0 /* SecondTutorialViewController.swift */; };
 		04B23F7220EBE1F4004E1DB0 /* ThirdTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B23F7120EBE1F4004E1DB0 /* ThirdTutorialViewController.swift */; };
+		04B23F7720EBE55B004E1DB0 /* tutorial-users.json in Resources */ = {isa = PBXBuildFile; fileRef = 04B23F7620EBE55B004E1DB0 /* tutorial-users.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		04B23F6D20EBE1B9004E1DB0 /* FirstTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTutorialViewController.swift; sourceTree = "<group>"; };
 		04B23F6F20EBE1D1004E1DB0 /* SecondTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTutorialViewController.swift; sourceTree = "<group>"; };
 		04B23F7120EBE1F4004E1DB0 /* ThirdTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdTutorialViewController.swift; sourceTree = "<group>"; };
+		04B23F7620EBE55B004E1DB0 /* tutorial-users.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "tutorial-users.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		04B23F7420EBE25C004E1DB0 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				04B23F7620EBE55B004E1DB0 /* tutorial-users.json */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				04B23F6320EBDA53004E1DB0 /* LaunchScreen.storyboard in Resources */,
 				04B23F6020EBDA53004E1DB0 /* Assets.xcassets in Resources */,
 				04B23F6C20EBDEF8004E1DB0 /* tutorial.storyboard in Resources */,
+				04B23F7720EBE55B004E1DB0 /* tutorial-users.json in Resources */,
 				04B23F5E20EBDA51004E1DB0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
