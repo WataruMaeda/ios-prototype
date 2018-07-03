@@ -44,7 +44,7 @@ class OcrService: NSObject {
 
 // MARK: - Vision API
 
-let url = "https://vision.googleapis.com/v1/images:annotate?key={API-KEY}"
+let url = "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyA6Wub31QDxq0A-Wb5JgYLMnD9vxBrwloY"
 
 fileprivate extension OcrService {
   

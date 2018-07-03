@@ -24,9 +24,9 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     label = UILabel()
     label.decoText(
-      "<em>Ba<b>se<b>ball<em> was first introduced to Japan in <em>1872<em> and <em>is<em> currently among the country's most <b>popular<b> participatory and spectator sports.",
-      backgroundColor: .yellow,
-      boldFont: UIFont.boldSystemFont(ofSize: 30)
+      "<em>Ba<b>se<b>ball<em> was first introduced to Japan in <em>1872<em> and <em>is<em> currently among the <em>country's most <b>popular<b> participatory and spectator sports.<em>",
+      backgroundColor: .red,
+      boldFont: UIFont.boldSystemFont(ofSize: 50)
     )
     view.addSubview(label)
   }
