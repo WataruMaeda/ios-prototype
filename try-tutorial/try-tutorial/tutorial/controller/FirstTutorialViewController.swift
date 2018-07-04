@@ -10,11 +10,31 @@ import UIKit
 
 class FirstTutorialViewController: UIViewController {
   
+  @IBOutlet weak var collectionView: UICollectionView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
-    
-    let users = TutorialModelManager.loadUsersFromJson()
-    print(users)
   }
+}
+
+// MARK: - CollectionView
+
+extension FirstTutorialViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+  
+  fileprivate func setupCollectionView() {
+    collectionView.delegate = self
+    collectionView.dataSource = self
+  }
+  
+  func collectionView(_ collectionView: UICollectionView,
+                      numberOfItemsInSection section: Int) -> Int {
+    return 10
+  }
+  
+  func collectionView(_ collectionView: UICollectionView,
+                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    return UICollectionViewCell()
+  }
+  
 }

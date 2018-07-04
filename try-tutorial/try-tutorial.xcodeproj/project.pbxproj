@@ -12,7 +12,7 @@
 		04B23F5E20EBDA51004E1DB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B23F5C20EBDA51004E1DB0 /* Main.storyboard */; };
 		04B23F6020EBDA53004E1DB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04B23F5F20EBDA53004E1DB0 /* Assets.xcassets */; };
 		04B23F6320EBDA53004E1DB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B23F6120EBDA53004E1DB0 /* LaunchScreen.storyboard */; };
-		04B23F6C20EBDEF8004E1DB0 /* tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B23F6B20EBDEF8004E1DB0 /* tutorial.storyboard */; };
+		04B23F6C20EBDEF8004E1DB0 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B23F6B20EBDEF8004E1DB0 /* Tutorial.storyboard */; };
 		04B23F6E20EBE1B9004E1DB0 /* FirstTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B23F6D20EBE1B9004E1DB0 /* FirstTutorialViewController.swift */; };
 		04B23F7020EBE1D1004E1DB0 /* SecondTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B23F6F20EBE1D1004E1DB0 /* SecondTutorialViewController.swift */; };
 		04B23F7220EBE1F4004E1DB0 /* ThirdTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B23F7120EBE1F4004E1DB0 /* ThirdTutorialViewController.swift */; };
@@ -28,7 +28,7 @@
 		04B23F5F20EBDA53004E1DB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04B23F6220EBDA53004E1DB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04B23F6420EBDA53004E1DB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04B23F6B20EBDEF8004E1DB0 /* tutorial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = tutorial.storyboard; sourceTree = "<group>"; };
+		04B23F6B20EBDEF8004E1DB0 /* Tutorial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		04B23F6D20EBE1B9004E1DB0 /* FirstTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTutorialViewController.swift; sourceTree = "<group>"; };
 		04B23F6F20EBE1D1004E1DB0 /* SecondTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTutorialViewController.swift; sourceTree = "<group>"; };
 		04B23F7120EBE1F4004E1DB0 /* ThirdTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdTutorialViewController.swift; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				04B23F7820EBE839004E1DB0 /* util */,
-				04B23F6B20EBDEF8004E1DB0 /* tutorial.storyboard */,
+				04B23F6B20EBDEF8004E1DB0 /* Tutorial.storyboard */,
 				04B23F7420EBE25C004E1DB0 /* model */,
 				04B23F7520EBE263004E1DB0 /* view */,
 				04B23F7320EBE234004E1DB0 /* controller */,
@@ -182,7 +182,7 @@
 			files = (
 				04B23F6320EBDA53004E1DB0 /* LaunchScreen.storyboard in Resources */,
 				04B23F6020EBDA53004E1DB0 /* Assets.xcassets in Resources */,
-				04B23F6C20EBDEF8004E1DB0 /* tutorial.storyboard in Resources */,
+				04B23F6C20EBDEF8004E1DB0 /* Tutorial.storyboard in Resources */,
 				04B23F7720EBE55B004E1DB0 /* tutorial-users.json in Resources */,
 				04B23F5E20EBDA51004E1DB0 /* Main.storyboard in Resources */,
 			);
