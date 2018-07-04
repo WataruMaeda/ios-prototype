@@ -47,15 +47,15 @@ extension FirstTutorialViewController: UICollectionViewDataSource, UICollectionV
     let space = 10 as CGFloat
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.minimumLineSpacing = space
-    flowLayout.minimumInteritemSpacing = space
-    flowLayout.sectionInset = .zero;
+    flowLayout.minimumInteritemSpacing = space / 2
+    flowLayout.sectionInset = UIEdgeInsetsMake(0, space, space, space);
     flowLayout.headerReferenceSize = CGSize(
-      width: collectionView.frame.size.width,
+      width: view.frame.size.width,
       height: 70
     )
     flowLayout.itemSize = CGSize(
-      width: (collectionView.frame.size.width - space * 4) / 3,
-      height: (collectionView.frame.size.width - space * 4) / 3 * 1.3
+      width: (view.frame.size.width - space * 4) / 3,
+      height: (view.frame.size.width - space * 4) / 3 * 1.3
     )
     collectionView.setCollectionViewLayout(flowLayout, animated: true, completion: nil)
     
