@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		043513F720EC848500F9C72E /* TutorialCosmeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043513F520EC848500F9C72E /* TutorialCosmeCollectionCell.swift */; };
 		043513F820EC848500F9C72E /* TutorialCosmeCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043513F620EC848500F9C72E /* TutorialCosmeCollectionCell.xib */; };
+		04359DDE20ED297A002783E1 /* TutorialSwitchReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */; };
 		04B23F5920EBDA51004E1DB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B23F5820EBDA51004E1DB0 /* AppDelegate.swift */; };
 		04B23F5B20EBDA51004E1DB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B23F5A20EBDA51004E1DB0 /* ViewController.swift */; };
 		04B23F5E20EBDA51004E1DB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B23F5C20EBDA51004E1DB0 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		043513F520EC848500F9C72E /* TutorialCosmeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialCosmeCollectionCell.swift; sourceTree = "<group>"; };
 		043513F620EC848500F9C72E /* TutorialCosmeCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialCosmeCollectionCell.xib; sourceTree = "<group>"; };
+		04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialSwitchReusableView.swift; sourceTree = "<group>"; };
 		04B23F5520EBDA51004E1DB0 /* try-tutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "try-tutorial.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B23F5820EBDA51004E1DB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04B23F5A20EBDA51004E1DB0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			children = (
 				043513F520EC848500F9C72E /* TutorialCosmeCollectionCell.swift */,
 				043513F620EC848500F9C72E /* TutorialCosmeCollectionCell.xib */,
+				04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				04B23F7020EBE1D1004E1DB0 /* SecondTutorialViewController.swift in Sources */,
 				043513F720EC848500F9C72E /* TutorialCosmeCollectionCell.swift in Sources */,
 				04B23F5B20EBDA51004E1DB0 /* ViewController.swift in Sources */,
+				04359DDE20ED297A002783E1 /* TutorialSwitchReusableView.swift in Sources */,
 				04B23F5920EBDA51004E1DB0 /* AppDelegate.swift in Sources */,
 				04B23F6E20EBE1B9004E1DB0 /* FirstTutorialViewController.swift in Sources */,
 				04B23F7220EBE1F4004E1DB0 /* ThirdTutorialViewController.swift in Sources */,
