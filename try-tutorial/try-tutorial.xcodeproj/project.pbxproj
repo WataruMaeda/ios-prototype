@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		043513F720EC848500F9C72E /* TutorialCosmeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043513F520EC848500F9C72E /* TutorialCosmeCollectionCell.swift */; };
-		043513F820EC848500F9C72E /* TutorialCosmeCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043513F620EC848500F9C72E /* TutorialCosmeCollectionCell.xib */; };
 		04359DDE20ED297A002783E1 /* TutorialSwitchReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */; };
 		04B23F5920EBDA51004E1DB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B23F5820EBDA51004E1DB0 /* AppDelegate.swift */; };
 		04B23F5B20EBDA51004E1DB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B23F5A20EBDA51004E1DB0 /* ViewController.swift */; };
@@ -25,7 +24,6 @@
 
 /* Begin PBXFileReference section */
 		043513F520EC848500F9C72E /* TutorialCosmeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialCosmeCollectionCell.swift; sourceTree = "<group>"; };
-		043513F620EC848500F9C72E /* TutorialCosmeCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialCosmeCollectionCell.xib; sourceTree = "<group>"; };
 		04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialSwitchReusableView.swift; sourceTree = "<group>"; };
 		04B23F5520EBDA51004E1DB0 /* try-tutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "try-tutorial.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B23F5820EBDA51004E1DB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				043513F520EC848500F9C72E /* TutorialCosmeCollectionCell.swift */,
-				043513F620EC848500F9C72E /* TutorialCosmeCollectionCell.xib */,
 				04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */,
 			);
 			path = view;
@@ -192,7 +189,6 @@
 				04B23F6320EBDA53004E1DB0 /* LaunchScreen.storyboard in Resources */,
 				04B23F6020EBDA53004E1DB0 /* Assets.xcassets in Resources */,
 				04B23F6C20EBDEF8004E1DB0 /* Tutorial.storyboard in Resources */,
-				043513F820EC848500F9C72E /* TutorialCosmeCollectionCell.xib in Resources */,
 				04B23F7720EBE55B004E1DB0 /* tutorial-users.json in Resources */,
 				04B23F5E20EBDA51004E1DB0 /* Main.storyboard in Resources */,
 			);

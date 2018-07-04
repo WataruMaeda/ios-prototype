@@ -16,7 +16,7 @@ class FirstTutorialViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .white
     setupNavigationItems()
-//    setupCollectionView()
+    setupCollectionView()
   }
 }
 
@@ -40,15 +40,23 @@ extension FirstTutorialViewController: UICollectionViewDataSource, UICollectionV
   fileprivate func setupCollectionView() {
     
     // set collection view UI
-    collectionView.contentInset = UIEdgeInsetsMake(8, 0, 50, 0)
+    collectionView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
+    
     
     // set layout of collectionView
     let space = 10 as CGFloat
     let flowLayout = UICollectionViewFlowLayout()
-    flowLayout.scrollDirection = .vertical
     flowLayout.minimumLineSpacing = space
     flowLayout.minimumInteritemSpacing = space
-    flowLayout.sectionInset = UIEdgeInsetsMake(0.0, space, 0.0, space);
+    flowLayout.sectionInset = .zero;
+    flowLayout.headerReferenceSize = CGSize(
+      width: collectionView.frame.size.width,
+      height: 70
+    )
+    flowLayout.itemSize = CGSize(
+      width: (collectionView.frame.size.width - space * 4) / 3,
+      height: (collectionView.frame.size.width - space * 4) / 3 * 1.3
+    )
     collectionView.setCollectionViewLayout(flowLayout, animated: true, completion: nil)
     
     // set delegate & datasorce
@@ -63,7 +71,8 @@ extension FirstTutorialViewController: UICollectionViewDataSource, UICollectionV
   
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    return UICollectionViewCell()
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+    return cell
   }
   
   func collectionView(_ collectionView: UICollectionView,
@@ -77,11 +86,7 @@ extension FirstTutorialViewController: UICollectionViewDataSource, UICollectionV
       fatalError("Could not find proper header")
     }
     
-    if kind == UICollectionElementKindSectionHeader {
-      return header
-    }
-    
-    return UICollectionReusableView()
+    return kind == UICollectionElementKindSectionHeader ? header : UICollectionReusableView()
   }
   
 }
