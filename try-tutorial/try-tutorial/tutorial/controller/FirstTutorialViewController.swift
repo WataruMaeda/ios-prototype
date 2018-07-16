@@ -120,4 +120,10 @@ extension FirstTutorialViewController: UICollectionViewDataSource, UICollectionV
     return kind == UICollectionElementKindSectionHeader ? header : UICollectionReusableView()
   }
   
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let storyboard = UIStoryboard(name: "Tutorial", bundle: Bundle.main)
+    let secondTutorial = storyboard.instantiateViewController(withIdentifier: "SecondTutorialViewController")
+    navigationController?.pushViewController(secondTutorial, animated: true)
+  }
+  
 }
