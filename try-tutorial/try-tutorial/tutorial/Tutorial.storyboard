@@ -472,7 +472,7 @@
                                     <viewLayoutGuide key="safeArea" id="Ct2-Z5-cMR"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="376" id="dwV-rl-q5y">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="376" id="dwV-rl-q5y" customClass="TutorialProfileCell" customModule="try_tutorial" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="268" width="375" height="376"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dwV-rl-q5y" id="hGr-Gc-SHv">
@@ -539,7 +539,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TutorialCosmeCell" reuseIdentifier="TutorialCosmeCell" id="2BK-eq-2gM" customClass="TutorialCosmeCollectionCell" customModule="try_tutorial" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TutorialCosmeCell" reuseIdentifier="cell" id="2BK-eq-2gM" customClass="TutorialCosmeCollectionCell" customModule="try_tutorial" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="150" height="280"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -746,19 +746,6 @@
                                                                     <exclude reference="k0f-sb-lNW"/>
                                                                 </mask>
                                                             </variation>
-                                                            <connections>
-                                                                <outlet property="cosme_image1" destination="mgr-yT-oCq" id="6fs-at-qGD"/>
-                                                                <outlet property="cosme_image2" destination="yxo-kd-fJh" id="8xe-SA-a8K"/>
-                                                                <outlet property="cosme_image3" destination="LUo-7o-HHI" id="D4Y-s9-mj6"/>
-                                                                <outlet property="face_image" destination="EU0-8I-Dl9" id="NRY-82-G4Y"/>
-                                                                <outlet property="favorite_num" destination="u9w-aU-yDJ" id="wOE-JF-Y7o"/>
-                                                                <outlet property="label_movie" destination="pvE-6h-J15" id="Zg7-h0-b6L"/>
-                                                                <outlet property="label_recipe" destination="dNS-sf-6Yf" id="hbl-8t-rY4"/>
-                                                                <outlet property="label_single" destination="qyD-4V-uah" id="dGd-cc-4NR"/>
-                                                                <outlet property="title" destination="BBU-QR-15C" id="VU8-0J-D10"/>
-                                                                <outlet property="user_image" destination="daA-ta-lGb" id="aAt-wX-5rR"/>
-                                                                <outlet property="user_name" destination="PRG-gd-tw9" id="0m1-Ra-1U5"/>
-                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -775,6 +762,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="collectionView" destination="iNf-xA-MO3" id="QlU-bg-Rzj"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
