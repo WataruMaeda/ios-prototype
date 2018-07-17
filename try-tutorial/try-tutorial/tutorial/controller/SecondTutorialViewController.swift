@@ -64,8 +64,13 @@ extension SecondTutorialViewController: UITableViewDelegate, UITableViewDataSour
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-    return cell ?? UITableViewCell()
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? TutorialProfileCell else {
+      return UITableViewCell()
+    }
+    if let navigationController = navigationController {
+      cell.setNavigationController(navigationController)
+    }
+    return cell
   }
 }
 

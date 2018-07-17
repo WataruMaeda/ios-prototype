@@ -11,6 +11,7 @@ import UIKit
 class TutorialProfileCell: UITableViewCell {
   
   @IBOutlet weak var collectionView: UICollectionView!
+  fileprivate var navigationController: UINavigationController?
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -23,6 +24,15 @@ class TutorialProfileCell: UITableViewCell {
   
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
+  }
+}
+
+// MARK: Accessor
+
+extension TutorialProfileCell {
+  
+  func setNavigationController(_ navigationContoller: UINavigationController) {
+    self.navigationController = navigationContoller
   }
 }
 
@@ -64,9 +74,9 @@ extension TutorialProfileCell: UICollectionViewDataSource, UICollectionViewDeleg
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    let storyboard = UIStoryboard(name: "Tutorial", bundle: Bundle.main)
-//    let secondTutorial = storyboard.instantiateViewController(withIdentifier: "SecondTutorialViewController")
-//    navigationController?.pushViewController(secondTutorial, animated: true)
+    let storyboard = UIStoryboard(name: "Tutorial", bundle: Bundle.main)
+    let thirdTutorial = storyboard.instantiateViewController(withIdentifier: "ThirdTutorialViewController")
+    self.navigationController?.pushViewController(thirdTutorial, animated: true)
   }
   
 }
