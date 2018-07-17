@@ -969,9 +969,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4mU-vi-Qtj">
                                                     <rect key="frame" x="0.0" y="506" width="375" height="188"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GB3-2E-MM6">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GB3-2E-MM6">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="173"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VTg-OP-Juw">
                                                                     <rect key="frame" x="10" y="0.0" width="173" height="173"/>
@@ -990,9 +989,8 @@
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.44807375021625157" green="0.95686274510000002" blue="0.91502946096272153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
-                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gok-ye-eTv">
-                                                            <rect key="frame" x="0.0" y="173" width="375" height="14"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gok-ye-eTv">
+                                                            <rect key="frame" x="0.0" y="173" width="375" height="15"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Before" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhh-dW-AGQ">
                                                                     <rect key="frame" x="0.0" y="0.0" width="188" height="14"/>
@@ -1010,11 +1008,21 @@
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.95686274510000002" green="0.85525236310628761" blue="0.065388421251476009" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="15" id="L2D-Ws-2Gz"/>
+                                                            </constraints>
                                                         </view>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.68627450980000004" green="0.68627450980000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
+                                                        <constraint firstItem="GB3-2E-MM6" firstAttribute="top" secondItem="4mU-vi-Qtj" secondAttribute="top" id="1W7-zc-ETh"/>
+                                                        <constraint firstAttribute="trailing" secondItem="GB3-2E-MM6" secondAttribute="trailing" id="Fbn-cD-dn0"/>
                                                         <constraint firstAttribute="width" secondItem="4mU-vi-Qtj" secondAttribute="height" multiplier="375:188" id="Fzv-to-iQF"/>
+                                                        <constraint firstItem="gok-ye-eTv" firstAttribute="top" secondItem="GB3-2E-MM6" secondAttribute="bottom" id="HtP-fL-YYD"/>
+                                                        <constraint firstAttribute="bottom" secondItem="gok-ye-eTv" secondAttribute="bottom" id="ZHf-0z-lhv"/>
+                                                        <constraint firstItem="GB3-2E-MM6" firstAttribute="leading" secondItem="4mU-vi-Qtj" secondAttribute="leading" id="eof-vC-pxz"/>
+                                                        <constraint firstAttribute="trailing" secondItem="gok-ye-eTv" secondAttribute="trailing" id="mTq-OZ-BVv"/>
+                                                        <constraint firstItem="gok-ye-eTv" firstAttribute="leading" secondItem="4mU-vi-Qtj" secondAttribute="leading" id="qNP-0k-vXc"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
