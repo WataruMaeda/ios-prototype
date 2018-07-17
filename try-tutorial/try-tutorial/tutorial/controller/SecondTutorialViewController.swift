@@ -23,6 +23,7 @@ class SecondTutorialViewController: UIViewController {
     view.backgroundColor = .white
     setupProfile()
     setupTableView()
+    setupPager()
   }
 }
 
@@ -66,5 +67,34 @@ extension SecondTutorialViewController: UITableViewDelegate, UITableViewDataSour
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
     return cell ?? UITableViewCell()
   }
+}
+
+// MARK: - Page Control
+
+extension SecondTutorialViewController {
   
+  func setupPager() {
+    
+    // get pager from xib
+    let nib = UINib(nibName: "TutorialPager", bundle: nil)
+    let subviews = nib.instantiate(withOwner: self, options: nil)
+    guard let pager = subviews.first as? TutorialPager else { return }
+    pager.frame = CGRect(x: 0, y: view.frame.size.height - 200,
+                         width: view.frame.size.width, height: 200)
+    
+    // add skip action
+    pager.skipButton.addTarget(self,action: #selector(tappedSkip), for: .touchUpInside)
+    
+    // setup shadow
+    pager.layer.shadowColor = UIColor.lightGray.cgColor
+    pager.layer.shadowOffset = CGSize(width: 0, height: -1);
+    pager.layer.masksToBounds = false
+    pager.layer.shadowOpacity = 0.2
+    
+    view.addSubview(pager)
+  }
+  
+  @objc func tappedSkip() {
+    print("tapped skip")
+  }
 }
