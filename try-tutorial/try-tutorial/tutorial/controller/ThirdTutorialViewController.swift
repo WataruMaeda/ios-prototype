@@ -35,5 +35,9 @@ extension ThirdTutorialViewController: UITableViewDelegate, UITableViewDataSourc
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
     return cell ?? UITableViewCell()
   }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 1000
+  }
 }
 
