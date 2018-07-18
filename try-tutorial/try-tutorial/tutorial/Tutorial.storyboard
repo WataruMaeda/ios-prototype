@@ -803,11 +803,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="1000" id="AZs-0U-PIp" customClass="TutorialRecipeDataCell" customModule="try_tutorial" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="1000"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="2000" id="AZs-0U-PIp" customClass="TutorialRecipeDataCell" customModule="try_tutorial" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="2000"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AZs-0U-PIp" id="MWN-sU-Z3v">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="999.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1999.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2eT-xf-pt5">
@@ -1070,7 +1070,7 @@
                                                         <constraint firstItem="F3T-1g-42b" firstAttribute="centerX" secondItem="2q8-cS-20q" secondAttribute="centerX" id="vyC-GJ-8xC"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cHl-rS-Mim" userLabel="procedure">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cHl-rS-Mim" userLabel="procedure-1">
                                                     <rect key="frame" x="0.0" y="764" width="375" height="192"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="me2-pV-Q6X">
@@ -1109,38 +1109,245 @@
                                                         <constraint firstAttribute="width" secondItem="cHl-rS-Mim" secondAttribute="height" multiplier="125:64" id="agn-I8-sjr"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xj8-Q2-Ze6" userLabel="procedure-2">
+                                                    <rect key="frame" x="0.0" y="956" width="375" height="192"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDb-P4-POz">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="waku_step" translatesAutoresizingMaskIntoConstraints="NO" id="wSE-7J-y6O">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                </imageView>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRG-75-5Gh">
+                                                                    <rect key="frame" x="178" y="0.0" width="20" height="35"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="11"/>
+                                                                    <color key="textColor" red="0.30000001189999997" green="0.30000001189999997" blue="0.30000001189999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </view>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vvy-LN-6My">
+                                                            <rect key="frame" x="12" y="44" width="138" height="138"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </imageView>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="rXI-B9-spn">
+                                                            <rect key="frame" x="162" y="44" width="205" height="138"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                            <string key="text">モッチスキンは白と黒両方使いましたが個人的に白の方が洗い上がりがしっとりしていて好みでした。 缶をよく振って立てた状態で泡を出します。 私は最初缶を逆さにして中身が出てきませんでした。← トルコアイスのようなもっちりしていて伸びる泡なので口で息をする時に口の中に入らないように注意してください。 泡で顔をマッサージするように優しく洗ってぬるま湯で流します。</string>
+                                                            <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="10"/>
+                                                            <color key="textColor" red="0.31000000239999997" green="0.31000000239999997" blue="0.31000000239999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="xj8-Q2-Ze6" secondAttribute="height" multiplier="125:64" id="L0j-Xz-cg8"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2q-82-YPc" userLabel="procedure-2">
+                                                    <rect key="frame" x="0.0" y="1148" width="375" height="192"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tel-Eq-YXy">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="waku_step" translatesAutoresizingMaskIntoConstraints="NO" id="rUg-fL-fHY">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                </imageView>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iKV-Gi-acq">
+                                                                    <rect key="frame" x="178" y="0.0" width="20" height="35"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="11"/>
+                                                                    <color key="textColor" red="0.30000001189999997" green="0.30000001189999997" blue="0.30000001189999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </view>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SkF-Rj-8yw">
+                                                            <rect key="frame" x="12" y="44" width="138" height="138"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </imageView>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="ZTn-do-FUW">
+                                                            <rect key="frame" x="162" y="44" width="205" height="138"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                            <string key="text">洗顔後一番最初に馬油を顔全体に塗ります。 固まっているタイプも買って使いましたが、顔に塗るには液体の方が適していると思います。 肌に優しいのでどんなに肌荒れしていてもしみることはありません。 乾燥や刺激から守ってくれます。 ほんの少し手に出して伸ばしてから乾燥が気になる部分を中心におさえるようにして塗ります。</string>
+                                                            <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="10"/>
+                                                            <color key="textColor" red="0.31000000239999997" green="0.31000000239999997" blue="0.31000000239999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="t2q-82-YPc" secondAttribute="height" multiplier="125:64" id="Cvc-Lt-hsB"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ag7-X5-L2g" userLabel="procedure-2">
+                                                    <rect key="frame" x="0.0" y="1340" width="375" height="192"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s9p-T2-uLM">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="waku_step" translatesAutoresizingMaskIntoConstraints="NO" id="I17-iL-bbN">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                </imageView>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnc-yo-0Gv">
+                                                                    <rect key="frame" x="178" y="0.0" width="20" height="35"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="11"/>
+                                                                    <color key="textColor" red="0.30000001189999997" green="0.30000001189999997" blue="0.30000001189999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </view>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z9g-jU-dzj">
+                                                            <rect key="frame" x="12" y="44" width="138" height="138"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </imageView>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="少し前からアスタリフトを使っています。 顔が乾燥してピリピリしていた時に薬局に行ってテスターでこれを使ったら痛みがすぐ引いて肌の調子が良くなったのでその場で購入しました。 少しお高めだけど効果はあると思います。 2プッシュ手に出して顔全体に塗ります。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="zFj-H8-Gs3">
+                                                            <rect key="frame" x="162" y="44" width="205" height="138"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="10"/>
+                                                            <color key="textColor" red="0.31000000239999997" green="0.31000000239999997" blue="0.31000000239999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Ag7-X5-L2g" secondAttribute="height" multiplier="125:64" id="Rq1-Wi-ajd"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8m7-wb-1Bd" userLabel="procedure-2">
+                                                    <rect key="frame" x="0.0" y="1532" width="375" height="192"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rc1-Mt-GKB">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="waku_step" translatesAutoresizingMaskIntoConstraints="NO" id="STZ-9c-u1G">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                </imageView>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mol-aT-hlM">
+                                                                    <rect key="frame" x="178" y="0.0" width="20" height="35"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="11"/>
+                                                                    <color key="textColor" red="0.30000001189999997" green="0.30000001189999997" blue="0.30000001189999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </view>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xMK-8q-4eX">
+                                                            <rect key="frame" x="12" y="44" width="138" height="138"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </imageView>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="乳液も化粧水とセットで購入しました。 1プッシュ手に出して顔全体に塗ります。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="Qmb-LW-eiv">
+                                                            <rect key="frame" x="162" y="44" width="205" height="138"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="10"/>
+                                                            <color key="textColor" red="0.31000000239999997" green="0.31000000239999997" blue="0.31000000239999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="8m7-wb-1Bd" secondAttribute="height" multiplier="125:64" id="0GY-df-fXK"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Mw-lc-Cth" userLabel="procedure-2">
+                                                    <rect key="frame" x="0.0" y="1724" width="375" height="192"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kio-Ur-fum">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="waku_step" translatesAutoresizingMaskIntoConstraints="NO" id="6nK-nZ-vlS">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                </imageView>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfT-ya-j5n">
+                                                                    <rect key="frame" x="178" y="0.0" width="20" height="35"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="11"/>
+                                                                    <color key="textColor" red="0.30000001189999997" green="0.30000001189999997" blue="0.30000001189999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </view>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CFL-W7-tE2">
+                                                            <rect key="frame" x="12" y="44" width="138" height="138"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </imageView>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="前髪が顔にはりつくのが気になるのでおでこにつけています。 たまに美容液やフェイスマスクを使ってべたつきが気になる時には顔全体につけます。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="5Xa-if-LjA">
+                                                            <rect key="frame" x="162" y="44" width="205" height="138"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="10"/>
+                                                            <color key="textColor" red="0.31000000239999997" green="0.31000000239999997" blue="0.31000000239999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="9Mw-lc-Cth" secondAttribute="height" multiplier="125:64" id="WXZ-um-1p9"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="GOS-Cc-z8s" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="06B-Lo-JF1"/>
                                                 <constraint firstAttribute="trailing" secondItem="4mU-vi-Qtj" secondAttribute="trailing" id="06Y-ws-lDW"/>
                                                 <constraint firstItem="JNE-S4-egA" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leadingMargin" id="2H1-Nf-VFr"/>
+                                                <constraint firstAttribute="trailing" secondItem="8m7-wb-1Bd" secondAttribute="trailing" id="2a6-Ap-0iM"/>
                                                 <constraint firstAttribute="trailing" secondItem="cHl-rS-Mim" secondAttribute="trailing" id="2fW-D2-cbW"/>
                                                 <constraint firstItem="JNE-S4-egA" firstAttribute="top" secondItem="a5J-Vu-qp3" secondAttribute="bottom" constant="6" id="2sv-ix-76n"/>
+                                                <constraint firstItem="9Mw-lc-Cth" firstAttribute="top" secondItem="8m7-wb-1Bd" secondAttribute="bottom" id="4PM-MU-Zek"/>
                                                 <constraint firstItem="a5J-Vu-qp3" firstAttribute="top" secondItem="jLk-qb-eRm" secondAttribute="bottom" constant="6" id="4ee-Us-DYj"/>
                                                 <constraint firstAttribute="trailing" secondItem="2q8-cS-20q" secondAttribute="trailing" id="4rk-Ie-FV0"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="JNE-S4-egA" secondAttribute="trailing" id="9s6-K7-IUv"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ag7-X5-L2g" secondAttribute="trailing" id="A5K-aQ-9Bq"/>
                                                 <constraint firstAttribute="trailing" secondItem="GOS-Cc-z8s" secondAttribute="trailing" id="GhC-bL-Gyb"/>
+                                                <constraint firstItem="t2q-82-YPc" firstAttribute="top" secondItem="xj8-Q2-Ze6" secondAttribute="bottom" id="IvY-vi-Ak9"/>
                                                 <constraint firstAttribute="trailing" secondItem="vSA-cd-yet" secondAttribute="trailing" id="JSm-8d-n3q"/>
                                                 <constraint firstAttribute="trailing" secondItem="a5J-Vu-qp3" secondAttribute="trailing" constant="40" id="Kf4-Su-yjz"/>
                                                 <constraint firstAttribute="trailing" secondItem="4mU-vi-Qtj" secondAttribute="trailing" id="MCI-kP-f7I"/>
+                                                <constraint firstAttribute="trailing" secondItem="t2q-82-YPc" secondAttribute="trailing" id="NwL-OW-t3F"/>
+                                                <constraint firstItem="xj8-Q2-Ze6" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="OwB-eB-DKM"/>
+                                                <constraint firstItem="xj8-Q2-Ze6" firstAttribute="top" secondItem="cHl-rS-Mim" secondAttribute="bottom" id="SZb-if-Lb0"/>
                                                 <constraint firstItem="4mU-vi-Qtj" firstAttribute="top" secondItem="vSA-cd-yet" secondAttribute="bottom" id="SgG-69-SI0"/>
                                                 <constraint firstItem="cHl-rS-Mim" firstAttribute="top" secondItem="2q8-cS-20q" secondAttribute="bottom" id="TJN-dt-k7J"/>
                                                 <constraint firstItem="2q8-cS-20q" firstAttribute="top" secondItem="4mU-vi-Qtj" secondAttribute="bottom" id="XwL-u7-o2m"/>
                                                 <constraint firstItem="4mU-vi-Qtj" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="ZjV-pT-oHV"/>
                                                 <constraint firstItem="jLk-qb-eRm" firstAttribute="top" secondItem="2eT-xf-pt5" secondAttribute="bottom" id="a3n-fU-E4c"/>
+                                                <constraint firstItem="t2q-82-YPc" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="bIC-ch-PuG"/>
+                                                <constraint firstItem="8m7-wb-1Bd" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="bNM-cc-zvg"/>
                                                 <constraint firstAttribute="trailing" secondItem="2eT-xf-pt5" secondAttribute="trailing" id="bfw-A8-hKI"/>
                                                 <constraint firstItem="2q8-cS-20q" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="cdr-bC-BbL"/>
                                                 <constraint firstItem="2eT-xf-pt5" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="hfD-Gw-GLx"/>
                                                 <constraint firstItem="4mU-vi-Qtj" firstAttribute="top" secondItem="vSA-cd-yet" secondAttribute="bottom" id="hfn-Al-v13"/>
+                                                <constraint firstItem="Ag7-X5-L2g" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="hxj-aW-t56"/>
+                                                <constraint firstItem="Ag7-X5-L2g" firstAttribute="top" secondItem="t2q-82-YPc" secondAttribute="bottom" id="lYH-H2-y4h"/>
+                                                <constraint firstAttribute="trailing" secondItem="xj8-Q2-Ze6" secondAttribute="trailing" id="mo7-hX-tFp"/>
                                                 <constraint firstItem="vSA-cd-yet" firstAttribute="top" secondItem="GOS-Cc-z8s" secondAttribute="bottom" constant="6" id="nED-jv-dxX"/>
                                                 <constraint firstItem="vSA-cd-yet" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="oIf-By-TGf"/>
+                                                <constraint firstAttribute="trailing" secondItem="9Mw-lc-Cth" secondAttribute="trailing" id="oNy-LQ-EDt"/>
                                                 <constraint firstItem="cHl-rS-Mim" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="qaN-0c-Xfh"/>
                                                 <constraint firstItem="2eT-xf-pt5" firstAttribute="top" secondItem="MWN-sU-Z3v" secondAttribute="top" id="qwN-iW-cLG"/>
                                                 <constraint firstItem="4mU-vi-Qtj" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="rgu-CS-LPn"/>
                                                 <constraint firstItem="a5J-Vu-qp3" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" constant="40" id="sNy-0B-Cx3"/>
                                                 <constraint firstAttribute="trailing" secondItem="jLk-qb-eRm" secondAttribute="trailing" id="t7v-i3-fOu"/>
                                                 <constraint firstItem="GOS-Cc-z8s" firstAttribute="top" secondItem="JNE-S4-egA" secondAttribute="bottom" constant="6" id="tZw-bU-H7W"/>
+                                                <constraint firstItem="8m7-wb-1Bd" firstAttribute="top" secondItem="Ag7-X5-L2g" secondAttribute="bottom" id="vOw-iD-rLz"/>
                                                 <constraint firstItem="jLk-qb-eRm" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="wHu-LX-rpa"/>
+                                                <constraint firstItem="9Mw-lc-Cth" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="zqE-JA-sqV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1163,21 +1370,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TcF-1j-jiL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2528.8000000000002" y="160.56971514242881"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="8gY-m7-vFx">
-            <objects>
-                <viewController id="o9T-Ms-j2R" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1C6-Iz-HZk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="4Wl-ph-RtC"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iae-6c-W0N" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3254" y="403"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jJY-X7-Vh5">

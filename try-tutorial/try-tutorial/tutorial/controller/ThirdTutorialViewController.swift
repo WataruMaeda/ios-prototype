@@ -37,7 +37,7 @@ extension ThirdTutorialViewController: UITableViewDelegate, UITableViewDataSourc
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 1000
+    return 2000
   }
 }
 
