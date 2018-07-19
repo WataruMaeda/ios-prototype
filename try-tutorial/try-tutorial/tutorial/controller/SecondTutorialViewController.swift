@@ -8,6 +8,8 @@
 
 import UIKit
 
+// SEE: ContentCollectionCell for the cell design
+
 class SecondTutorialViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!

@@ -10,6 +10,7 @@ import UIKit
 
 class TutorialProfileCell: UITableViewCell {
   
+  fileprivate var recipes = [Recipe]()
   @IBOutlet weak var collectionView: UICollectionView!
   fileprivate var navigationController: UINavigationController?
   
@@ -19,6 +20,7 @@ class TutorialProfileCell: UITableViewCell {
   
   override func layoutSubviews() {
     super.layoutSubviews()
+    setRecipeList()
     setupCollectionView()
   }
   
@@ -30,6 +32,10 @@ class TutorialProfileCell: UITableViewCell {
 // MARK: Accessor
 
 extension TutorialProfileCell {
+  
+  func setRecipeList() {
+    recipes = TutorialModelManager.getRecipeList() ?? [Recipe]()
+  }
   
   func setNavigationController(_ navigationContoller: UINavigationController) {
     self.navigationController = navigationContoller
@@ -64,7 +70,7 @@ extension TutorialProfileCell: UICollectionViewDataSource, UICollectionViewDeleg
   
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return 10
+    return recipes.count
   }
   
   func collectionView(_ collectionView: UICollectionView,
