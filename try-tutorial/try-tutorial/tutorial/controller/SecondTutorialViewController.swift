@@ -65,6 +65,10 @@ extension SecondTutorialViewController: UITableViewDelegate, UITableViewDataSour
     return 1
   }
   
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return (view.frame.size.width - 10 * 4) / 3 * 1.87 * 3
+  }
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? TutorialProfileCell else {
       return UITableViewCell()

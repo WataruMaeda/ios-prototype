@@ -51,6 +51,7 @@ extension TutorialProfileCell: UICollectionViewDataSource, UICollectionViewDeleg
     
     // set collection view UI
     collectionView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
+    collectionView.isScrollEnabled = false
     
     // set layout of collectionView
     let space = 10 as CGFloat
