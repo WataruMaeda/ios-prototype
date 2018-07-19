@@ -10,6 +10,7 @@
 		043513F720EC848500F9C72E /* TutorialUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043513F520EC848500F9C72E /* TutorialUserCell.swift */; };
 		04359DDE20ED297A002783E1 /* TutorialSwitchReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */; };
 		0484474B20FD071B0020DA54 /* TutorialProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484474A20FD071B0020DA54 /* TutorialProfileCell.swift */; };
+		04847DC421005DB3004B3813 /* tutorial-recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 04847DC321005DB3004B3813 /* tutorial-recipes.json */; };
 		048E2FF220FA5D00005DD202 /* TutorialCosmeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E2FF120FA5D00005DD202 /* TutorialCosmeCell.swift */; };
 		04938E9920EDB9DC00971352 /* TutorialPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04938E9820EDB9DC00971352 /* TutorialPager.swift */; };
 		04938E9B20EDB9E900971352 /* TutorialPager.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04938E9A20EDB9E900971352 /* TutorialPager.xib */; };
@@ -31,6 +32,7 @@
 		043513F520EC848500F9C72E /* TutorialUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialUserCell.swift; sourceTree = "<group>"; };
 		04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialSwitchReusableView.swift; sourceTree = "<group>"; };
 		0484474A20FD071B0020DA54 /* TutorialProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialProfileCell.swift; sourceTree = "<group>"; };
+		04847DC321005DB3004B3813 /* tutorial-recipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "tutorial-recipes.json"; sourceTree = "<group>"; };
 		048E2FF120FA5D00005DD202 /* TutorialCosmeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialCosmeCell.swift; sourceTree = "<group>"; };
 		04938E9820EDB9DC00971352 /* TutorialPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPager.swift; sourceTree = "<group>"; };
 		04938E9A20EDB9E900971352 /* TutorialPager.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialPager.xib; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				04B23F7620EBE55B004E1DB0 /* tutorial-users.json */,
+				04847DC321005DB3004B3813 /* tutorial-recipes.json */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 			files = (
 				04B23F6320EBDA53004E1DB0 /* LaunchScreen.storyboard in Resources */,
 				04938E9B20EDB9E900971352 /* TutorialPager.xib in Resources */,
+				04847DC421005DB3004B3813 /* tutorial-recipes.json in Resources */,
 				04B23F6020EBDA53004E1DB0 /* Assets.xcassets in Resources */,
 				04B23F6C20EBDEF8004E1DB0 /* Tutorial.storyboard in Resources */,
 				04B23F7720EBE55B004E1DB0 /* tutorial-users.json in Resources */,

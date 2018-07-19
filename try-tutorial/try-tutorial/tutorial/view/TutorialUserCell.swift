@@ -27,6 +27,12 @@ extension TutorialUserCell {
     rankingImage.image = getRankingImage(index: index)
     profileImage.image = UIImage(named: user.image)
     nameLabel.text = user.name
+    rankingLabel.text = "\(index + 1)"
+//    if (index > 2) {
+//      rankingLabel.backgroundColor = .lightGray
+//      rankingLabel.layer.cornerRadius = rankingLabel.frame.size.width / 2
+//      rankingLabel.clipsToBounds = true
+//    }
   }
   
   private func getRankingImage(index: Int) -> UIImage? {
