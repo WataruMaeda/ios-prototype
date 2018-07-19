@@ -9,23 +9,22 @@
 import UIKit
 
 struct ResponseData: Decodable {
-  var person: [Person]
+  var user: [User]
 }
 
-struct Person : Decodable {
+struct User : Decodable {
   var name: String
-  var age: String
-  var employed: String
+  var image: String
 }
 
 class TutorialModelManager {
 
-  static func loadUsersFromJson() -> [Person]? {
+  static func getUserList() -> [User]? {
     if let url = Bundle.main.url(forResource: "tutorial-users", withExtension: "json") {
       do {
         let data = try Data(contentsOf: url)
         let jsonData = try JSONDecoder().decode(ResponseData.self, from: data)
-        return jsonData.person
+        return jsonData.user
       } catch {
         print("error:\(error)")
       }

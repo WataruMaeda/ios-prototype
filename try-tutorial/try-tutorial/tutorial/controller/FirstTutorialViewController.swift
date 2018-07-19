@@ -10,14 +10,25 @@ import UIKit
 
 class FirstTutorialViewController: UIViewController {
   
+  fileprivate var users = [User]()
   @IBOutlet weak var collectionView: UICollectionView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
     setupNavigationItems()
+    setUserList()
     setupCollectionView()
     setupPager()
+  }
+}
+
+// MARK: - Model
+
+extension FirstTutorialViewController {
+  
+  func setUserList() {
+    users = TutorialModelManager.getUserList() ?? [User]()
   }
 }
 
@@ -97,12 +108,16 @@ extension FirstTutorialViewController: UICollectionViewDataSource, UICollectionV
   
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return 10
+    return users.count
   }
   
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? TutorialUserCell else {
+      return UICollectionViewCell()
+    }
+    let index = indexPath.row
+    cell.setupContens(users[index], index: index)
     return cell
   }
   

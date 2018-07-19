@@ -19,8 +19,27 @@ class TutorialUserCell: UICollectionViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
   }
+}
+
+extension TutorialUserCell {
   
-  func setupContens() {
+  func setupContens(_ user: User, index: Int) {
+    rankingImage.image = getRankingImage(index: index)
+    profileImage.image = UIImage(named: user.image)
+    nameLabel.text = user.name
+  }
+  
+  private func getRankingImage(index: Int) -> UIImage? {
+    switch index {
+    case 0:
+      return UIImage(named: "ranking1")
+    case 1:
+      return UIImage(named: "ranking2")
+    case 2:
+      return UIImage(named: "ranking3")
+    default:
+      return UIImage()
+    }
     
   }
 }
