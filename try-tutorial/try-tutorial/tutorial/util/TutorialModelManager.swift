@@ -22,6 +22,7 @@ struct User : Decodable {
 }
 
 struct Recipe : Decodable {
+  var category: String
   var image: String
   var title: String
   var like: String

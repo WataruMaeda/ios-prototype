@@ -516,7 +516,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TutorialCosmeCell" reuseIdentifier="cell" id="2BK-eq-2gM" customClass="TutorialCosmeCollectionCell" customModule="try_tutorial" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TutorialCosmeCell" reuseIdentifier="cell" id="2BK-eq-2gM" customClass="TutorialCosmeCell" customModule="try_tutorial" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="150" height="280"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -723,6 +723,17 @@
                                                                     <exclude reference="k0f-sb-lNW"/>
                                                                 </mask>
                                                             </variation>
+                                                            <connections>
+                                                                <outlet property="categoryImageView" destination="qyD-4V-uah" id="Lfh-iT-tcz"/>
+                                                                <outlet property="detailsLabel" destination="u9w-aU-yDJ" id="Lkb-Mt-Wdv"/>
+                                                                <outlet property="nameLabel" destination="PRG-gd-tw9" id="8Eb-Hv-9nN"/>
+                                                                <outlet property="profileImageView" destination="daA-ta-lGb" id="RQg-FJ-FOL"/>
+                                                                <outlet property="recipeImageView" destination="EU0-8I-Dl9" id="NeH-9f-plv"/>
+                                                                <outlet property="recipeImageView1" destination="mgr-yT-oCq" id="xAN-CP-s72"/>
+                                                                <outlet property="recipeImageView2" destination="yxo-kd-fJh" id="5Z0-hq-SSx"/>
+                                                                <outlet property="recipeImageView3" destination="LUo-7o-HHI" id="2Dh-MU-uTF"/>
+                                                                <outlet property="titleLabel" destination="BBU-QR-15C" id="Zuf-aD-CG9"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -1377,9 +1388,9 @@
         <image name="comment" width="100" height="100"/>
         <image name="good" width="64" height="64"/>
         <image name="icon_favorite" width="30" height="30"/>
-        <image name="label_movie" width="16" height="16"/>
-        <image name="label_recipe" width="16" height="16"/>
-        <image name="label_single" width="16" height="16"/>
+        <image name="label_movie" width="115" height="115"/>
+        <image name="label_recipe" width="115" height="115"/>
+        <image name="label_single" width="115" height="115"/>
         <image name="official" width="50" height="50"/>
         <image name="social_icon_instagram" width="115" height="115"/>
         <image name="social_icon_twitter" width="115" height="115"/>

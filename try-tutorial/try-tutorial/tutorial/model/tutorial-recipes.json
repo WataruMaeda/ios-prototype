@@ -3,6 +3,7 @@
   "recipes":
   [
    {
+   "category": "label_recipe",
    "image": "tuto-recipe-1",
    "title": "最近のスキンケア",
    "like": "58",
@@ -12,6 +13,7 @@
    "cosme_image_3": "",
    },
    {
+   "category": "label_recipe",
    "image": "tuto-recipe-2",
    "title": "いちごメイク",
    "like": "72",
@@ -21,6 +23,7 @@
    "cosme_image_3": "tuto-recipe-2-3",
    },
    {
+   "category": "label_movie",
    "image": "tuto-recipe-3",
    "title": "5分で石原さとみさん風メイク",
    "like": "67",
@@ -30,6 +33,7 @@
    "cosme_image_3": "tuto-recipe-3-3",
    },
    {
+   "category": "label_recipe",
    "image": "tuto-recipe-4",
    "title": "ヒロインメイクのマスカラ",
    "like": "49",
@@ -39,6 +43,7 @@
    "cosme_image_3": "",
    },
    {
+   "category": "label_movie",
    "image": "tuto-recipe-5",
    "title": "グレーテル風メイク",
    "like": "68",
@@ -48,6 +53,7 @@
    "cosme_image_3": "tuto-recipe-5-3",
    },
    {
+   "category": "label_single",
    "image": "tuto-recipe-6",
    "title": "毎日メイク2018年ver.",
    "like": "79",
@@ -57,6 +63,7 @@
    "cosme_image_3": "",
    },
    {
+   "category": "label_recipe",
    "image": "tuto-recipe-7",
    "title": "バレない二重",
    "like": "119",
@@ -66,6 +73,7 @@
    "cosme_image_3": "",
    },
    {
+   "category": "label_movie",
    "image": "tuto-recipe-8",
    "title": "グロくないハロウィンメイク",
    "like": "39",
@@ -76,6 +84,7 @@
    },
    
    {
+   "category": "label_single",
    "image": "tuto-recipe-9",
    "title": "カラコンレビュー",
    "like": "43",

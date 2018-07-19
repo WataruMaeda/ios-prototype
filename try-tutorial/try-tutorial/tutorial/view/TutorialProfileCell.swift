@@ -35,6 +35,7 @@ extension TutorialProfileCell {
   
   func setRecipeList() {
     recipes = TutorialModelManager.getRecipeList() ?? [Recipe]()
+    print(recipes)
   }
   
   func setNavigationController(_ navigationContoller: UINavigationController) {
@@ -75,7 +76,10 @@ extension TutorialProfileCell: UICollectionViewDataSource, UICollectionViewDeleg
   
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? TutorialCosmeCell else {
+      return UICollectionViewCell()
+    }
+    cell.setupContents(recipes[indexPath.row])
     return cell
   }
   
