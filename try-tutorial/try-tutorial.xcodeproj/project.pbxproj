@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		043513F720EC848500F9C72E /* TutorialCosmeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043513F520EC848500F9C72E /* TutorialCosmeCollectionCell.swift */; };
+		043513F720EC848500F9C72E /* TutorialUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043513F520EC848500F9C72E /* TutorialUserCell.swift */; };
 		04359DDE20ED297A002783E1 /* TutorialSwitchReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */; };
 		0484474B20FD071B0020DA54 /* TutorialProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484474A20FD071B0020DA54 /* TutorialProfileCell.swift */; };
 		048E2FF220FA5D00005DD202 /* TutorialCosmeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E2FF120FA5D00005DD202 /* TutorialCosmeCell.swift */; };
@@ -28,7 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		043513F520EC848500F9C72E /* TutorialCosmeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialCosmeCollectionCell.swift; sourceTree = "<group>"; };
+		043513F520EC848500F9C72E /* TutorialUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialUserCell.swift; sourceTree = "<group>"; };
 		04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialSwitchReusableView.swift; sourceTree = "<group>"; };
 		0484474A20FD071B0020DA54 /* TutorialProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialProfileCell.swift; sourceTree = "<group>"; };
 		048E2FF120FA5D00005DD202 /* TutorialCosmeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialCosmeCell.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 		04B23F7520EBE263004E1DB0 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				043513F520EC848500F9C72E /* TutorialCosmeCollectionCell.swift */,
+				043513F520EC848500F9C72E /* TutorialUserCell.swift */,
 				048E2FF120FA5D00005DD202 /* TutorialCosmeCell.swift */,
 				04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */,
 				04938E9820EDB9DC00971352 /* TutorialPager.swift */,
@@ -219,7 +219,7 @@
 			files = (
 				04938E9920EDB9DC00971352 /* TutorialPager.swift in Sources */,
 				04B23F7020EBE1D1004E1DB0 /* SecondTutorialViewController.swift in Sources */,
-				043513F720EC848500F9C72E /* TutorialCosmeCollectionCell.swift in Sources */,
+				043513F720EC848500F9C72E /* TutorialUserCell.swift in Sources */,
 				0484474B20FD071B0020DA54 /* TutorialProfileCell.swift in Sources */,
 				048E2FF220FA5D00005DD202 /* TutorialCosmeCell.swift in Sources */,
 				04AB5EFC20FD90C5006B6835 /* TutorialRecipeDataCell.swift in Sources */,
