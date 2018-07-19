@@ -66,7 +66,7 @@ extension SecondTutorialViewController: UITableViewDelegate, UITableViewDataSour
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return (view.frame.size.width - 10 * 4) / 3 * 1.87 * 3
+    return (view.frame.size.width - 40) / 3 * 1.87 * 3 + 60
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
