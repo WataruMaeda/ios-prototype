@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0432ADD8210244F400700548 /* TutorialSpeechBaloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0432ADD7210244F400700548 /* TutorialSpeechBaloon.swift */; };
+		0432ADDA210244FE00700548 /* TutorialSpeechBaloon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0432ADD9210244FE00700548 /* TutorialSpeechBaloon.xib */; };
 		043513F720EC848500F9C72E /* TutorialUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043513F520EC848500F9C72E /* TutorialUserCell.swift */; };
 		04359DDE20ED297A002783E1 /* TutorialSwitchReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */; };
 		0484474B20FD071B0020DA54 /* TutorialProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484474A20FD071B0020DA54 /* TutorialProfileCell.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0432ADD7210244F400700548 /* TutorialSpeechBaloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialSpeechBaloon.swift; sourceTree = "<group>"; };
+		0432ADD9210244FE00700548 /* TutorialSpeechBaloon.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialSpeechBaloon.xib; sourceTree = "<group>"; };
 		043513F520EC848500F9C72E /* TutorialUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialUserCell.swift; sourceTree = "<group>"; };
 		04359DDC20ED297A002783E1 /* TutorialSwitchReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialSwitchReusableView.swift; sourceTree = "<group>"; };
 		0484474A20FD071B0020DA54 /* TutorialProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialProfileCell.swift; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 				0484474A20FD071B0020DA54 /* TutorialProfileCell.swift */,
 				04AB5EFB20FD90C5006B6835 /* TutorialRecipeDataCell.swift */,
 				04938E9A20EDB9E900971352 /* TutorialPager.xib */,
+				0432ADD7210244F400700548 /* TutorialSpeechBaloon.swift */,
+				0432ADD9210244FE00700548 /* TutorialSpeechBaloon.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -204,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0432ADDA210244FE00700548 /* TutorialSpeechBaloon.xib in Resources */,
 				04B23F6320EBDA53004E1DB0 /* LaunchScreen.storyboard in Resources */,
 				04938E9B20EDB9E900971352 /* TutorialPager.xib in Resources */,
 				04847DC421005DB3004B3813 /* tutorial-recipes.json in Resources */,
@@ -231,6 +238,7 @@
 				04359DDE20ED297A002783E1 /* TutorialSwitchReusableView.swift in Sources */,
 				04B23F5920EBDA51004E1DB0 /* AppDelegate.swift in Sources */,
 				04B23F6E20EBE1B9004E1DB0 /* FirstTutorialViewController.swift in Sources */,
+				0432ADD8210244F400700548 /* TutorialSpeechBaloon.swift in Sources */,
 				04B23F7220EBE1F4004E1DB0 /* ThirdTutorialViewController.swift in Sources */,
 				04B23F7A20EBE888004E1DB0 /* TutorialModelManager.swift in Sources */,
 			);

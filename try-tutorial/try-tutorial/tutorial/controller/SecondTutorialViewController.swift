@@ -27,6 +27,14 @@ class SecondTutorialViewController: UIViewController {
     setupTableView()
     setupPager()
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    title = "プロフィール"
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    title = ""
+  }
 }
 
 // MARK: Header

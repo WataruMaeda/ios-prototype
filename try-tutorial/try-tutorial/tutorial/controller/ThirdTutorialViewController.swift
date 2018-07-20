@@ -11,12 +11,21 @@ import UIKit
 class ThirdTutorialViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
+  fileprivate var pager: TutorialPager!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
     setupTableView()
     setupPager()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    title = "最近のスキンケア"
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    title = ""
   }
 }
 
@@ -52,7 +61,7 @@ extension ThirdTutorialViewController {
     // get pager from xib
     let nib = UINib(nibName: "TutorialPager", bundle: nil)
     let subviews = nib.instantiate(withOwner: self, options: nil)
-    guard let pager = subviews.first as? TutorialPager else { return }
+    pager = subviews.first as! TutorialPager
     pager.frame = CGRect(x: 0, y: view.frame.size.height - 178,
                          width: view.frame.size.width, height: 178)
     
@@ -67,7 +76,6 @@ extension ThirdTutorialViewController {
     
     // setup contents
     pager.setupContents(3)
-    pager.setupContents(4)
     
     view.addSubview(pager)
   }
@@ -78,6 +86,6 @@ extension ThirdTutorialViewController {
     tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
     
     // setup contents
-//    pager.setupContents(4)
+    pager.setupContents(4)
   }
 }

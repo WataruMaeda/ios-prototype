@@ -16,6 +16,7 @@ class FirstTutorialViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
+    title = ""
     setupNavigationItems()
     setUserList()
     setupCollectionView()
@@ -141,6 +142,7 @@ extension FirstTutorialViewController: UICollectionViewDataSource, UICollectionV
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if indexPath.row != 0 { return }
     let storyboard = UIStoryboard(name: "Tutorial", bundle: Bundle.main)
     let secondTutorial = storyboard.instantiateViewController(withIdentifier: "SecondTutorialViewController")
     navigationController?.pushViewController(secondTutorial, animated: true)
