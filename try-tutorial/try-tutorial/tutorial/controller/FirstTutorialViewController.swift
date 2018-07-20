@@ -42,8 +42,8 @@ extension FirstTutorialViewController {
     let nib = UINib(nibName: "TutorialPager", bundle: nil)
     let subviews = nib.instantiate(withOwner: self, options: nil)
     guard let pager = subviews.first as? TutorialPager else { return }
-    pager.frame = CGRect(x: 0, y: view.frame.size.height - 200,
-                         width: view.frame.size.width, height: 200)
+    pager.frame = CGRect(x: 0, y: view.frame.size.height - 178,
+                         width: view.frame.size.width, height: 178)
     
     // add skip action
     pager.skipButton.addTarget(self,action: #selector(tappedSkip), for: .touchUpInside)
@@ -54,11 +54,16 @@ extension FirstTutorialViewController {
     pager.layer.masksToBounds = false
     pager.layer.shadowOpacity = 0.2
     
+    // setup contents
+    pager.setupContents(1)
+    
     view.addSubview(pager)
   }
   
   @objc func tappedSkip() {
-    print("tapped skip")
+    let storyboard = UIStoryboard(name: "Tutorial", bundle: Bundle.main)
+    let secondTutorial = storyboard.instantiateViewController(withIdentifier: "SecondTutorialViewController")
+    navigationController?.pushViewController(secondTutorial, animated: true)
   }
 }
 
