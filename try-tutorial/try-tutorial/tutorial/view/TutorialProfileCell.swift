@@ -16,12 +16,9 @@ class TutorialProfileCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
     setRecipeList()
     setupCollectionView()
+    shakeRecipe()
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
@@ -85,9 +82,28 @@ extension TutorialProfileCell: UICollectionViewDataSource, UICollectionViewDeleg
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if indexPath.row != 0 { return }
     let storyboard = UIStoryboard(name: "Tutorial", bundle: Bundle.main)
     let thirdTutorial = storyboard.instantiateViewController(withIdentifier: "ThirdTutorialViewController")
     self.navigationController?.pushViewController(thirdTutorial, animated: true)
   }
   
+  func shakeRecipe() {
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+      
+      let indexPath = IndexPath(row: 0, section: 0)
+      guard let cell = self.collectionView.cellForItem(at: indexPath) else { return }
+      
+      // shake animation
+      let animation = CAKeyframeAnimation(keyPath:"transform")
+      let angle = 0.05 as CGFloat
+      animation.values = [CATransform3DMakeRotation(angle, 0.0, 0.0, 1.0),
+                          CATransform3DMakeRotation(-angle, 0.0, 0.0, 1.0)]
+      animation.autoreverses = true
+      animation.duration = 0.2
+      animation.repeatCount = 1
+      cell.layer.add(animation, forKey: "position")
+    }
+  }
 }

@@ -26,6 +26,7 @@ class SecondTutorialViewController: UIViewController {
     setupProfile()
     setupTableView()
     setupPager()
+    showSpeechBaloon()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +61,44 @@ extension SecondTutorialViewController {
   }
 }
 
+// MARK: - Speech Baloon
+
+extension SecondTutorialViewController {
+  
+  func showSpeechBaloon() {
+    
+    // get nib
+    let nib = UINib(nibName: "TutorialSpeechBaloon", bundle: nil)
+    let subviews = nib.instantiate(withOwner: self, options: nil)
+    
+    // show baloon after 4 sec
+    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+      
+      let indexPath = IndexPath(row: 0, section: 0)
+      let cellRect = self.tableView.rectForRow(at: indexPath)
+      
+      // create baloon
+      let speechBaloonView = subviews.first as! TutorialSpeechBaloon
+      speechBaloonView.frame = CGRect(x: self.view.frame.size.width / 3 / 3 * 2  + 10,
+                                           y: cellRect.origin.y,
+                                           width: self.view.frame.size.width / 3,
+                                           height: self.view.frame.size.width / 3)
+      speechBaloonView.label.text = "気になるメイクを\n見つけよう"
+      speechBaloonView.alpha = 0
+      self.view.addSubview(speechBaloonView)
+      
+      // animation
+      UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
+        
+        // fade in animation
+        speechBaloonView.alpha = 1
+        
+      }, completion: nil)
+    }
+  }
+}
+
+
 // MARK: TableView
 
 extension SecondTutorialViewController: UITableViewDelegate, UITableViewDataSource {
@@ -67,6 +106,7 @@ extension SecondTutorialViewController: UITableViewDelegate, UITableViewDataSour
   func setupTableView() {
     tableView.dataSource = self
     tableView.delegate = self
+    tableView.isScrollEnabled = false
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,7 +138,7 @@ extension SecondTutorialViewController {
     let nib = UINib(nibName: "TutorialPager", bundle: nil)
     let subviews = nib.instantiate(withOwner: self, options: nil)
     guard let pager = subviews.first as? TutorialPager else { return }
-    pager.frame = CGRect(x: 0, y: view.frame.size.height - 178,
+    pager.frame = CGRect(x: 0, y: view.frame.size.height,
                          width: view.frame.size.width, height: 178)
     
     // add skip action
@@ -114,6 +154,13 @@ extension SecondTutorialViewController {
     pager.setupContents(2)
     
     view.addSubview(pager)
+    
+    // animation
+    var pagerOrigin = pager.frame.origin
+    pagerOrigin.y = view.frame.size.height - 178
+    UIView.animate(withDuration: 0.2, delay: 2, options: [.curveEaseIn], animations: {
+      pager.frame.origin = pagerOrigin
+    }, completion: nil)
   }
   
   @objc func tappedSkip() {

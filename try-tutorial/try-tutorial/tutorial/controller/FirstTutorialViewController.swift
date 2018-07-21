@@ -21,6 +21,7 @@ class FirstTutorialViewController: UIViewController {
     setUserList()
     setupCollectionView()
     setupPager()
+    showSpeechBaloon()
   }
 }
 
@@ -30,41 +31,6 @@ extension FirstTutorialViewController {
   
   func setUserList() {
     users = TutorialModelManager.getUserList() ?? [User]()
-  }
-}
-
-// MARK: - Page Control
-
-extension FirstTutorialViewController {
-  
-  func setupPager() {
-    
-    // get pager from xib
-    let nib = UINib(nibName: "TutorialPager", bundle: nil)
-    let subviews = nib.instantiate(withOwner: self, options: nil)
-    guard let pager = subviews.first as? TutorialPager else { return }
-    pager.frame = CGRect(x: 0, y: view.frame.size.height - 178,
-                         width: view.frame.size.width, height: 178)
-    
-    // add skip action
-    pager.skipButton.addTarget(self,action: #selector(tappedSkip), for: .touchUpInside)
-    
-    // setup shadow
-    pager.layer.shadowColor = UIColor.lightGray.cgColor
-    pager.layer.shadowOffset = CGSize(width: 0, height: -1);
-    pager.layer.masksToBounds = false
-    pager.layer.shadowOpacity = 0.2
-    
-    // setup contents
-    pager.setupContents(1)
-    
-    view.addSubview(pager)
-  }
-  
-  @objc func tappedSkip() {
-    let storyboard = UIStoryboard(name: "Tutorial", bundle: Bundle.main)
-    let secondTutorial = storyboard.instantiateViewController(withIdentifier: "SecondTutorialViewController")
-    navigationController?.pushViewController(secondTutorial, animated: true)
   }
 }
 
@@ -81,6 +47,101 @@ extension FirstTutorialViewController {
   }
 }
 
+// MARK: - Speech Baloon
+
+extension FirstTutorialViewController {
+  
+  func showSpeechBaloon() {
+    
+    // get nib
+    let nib = UINib(nibName: "TutorialSpeechBaloon", bundle: nil)
+    let subviews = nib.instantiate(withOwner: self, options: nil)
+    
+    // show baloon after 4 sec
+    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+      
+      // first cell position
+      let indexPath = IndexPath(row: 0, section: 0)
+      guard let attribute = self.collectionView.layoutAttributesForItem(at: indexPath) else {
+        return
+      }
+      
+      // create baloon
+      let speechBaloonView = subviews.first as! TutorialSpeechBaloon
+      speechBaloonView.frame = CGRect(x: attribute.frame.origin.x + attribute.frame.size.width / 3 * 2,
+                                           y: attribute.frame.origin.y + attribute.frame.size.height / 4,
+                                           width: self.view.frame.size.width / 3,
+                                           height: self.view.frame.size.width / 3)
+      speechBaloonView.label.text = "参考にしたい人を\n見つけよう"
+      speechBaloonView.alpha = 0
+      self.view.addSubview(speechBaloonView)
+      
+      // animation
+      UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
+        
+        // fade in animation
+        speechBaloonView.alpha = 1
+        
+      }, completion: { _ in
+        
+        guard let cell = self.collectionView.cellForItem(at: indexPath) else { return }
+        
+        // shake animation
+        let animation = CAKeyframeAnimation(keyPath:"transform")
+        let angle = 0.05 as CGFloat
+        animation.values = [CATransform3DMakeRotation(angle, 0.0, 0.0, 1.0),
+                            CATransform3DMakeRotation(-angle, 0.0, 0.0, 1.0)]
+        animation.autoreverses = true
+        animation.duration = 0.2
+        animation.repeatCount = 1
+        cell.layer.add(animation, forKey: "position")
+      })
+    }
+  }
+}
+
+// MARK: - Page Control
+
+extension FirstTutorialViewController {
+  
+  func setupPager() {
+    
+    // get pager from xib
+    let nib = UINib(nibName: "TutorialPager", bundle: nil)
+    let subviews = nib.instantiate(withOwner: self, options: nil)
+    guard let pager = subviews.first as? TutorialPager else { return }
+    pager.frame = CGRect(x: 0, y: view.frame.size.height,
+                         width: view.frame.size.width, height: 178)
+    
+    // add skip action
+    pager.skipButton.addTarget(self,action: #selector(tappedSkip), for: .touchUpInside)
+    
+    // setup shadow
+    pager.layer.shadowColor = UIColor.lightGray.cgColor
+    pager.layer.shadowOffset = CGSize(width: 0, height: -1);
+    pager.layer.masksToBounds = false
+    pager.layer.shadowOpacity = 0.2
+    
+    // setup contents
+    pager.setupContents(1)
+    
+    view.addSubview(pager)
+    
+    // animation
+    var pagerOrigin = pager.frame.origin
+    pagerOrigin.y = view.frame.size.height - 178
+    UIView.animate(withDuration: 0.2, delay: 2, options: [.curveEaseIn], animations: {
+      pager.frame.origin = pagerOrigin
+    }, completion: nil)
+  }
+  
+  @objc func tappedSkip() {
+    let storyboard = UIStoryboard(name: "Tutorial", bundle: Bundle.main)
+    let secondTutorial = storyboard.instantiateViewController(withIdentifier: "SecondTutorialViewController")
+    navigationController?.pushViewController(secondTutorial, animated: true)
+  }
+}
+
 // MARK: - CollectionView
 
 extension FirstTutorialViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -89,7 +150,6 @@ extension FirstTutorialViewController: UICollectionViewDataSource, UICollectionV
     
     // set collection view UI
     collectionView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
-    
     
     // set layout of collectionView
     let space = 10 as CGFloat
@@ -110,6 +170,7 @@ extension FirstTutorialViewController: UICollectionViewDataSource, UICollectionV
     // set delegate & datasorce
     collectionView.delegate = self
     collectionView.dataSource = self
+    collectionView.isScrollEnabled = false
   }
   
   func collectionView(_ collectionView: UICollectionView,
@@ -137,6 +198,7 @@ extension FirstTutorialViewController: UICollectionViewDataSource, UICollectionV
       for: indexPath) as? TutorialSwitchReusableView else {
       fatalError("Could not find proper header")
     }
+    header.isUserInteractionEnabled = false
     
     return kind == UICollectionElementKindSectionHeader ? header : UICollectionReusableView()
   }
