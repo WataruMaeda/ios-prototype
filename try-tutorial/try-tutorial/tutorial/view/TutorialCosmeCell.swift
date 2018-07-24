@@ -32,5 +32,31 @@ extension TutorialCosmeCell {
     recipeImageView3.image = UIImage(named: recipe.cosme_image_3)
     profileImageView.image = UIImage(named: "tuto-user-1")
     nameLabel.text = "ゆきだるま☃"
+    
+    // set favorite num / like num
+    let deteilString = "  \(recipe.like)   \(recipe.save)"
+    let attrString = NSMutableAttributedString(string: deteilString)
+    
+    // set like img
+    let attach1 = NSTextAttachment()
+    attach1.image = #imageLiteral(resourceName: "good_label")
+    attach1.bounds = CGRect(x: 0,
+                            y: -3,
+                            width: frame.size.width * 0.12,
+                            height: frame.size.width * 0.12)
+    let attrString1 = NSAttributedString(attachment: attach1)
+    attrString.insert(attrString1, at: 1)
+    
+    // set favorite img
+    let attach2 = NSTextAttachment()
+    attach2.image = #imageLiteral(resourceName: "favorite_label")
+    attach2.bounds = CGRect(x: 0,
+                            y: -3,
+                            width: frame.size.width * 0.12,
+                            height: frame.size.width * 0.12)
+    let attrString2 = NSAttributedString(attachment: attach1)
+    attrString.insert(attrString2, at: 7)
+    
+    detailsLabel.attributedText = attrString
   }
 }
