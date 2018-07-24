@@ -792,7 +792,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="2000" id="AZs-0U-PIp" customClass="TutorialRecipeDataCell" customModule="try_tutorial" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="2000" id="AZs-0U-PIp" customClass="TutorialRecipeCell" customModule="try_tutorial" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="2000"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AZs-0U-PIp" id="MWN-sU-Z3v">
@@ -1339,6 +1339,18 @@
                                                 <constraint firstItem="9Mw-lc-Cth" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="zqE-JA-sqV"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="afterImageView" destination="9FC-au-aiQ" id="sTA-1f-xhO"/>
+                                            <outlet property="beforeImageView" destination="VTg-OP-Juw" id="Pcl-cu-dXb"/>
+                                            <outlet property="profileImageView" destination="2po-k5-jeC" id="v5N-Dh-j42"/>
+                                            <outlet property="recipeImageView" destination="a5J-Vu-qp3" id="VgV-yn-iNw"/>
+                                            <outlet property="recipeImageView1" destination="dh0-lh-cEc" id="qVM-Va-Xfs"/>
+                                            <outlet property="recipeImageView2" destination="Vvy-LN-6My" id="fkN-TS-pWc"/>
+                                            <outlet property="recipeImageView3" destination="SkF-Rj-8yw" id="MyJ-Lj-h0I"/>
+                                            <outlet property="recipeImageView4" destination="Z9g-jU-dzj" id="UDX-OT-5Zx"/>
+                                            <outlet property="recipeImageView5" destination="xMK-8q-4eX" id="mCJ-av-44K"/>
+                                            <outlet property="recipeImageView6" destination="CFL-W7-tE2" id="aFJ-KQ-jGt"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
