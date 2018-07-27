@@ -31,7 +31,6 @@ extension TutorialProfileCell {
   
   func setRecipeList() {
     recipes = TutorialModelManager.getRecipeList() ?? [Recipe]()
-    print(recipes)
   }
   
   func setNavigationController(_ navigationContoller: UINavigationController) {

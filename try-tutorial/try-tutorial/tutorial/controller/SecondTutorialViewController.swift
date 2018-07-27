@@ -73,9 +73,9 @@ extension SecondTutorialViewController {
     // create baloon
     let speechBaloonView = subviews.first as! TutorialSpeechBaloon
     speechBaloonView.frame = CGRect(x: self.view.frame.size.width / 3 / 3 * 2 + 10,
-                                         y: cellRect.origin.y,
-                                         width: self.view.frame.size.width / 3,
-                                         height: self.view.frame.size.width / 3)
+                                    y: cellRect.origin.y,
+                                    width: self.view.frame.size.width / 3,
+                                    height: self.view.frame.size.width / 3)
     speechBaloonView.label.text = "気になる\nメイクを\n見つけよう"
     speechBaloonView.alpha = 0
     self.view.addSubview(speechBaloonView)

@@ -27,9 +27,9 @@ extension TutorialCosmeCell {
     categoryImageView.image = UIImage(named: recipe.category)
     recipeImageView.image = UIImage(named: recipe.image)
     titleLabel.text = recipe.title
-    recipeImageView1.image = UIImage(named: recipe.cosme_image_1)
-    recipeImageView2.image = UIImage(named: recipe.cosme_image_2)
-    recipeImageView3.image = UIImage(named: recipe.cosme_image_3)
+    recipeImageView1.image = recipe.cosme_image_1.count > 0 ? UIImage(named: recipe.cosme_image_1) : UIImage()
+    recipeImageView2.image = recipe.cosme_image_2.count > 0 ? UIImage(named: recipe.cosme_image_2) : UIImage()
+    recipeImageView3.image = recipe.cosme_image_3.count > 0 ? UIImage(named: recipe.cosme_image_3) : UIImage()
     profileImageView.image = UIImage(named: "tuto-user-1")
     nameLabel.text = "ゆきだるま☃"
     
