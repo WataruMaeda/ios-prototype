@@ -789,11 +789,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="2000" id="AZs-0U-PIp" customClass="TutorialRecipeCell" customModule="try_tutorial" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="2000"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="1916" id="AZs-0U-PIp" customClass="TutorialRecipeCell" customModule="try_tutorial" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="1916"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AZs-0U-PIp" id="MWN-sU-Z3v">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1999.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1915.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2eT-xf-pt5">
@@ -1336,6 +1336,7 @@
                                                 <constraint firstItem="9Mw-lc-Cth" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="zqE-JA-sqV"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="afterImageView" destination="9FC-au-aiQ" id="sTA-1f-xhO"/>
                                             <outlet property="beforeImageView" destination="VTg-OP-Juw" id="Pcl-cu-dXb"/>

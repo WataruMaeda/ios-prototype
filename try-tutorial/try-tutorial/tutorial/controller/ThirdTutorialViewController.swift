@@ -46,6 +46,14 @@ extension ThirdTutorialViewController: UITableViewDelegate, UITableViewDataSourc
     }
   }
   
+  func resizeTableView() {
+    var frame = tableView.frame
+    frame.size.height = tableView.frame.size.height - pager.frame.size.height
+    print(tableView.frame.size.height)
+    print(pager.frame.size.height)
+    tableView.frame = frame
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 1
   }
@@ -92,7 +100,9 @@ extension ThirdTutorialViewController {
     pagerOrigin.y = view.frame.size.height - 178
     UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
       self.pager.frame.origin = pagerOrigin
-    }, completion: nil)
+    }, completion: { _ in
+      self.resizeTableView()
+    })
   }
   
   @objc func tappedSkip() {
