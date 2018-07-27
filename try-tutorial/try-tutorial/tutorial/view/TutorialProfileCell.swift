@@ -50,14 +50,14 @@ extension TutorialProfileCell: UICollectionViewDataSource, UICollectionViewDeleg
     collectionView.isScrollEnabled = false
     
     // set layout of collectionView
-    let space = 10 as CGFloat
+    let space = 5 as CGFloat
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.minimumLineSpacing = space
     flowLayout.minimumInteritemSpacing = space / 2
     flowLayout.sectionInset = UIEdgeInsetsMake(0, space, space, space);
     flowLayout.itemSize = CGSize(
-      width: (frame.size.width - space * 4) / 3,
-      height: (frame.size.width - space * 4) / 3 * 1.87
+      width: (UIScreen.main.bounds.size.width - space * 4) / 3,
+      height: (UIScreen.main.bounds.size.width - space * 4) / 3 * 1.87
     )
     collectionView.setCollectionViewLayout(flowLayout, animated: true, completion: nil)
     

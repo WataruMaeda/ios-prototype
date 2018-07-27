@@ -103,7 +103,6 @@ extension SecondTutorialViewController: UITableViewDelegate, UITableViewDataSour
       self.tableView.reloadData()
     }) { finished in
       if finished {
-        
         self.setupPager()
         self.showSpeechBaloon()
       }
