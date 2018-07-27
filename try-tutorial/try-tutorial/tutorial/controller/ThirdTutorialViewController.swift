@@ -64,7 +64,7 @@ extension ThirdTutorialViewController: UITableViewDelegate, UITableViewDataSourc
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 1918
+    return UITableViewAutomaticDimension
   }
 }
 

@@ -789,11 +789,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="1916" id="AZs-0U-PIp" customClass="TutorialRecipeCell" customModule="try_tutorial" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="1916"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="1917" id="AZs-0U-PIp" customClass="TutorialRecipeCell" customModule="try_tutorial" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="1917"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AZs-0U-PIp" id="MWN-sU-Z3v">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1915.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1916.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2eT-xf-pt5">
@@ -1315,6 +1315,7 @@
                                                 <constraint firstItem="jLk-qb-eRm" firstAttribute="top" secondItem="2eT-xf-pt5" secondAttribute="bottom" id="a3n-fU-E4c"/>
                                                 <constraint firstItem="t2q-82-YPc" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="bIC-ch-PuG"/>
                                                 <constraint firstItem="8m7-wb-1Bd" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="bNM-cc-zvg"/>
+                                                <constraint firstAttribute="bottom" secondItem="9Mw-lc-Cth" secondAttribute="bottom" constant="0.5" id="ba2-SZ-XTH"/>
                                                 <constraint firstAttribute="trailing" secondItem="2eT-xf-pt5" secondAttribute="trailing" id="bfw-A8-hKI"/>
                                                 <constraint firstItem="2q8-cS-20q" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="cdr-bC-BbL"/>
                                                 <constraint firstItem="2eT-xf-pt5" firstAttribute="leading" secondItem="MWN-sU-Z3v" secondAttribute="leading" id="hfD-Gw-GLx"/>
