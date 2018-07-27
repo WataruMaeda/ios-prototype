@@ -76,7 +76,7 @@ extension SecondTutorialViewController {
                                          y: cellRect.origin.y,
                                          width: self.view.frame.size.width / 3,
                                          height: self.view.frame.size.width / 3)
-    speechBaloonView.label.text = "気になるメイクを\n見つけよう"
+    speechBaloonView.label.text = "気になる\nメイクを\n見つけよう"
     speechBaloonView.alpha = 0
     self.view.addSubview(speechBaloonView)
     

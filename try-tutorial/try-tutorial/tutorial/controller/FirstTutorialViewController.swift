@@ -67,7 +67,7 @@ extension FirstTutorialViewController {
                                     y: attribute.frame.origin.y + attribute.frame.size.height / 4,
                                     width: self.view.frame.size.width / 3,
                                     height: self.view.frame.size.width / 3)
-    speechBaloonView.label.text = "参考にしたい人を\n見つけよう"
+    speechBaloonView.label.text = "参考にしたい\n人を\n見つけよう"
     speechBaloonView.alpha = 0
     self.view.addSubview(speechBaloonView)
     

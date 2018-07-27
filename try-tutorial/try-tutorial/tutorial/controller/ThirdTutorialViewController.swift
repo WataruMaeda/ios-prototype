@@ -149,7 +149,7 @@ extension ThirdTutorialViewController {
                                     y: 25 - self.view.frame.size.width / 3,
                                     width: self.view.frame.size.width / 3,
                                     height: self.view.frame.size.width / 3)
-    speechBaloonView.label.text = "メイクの方法を\n見てみよう"
+    speechBaloonView.label.text = "メイクの\n方法を\n見てみよう"
     self.downArrowView.addSubview(speechBaloonView)
     self.downArrowView.alpha = 0
     
