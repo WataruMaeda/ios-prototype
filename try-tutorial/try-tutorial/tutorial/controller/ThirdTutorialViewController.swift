@@ -49,8 +49,6 @@ extension ThirdTutorialViewController: UITableViewDelegate, UITableViewDataSourc
   func resizeTableView() {
     var frame = tableView.frame
     frame.size.height = tableView.frame.size.height - pager.frame.size.height
-    print(tableView.frame.size.height)
-    print(pager.frame.size.height)
     tableView.frame = frame
   }
   
