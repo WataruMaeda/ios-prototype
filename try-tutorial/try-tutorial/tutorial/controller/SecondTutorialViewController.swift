@@ -8,8 +8,6 @@
 
 import UIKit
 
-// SEE: ContentCollectionCell for the cell design
-
 class SecondTutorialViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
@@ -25,8 +23,6 @@ class SecondTutorialViewController: UIViewController {
     view.backgroundColor = .white
     setupProfile()
     setupTableView()
-    setupPager()
-    showSpeechBaloon()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -70,31 +66,27 @@ extension SecondTutorialViewController {
     // get nib
     let nib = UINib(nibName: "TutorialSpeechBaloon", bundle: nil)
     let subviews = nib.instantiate(withOwner: self, options: nil)
+      
+    let indexPath = IndexPath(row: 0, section: 0)
+    let cellRect = self.tableView.rectForRow(at: indexPath)
     
-    // show baloon after 4 sec
-    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+    // create baloon
+    let speechBaloonView = subviews.first as! TutorialSpeechBaloon
+    speechBaloonView.frame = CGRect(x: self.view.frame.size.width / 3 / 3 * 2 + 10,
+                                         y: cellRect.origin.y,
+                                         width: self.view.frame.size.width / 3,
+                                         height: self.view.frame.size.width / 3)
+    speechBaloonView.label.text = "気になるメイクを\n見つけよう"
+    speechBaloonView.alpha = 0
+    self.view.addSubview(speechBaloonView)
+    
+    // animation
+    UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
       
-      let indexPath = IndexPath(row: 0, section: 0)
-      let cellRect = self.tableView.rectForRow(at: indexPath)
+      // fade in animation
+      speechBaloonView.alpha = 1
       
-      // create baloon
-      let speechBaloonView = subviews.first as! TutorialSpeechBaloon
-      speechBaloonView.frame = CGRect(x: self.view.frame.size.width / 3 / 3 * 2  + 10,
-                                           y: cellRect.origin.y,
-                                           width: self.view.frame.size.width / 3,
-                                           height: self.view.frame.size.width / 3)
-      speechBaloonView.label.text = "気になるメイクを\n見つけよう"
-      speechBaloonView.alpha = 0
-      self.view.addSubview(speechBaloonView)
-      
-      // animation
-      UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
-        
-        // fade in animation
-        speechBaloonView.alpha = 1
-        
-      }, completion: nil)
-    }
+    }, completion: nil)
   }
 }
 
@@ -107,6 +99,15 @@ extension SecondTutorialViewController: UITableViewDelegate, UITableViewDataSour
     tableView.dataSource = self
     tableView.delegate = self
     tableView.isScrollEnabled = false
+    UIView.animate(withDuration: 0, animations: {
+      self.tableView.reloadData()
+    }) { finished in
+      if finished {
+        
+        self.setupPager()
+        self.showSpeechBaloon()
+      }
+    }
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -158,7 +159,7 @@ extension SecondTutorialViewController {
     // animation
     var pagerOrigin = pager.frame.origin
     pagerOrigin.y = view.frame.size.height - 178
-    UIView.animate(withDuration: 0.2, delay: 2, options: [.curveEaseIn], animations: {
+    UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
       pager.frame.origin = pagerOrigin
     }, completion: nil)
   }

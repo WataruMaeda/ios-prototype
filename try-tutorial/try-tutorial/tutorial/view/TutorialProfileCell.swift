@@ -18,7 +18,6 @@ class TutorialProfileCell: UITableViewCell {
     super.awakeFromNib()
     setRecipeList()
     setupCollectionView()
-    shakeRecipe()
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
@@ -65,6 +64,13 @@ extension TutorialProfileCell: UICollectionViewDataSource, UICollectionViewDeleg
     // set delegate & datasorce
     collectionView.delegate = self
     collectionView.dataSource = self
+    UIView.animate(withDuration: 0, animations: {
+      self.collectionView.reloadData()
+    }) { finished in
+      if finished {
+        self.shakeRecipe()
+      }
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView,
@@ -89,21 +95,18 @@ extension TutorialProfileCell: UICollectionViewDataSource, UICollectionViewDeleg
   }
   
   func shakeRecipe() {
+      
+    let indexPath = IndexPath(row: 0, section: 0)
+    guard let cell = self.collectionView.cellForItem(at: indexPath) else { return }
     
-    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-      
-      let indexPath = IndexPath(row: 0, section: 0)
-      guard let cell = self.collectionView.cellForItem(at: indexPath) else { return }
-      
-      // shake animation
-      let animation = CAKeyframeAnimation(keyPath:"transform")
-      let angle = 0.05 as CGFloat
-      animation.values = [CATransform3DMakeRotation(angle, 0.0, 0.0, 1.0),
-                          CATransform3DMakeRotation(-angle, 0.0, 0.0, 1.0)]
-      animation.autoreverses = true
-      animation.duration = 0.2
-      animation.repeatCount = 1
-      cell.layer.add(animation, forKey: "position")
-    }
+    // shake animation
+    let animation = CAKeyframeAnimation(keyPath:"transform")
+    let angle = 0.05 as CGFloat
+    animation.values = [CATransform3DMakeRotation(angle, 0.0, 0.0, 1.0),
+                        CATransform3DMakeRotation(-angle, 0.0, 0.0, 1.0)]
+    animation.autoreverses = true
+    animation.duration = 0.2
+    animation.repeatCount = 2
+    cell.layer.add(animation, forKey: "position")
   }
 }

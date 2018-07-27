@@ -18,8 +18,6 @@ class ThirdTutorialViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .white
     setupTableView()
-    setupPager()
-    showSpeechBaloon()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +36,14 @@ extension ThirdTutorialViewController: UITableViewDelegate, UITableViewDataSourc
   func setupTableView() {
     tableView.dataSource = self
     tableView.delegate = self
+    UIView.animate(withDuration: 0, animations: {
+      self.tableView.reloadData()
+    }) { finished in
+      if finished {
+        self.setupPager()
+        self.showSpeechBaloon()
+      }
+    }
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,7 +90,7 @@ extension ThirdTutorialViewController {
     // animation
     var pagerOrigin = pager.frame.origin
     pagerOrigin.y = view.frame.size.height - 178
-    UIView.animate(withDuration: 0.2, delay: 2, options: [.curveEaseIn], animations: {
+    UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
       self.pager.frame.origin = pagerOrigin
     }, completion: nil)
   }
@@ -143,30 +149,26 @@ extension ThirdTutorialViewController {
     self.downArrowView.center = CGPoint(x: self.view.center.x,
                                         y: self.view.frame.size.height - 178 - 30)
     
-    // show baloon after 4 sec
-    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+    self.downArrowView.isHidden = false
+    self.view.addSubview(self.downArrowView)
+    
+    // animation
+    UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
       
-      self.downArrowView.isHidden = false
-      self.view.addSubview(self.downArrowView)
+      // fade in animation
+      self.downArrowView.alpha = 1
       
-      // animation
-      UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
-        
-        // fade in animation
-        self.downArrowView.alpha = 1
-        
-      }, completion: nil)
-      
-      // shake animation
-      let animation = CAKeyframeAnimation(keyPath:"transform")
-      let angle = 0.05 as CGFloat
-      animation.values = [CATransform3DMakeRotation(angle, 0.0, 0.0, 1.0),
-                          CATransform3DMakeRotation(-angle, 0.0, 0.0, 1.0)]
-      animation.autoreverses = true
-      animation.duration = 0.2
-      animation.repeatCount = 1
-      self.downArrowView.layer.add(animation, forKey: "position")
-    }
+    }, completion: nil)
+    
+    // shake animation
+    let animation = CAKeyframeAnimation(keyPath:"transform")
+    let angle = 0.05 as CGFloat
+    animation.values = [CATransform3DMakeRotation(angle, 0.0, 0.0, 1.0),
+                        CATransform3DMakeRotation(-angle, 0.0, 0.0, 1.0)]
+    animation.autoreverses = true
+    animation.duration = 0.2
+    animation.repeatCount = 2
+    self.downArrowView.layer.add(animation, forKey: "position")
   }
   
   @objc func tappedArrow() {
