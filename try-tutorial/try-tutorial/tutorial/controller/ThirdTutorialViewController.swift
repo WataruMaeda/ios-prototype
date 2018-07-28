@@ -49,7 +49,9 @@ extension ThirdTutorialViewController: UITableViewDelegate, UITableViewDataSourc
   
   func resizeTableView() {
     var frame = tableView.frame
-    frame.size.height = tableView.frame.size.height - pager.frame.size.height
+    frame.size.height = isIphoneX()
+      ? tableView.frame.size.height - pager.frame.size.height + 45
+      : tableView.frame.size.height - pager.frame.size.height
     tableView.frame = frame
   }
   
@@ -220,12 +222,25 @@ extension ThirdTutorialViewController {
 
 extension ThirdTutorialViewController {
   
-  private func getProcedureStartingPosition() -> CGFloat {
+  fileprivate func getProcedureStartingPosition() -> CGFloat {
     
     // get cell from table
     guard let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TutorialRecipeCell else {
       return 0
     }
-    return cell.procedureView.frame.origin.y - navigationController!.navigationBar.frame.size.height - 20
+    return isIphoneX()
+      ? cell.procedureView.frame.origin.y - navigationController!.navigationBar.frame.size.height - 45
+      : cell.procedureView.frame.origin.y - navigationController!.navigationBar.frame.size.height - 20
+  }
+  
+  fileprivate func isIphoneX() -> Bool {
+    guard #available(iOS 11.0, *),
+      UIDevice().userInterfaceIdiom == .phone else {
+        return false
+    }
+    let nativeSize = UIScreen.main.nativeBounds.size
+    let (w, h) = (nativeSize.width, nativeSize.height)
+    let (d1, d2): (CGFloat, CGFloat) = (1125.0, 2436.0)
+    return (w == d1 && h == d2) || (w == d2 && h == d1)
   }
 }
