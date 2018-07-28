@@ -13,6 +13,7 @@ class ThirdTutorialViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   fileprivate var pager: TutorialPager!
   fileprivate var downArrowView: UIView!
+  fileprivate var didShowStartPager = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -63,6 +64,24 @@ extension ThirdTutorialViewController: UITableViewDelegate, UITableViewDataSourc
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableViewAutomaticDimension
+  }
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    
+    if tableView.contentOffset.y > 400 && !pager.isHidden && !didShowStartPager {
+      didShowStartPager = true
+      
+      // get procedure view starting point
+      UIView.animate(withDuration: 0.2, animations: {
+        self.downArrowView.alpha = 0
+      }) { _ in
+        self.downArrowView.isHidden = true
+        self.resizeTableView()
+      }
+      
+      // setup contents
+      pager.setupContents(4)
+    }
   }
 }
 
@@ -180,17 +199,33 @@ extension ThirdTutorialViewController {
   }
   
   @objc func tappedArrow() {
+    didShowStartPager = true
     
+    // get procedure view starting point
+    let procefureBeginY = getProcedureStartingPosition()
     UIView.animate(withDuration: 0.2, animations: {
-      self.downArrowView.alpha = 1
+      self.downArrowView.alpha = 0
+      self.tableView.contentOffset.y = procefureBeginY
     }) { _ in
       self.downArrowView.isHidden = true
+      self.resizeTableView()
     }
-    
-    // scroll to bottom
-    tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
     
     // setup contents
     pager.setupContents(4)
+  }
+}
+
+// MARK: - Supporting Functions
+
+extension ThirdTutorialViewController {
+  
+  private func getProcedureStartingPosition() -> CGFloat {
+    
+    // get cell from table
+    guard let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TutorialRecipeCell else {
+      return 0
+    }
+    return cell.procedureView.frame.origin.y - navigationController!.navigationBar.frame.size.height - 20
   }
 }

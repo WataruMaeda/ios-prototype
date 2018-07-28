@@ -41,6 +41,8 @@ class TutorialRecipeCell: UITableViewCell {
     didSet { recipeImageView6.addCornerRafius() }
   }
   
+  @IBOutlet weak var procedureView: UIView!
+  
   override func awakeFromNib() {
     super.awakeFromNib()
   }

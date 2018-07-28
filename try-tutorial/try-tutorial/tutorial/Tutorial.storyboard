@@ -1341,6 +1341,7 @@
                                         <connections>
                                             <outlet property="afterImageView" destination="9FC-au-aiQ" id="sTA-1f-xhO"/>
                                             <outlet property="beforeImageView" destination="VTg-OP-Juw" id="Pcl-cu-dXb"/>
+                                            <outlet property="procedureView" destination="2q8-cS-20q" id="8h3-sH-ko2"/>
                                             <outlet property="profileImageView" destination="2po-k5-jeC" id="v5N-Dh-j42"/>
                                             <outlet property="recipeImageView" destination="a5J-Vu-qp3" id="VgV-yn-iNw"/>
                                             <outlet property="recipeImageView1" destination="dh0-lh-cEc" id="qVM-Va-Xfs"/>
