@@ -14,13 +14,10 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     
     // twitter button
-    let button = TwitterButton(frame: CGRect(x: 100, y: 100, width: 300, height: 50))
+    let button = TwitterButton(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
     button.addLoginHander(presentingFrom: self) { (accessToken, response) in
-      guard let accessToken = accessToken,
-            let response = response else {
-              return
-      }
-      print(accessToken)
+      print(accessToken ?? "token is nil")
+      print(response)
     }
     button.center = view.center
     view.addSubview(button)
