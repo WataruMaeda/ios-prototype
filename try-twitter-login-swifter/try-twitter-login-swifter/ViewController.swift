@@ -12,10 +12,18 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    TwitterUtil.authorize(presentingFrom: self)
+    
+    // twitter button
+    let button = TwitterButton(frame: CGRect(x: 100, y: 100, width: 300, height: 50))
+    button.addLoginHander(presentingFrom: self) { (accessToken, response) in
+      guard let accessToken = accessToken,
+            let response = response else {
+              return
+      }
+      print(accessToken)
+    }
+    button.center = view.center
+    view.addSubview(button)
   }
 }
 

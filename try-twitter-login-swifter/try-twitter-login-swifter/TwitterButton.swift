@@ -7,15 +7,56 @@
 //
 
 import UIKit
+import Swifter
 
 class TwitterButton: UIButton {
+  
+  fileprivate lazy var presentingFrom = UIViewController()
+  fileprivate lazy var loginCallback: (Credential.OAuthAccessToken?, URLResponse?)->Void = { (token, response) in }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    // layout button
+    backgroundColor = UIColor(red:0.114, green:0.632, blue:0.952, alpha:1.000)
+    setImage(#imageLiteral(resourceName: "twitter"), for: .normal)
+    setTitle(" Twitterにログイン", for: .normal)
+    titleLabel?.font = UIFont.systemFont(ofSize: 16)
+    setTitleColor(.white, for: .normal)
+    setTitleColor(.gray, for: .highlighted)
+    imageView?.contentMode = .scaleAspectFit
+  }
+  
+  
+  
+}
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+// MARK: - Twitter Login
 
+extension TwitterButton {
+  
+  func addLoginHander(presentingFrom: UIViewController,
+                      loginCallback: @escaping (Credential.OAuthAccessToken?, URLResponse?)->Void) {
+    self.presentingFrom = presentingFrom
+    self.loginCallback = loginCallback
+    addTarget(self, action: #selector(authorize), for: .touchUpInside)
+  }
+  
+  @objc private func authorize() {
+    
+    // test key
+    let swifter = Swifter(consumerKey: "nLl1mNYc25avPPF4oIzMyQzft",
+                          consumerSecret: "Qm3e5JTXDhbbLl44cq6WdK00tSUwa17tWlO8Bf70douE4dcJe2")
+    guard let callbackURL = URL(string: "swifter://success") else { return }
+    
+    swifter.authorize(withCallback: callbackURL, presentingFrom: presentingFrom, success: { accessToken, response in
+      print("success!")
+      print(response)
+      self.loginCallback(accessToken, response)
+    }, failure: { error in
+      print("error!")
+      print(error)
+      self.loginCallback(nil, nil)
+    })
+  }
 }
