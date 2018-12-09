@@ -9,12 +9,24 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    fileprivate var all = [String]()
+    fileprivate var selected = [String]()
+    fileprivate var recommends = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        title = "Search Items"
     }
-
-
+    
+    func initVariables() {
+        all = [
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j"
+        ]
+        
+        recommends = [
+            "k", "l", "m", "n"
+        ]
+    }
 }
 
