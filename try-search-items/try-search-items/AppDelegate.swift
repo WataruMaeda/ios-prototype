@@ -17,7 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let navigationController = UINavigationController(rootViewController: ViewController())
+        let navigationController = NavigationController(rootViewController: ViewController())
+        navigationController.setupTheme(UIColor(red:0.493, green:0.837, blue:0.876, alpha:1.000), barStyle: .default, tintColor: .white, isTranslucent: false)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
