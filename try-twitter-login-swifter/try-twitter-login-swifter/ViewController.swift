@@ -16,7 +16,9 @@ class ViewController: UIViewController {
     // twitter button
     let button = TwitterButton(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
     button.addLoginHander(presentingFrom: self) { (accessToken, response) in
+      print("--------")
       print(accessToken ?? "token is nil")
+      print("--------")
       print(response)
     }
     button.center = view.center

@@ -61,11 +61,8 @@ extension TwitterButton {
 
     // ask for auth
     swifter.authorize(withCallback: callbackURL, presentingFrom: presentingFrom, success: { accessToken, response in
-      print("success!")
-      print(response)
       self.loginCallback(accessToken, response)
     }, failure: { error in
-      print("error!")
       print(error)
     })
   }
