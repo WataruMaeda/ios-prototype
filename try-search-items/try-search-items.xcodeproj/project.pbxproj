@@ -20,6 +20,7 @@
 		04D37A4921BCF5AD00C8AB06 /* UIButtonCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D37A3521BCF5AD00C8AB06 /* UIButtonCallback.swift */; };
 		04D37A4A21BCF5AD00C8AB06 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D37A3621BCF5AD00C8AB06 /* NavigationController.swift */; };
 		04D37A4B21BCF5AE00C8AB06 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D37A3721BCF5AD00C8AB06 /* TabbarController.swift */; };
+		04D37A5021BCF81D00C8AB06 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D37A4F21BCF81D00C8AB06 /* check.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		04D37A3521BCF5AD00C8AB06 /* UIButtonCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonCallback.swift; sourceTree = "<group>"; };
 		04D37A3621BCF5AD00C8AB06 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		04D37A3721BCF5AD00C8AB06 /* TabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
+		04D37A4F21BCF81D00C8AB06 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		04D37A1021BCF2A500C8AB06 /* try-search-items */ = {
 			isa = PBXGroup;
 			children = (
+				04D37A4E21BCF80600C8AB06 /* assets */,
 				04D37A2321BCF5AD00C8AB06 /* common */,
 				04D37A1121BCF2A500C8AB06 /* AppDelegate.swift */,
 				04D37A1321BCF2A500C8AB06 /* ViewController.swift */,
@@ -110,6 +113,14 @@
 				04D37A3721BCF5AD00C8AB06 /* TabbarController.swift */,
 			);
 			path = components;
+			sourceTree = "<group>";
+		};
+		04D37A4E21BCF80600C8AB06 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				04D37A4F21BCF81D00C8AB06 /* check.png */,
+			);
+			path = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +183,7 @@
 			files = (
 				04D37A1C21BCF2A700C8AB06 /* LaunchScreen.storyboard in Resources */,
 				04D37A1921BCF2A700C8AB06 /* Assets.xcassets in Resources */,
+				04D37A5021BCF81D00C8AB06 /* check.png in Resources */,
 				04D37A1721BCF2A500C8AB06 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

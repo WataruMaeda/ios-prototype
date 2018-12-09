@@ -16,6 +16,13 @@ class ViewController: UIViewController {
     
     let cellId = "cellId"
     
+    fileprivate lazy var searchbar: UISearchBar = {
+        let search = UISearchBar()
+        search.delegate = self
+        search.showsScopeBar = true
+        return search
+    }()
+    
     fileprivate lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
@@ -27,15 +34,28 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Search Items"
-        setupData()
+        setup()
+        setupSearchBar()
         setupTable()
     }
     
-    func setupData() {
+    func setup() {
+        edgesForExtendedLayout = []
         all = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" ]
         recommends = [ "k", "l", "m", "n" ]
     }
 }
+
+// MARK : - UISearchBarDelegate
+
+extension ViewController: UISearchBarDelegate {
+    
+    func setupSearchBar() {
+        view.addSubview(searchbar)
+        searchbar.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+    }
+}
+
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 
@@ -43,7 +63,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     func setupTable() {
         view.addSubview(tableView)
-        tableView.fillAnchor()
+        tableView.anchor(searchbar.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
     
@@ -61,4 +81,3 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
-
