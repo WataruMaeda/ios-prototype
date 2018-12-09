@@ -179,11 +179,11 @@ extension UIView {
     let animation = CABasicAnimation(keyPath: "transform.scale")
     animation.toValue = to
     animation.duration = duration
-    animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+    animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
     animation.autoreverses = repeats
     
     if !repeats {
-      animation.fillMode = kCAFillModeForwards
+        animation.fillMode = CAMediaTimingFillMode.forwards
       animation.isRemovedOnCompletion = false
     } else {
       animation.repeatCount = Float.infinity
