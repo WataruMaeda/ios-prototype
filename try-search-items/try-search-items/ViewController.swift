@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     fileprivate var all = [String]()
     fileprivate var selected = [String]()
     fileprivate var recommends = [String]()
+    fileprivate var recommendsAll = [String]()
     fileprivate var remains = [String]()
     fileprivate var isSearching = false
     
@@ -36,17 +37,52 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        edgesForExtendedLayout = []
         title = "Search Items"
-        setup()
+        setupData()
         setupSearchBar()
         setupTable()
     }
+}
+
+// MARK : - Data management
+
+extension ViewController {
     
-    func setup() {
-        edgesForExtendedLayout = []
+    func setupData() {
         all = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" ]
-        recommends = [ "k", "l", "m", "n" ]
-        remains = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" ]
+        recommendsAll = [ "k", "l", "m", "n" ]
+        recommends = recommendsAll
+        recommends.forEach { item in
+            remains = all.filter({ $0 != item })
+        }
+    }
+    
+    func updateSelectedItem(item: String, indexPath: IndexPath) {
+        
+        if selected.count > 0 && indexPath.section == 0 {
+            
+            // back to the array where originaly belonged to
+            recommendsAll.contains(item)
+                ? recommends.append(item)
+                : remains.append(item)
+            
+            // update item
+            selected = selected.filter({ $0 != item })
+            
+        } else {
+            selected.append(item)
+            selected = Array(Set(selected)) // remove duplicate
+            
+            // update items
+            selected.forEach { item in
+                recommends = recommends.filter({ $0 != item })
+                remains = remains.filter({ $0 != item })
+            }
+        }
+        
+        // update table
+        tableView.reloadData()
     }
 }
 
@@ -62,16 +98,15 @@ extension ViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearching = false
         searchBar.showsCancelButton = false
-        self.view.endEditing(true)
+        view.endEditing(true)
         searchBar.text = ""
-        tableView.reloadData(with: .automatic)
+        tableView.reloadData()
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        tableView.reloadData(with: .automatic)
         isSearching = true
         searchBar.showsCancelButton = true
-        tableView.reloadData(with: .automatic)
+        tableView.reloadData()
         return true
     }
 }
@@ -86,9 +121,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.anchor(searchbar.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearching { return all.count }
+        if isSearching { return selected.count > 0 ? remains.count : all.count }
         if selected.count == 0 { return section == 0 ? recommends.count : remains.count }
         return section == 0 ? selected.count : remains.count
     }
@@ -108,15 +142,24 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         if isSearching {
-            cell.label.text = all[indexPath.row]
+            cell.label.text = selected.count > 0
+                ? remains[indexPath.row]
+                : all[indexPath.row]
+            cell.imgView.isHidden = true
         } else if (selected.count == 0) {
             cell.label.text = indexPath.section == 0
                 ? recommends[indexPath.row]
                 : remains[indexPath.row]
+            cell.imgView.isHidden = true
         } else {
             cell.label.text = indexPath.section == 0
                 ? selected[indexPath.row]
                 : remains[indexPath.row]
+            cell.imgView.isHidden = indexPath.section != 0
+        }
+        cell.addSelectedHandler { item in
+            print("selected item is \(item)")
+            self.updateSelectedItem(item: item, indexPath: indexPath)
         }
         return cell
     }
@@ -131,12 +174,14 @@ class TableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var imgView: UIImageView = {
+    lazy var imgView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "check")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+    
+    private var callback: (String) -> Void = {_ in }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -151,7 +196,7 @@ class TableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func initSubviews() {
+    private func initSubviews() {
         addSubview(label)
         addSubview(imgView)
         
@@ -160,21 +205,16 @@ class TableViewCell: UITableViewCell {
         imgView.anchor(topAnchor, left: label.rightAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 5, rightConstant: 16, widthConstant: 50, heightConstant: 0)
     }
     
+    func addSelectedHandler(callback: @escaping (String) -> Void = {_ in }) {
+        self.callback = callback
+    }
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
-        
-    }
-}
-
-// MARK: - extension
-
-extension UITableView {
-    func reloadData(with animation: UITableView.RowAnimation) {
-        beginUpdates()
-        reloadSections(IndexSet(integersIn: 0..<numberOfSections), with: animation)
-        endUpdates()
+        super.setSelected(selected, animated: animated)
+        if selected { callback(label.text ?? "") }
     }
 }
