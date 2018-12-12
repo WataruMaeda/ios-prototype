@@ -12,9 +12,11 @@ class ViewController: UIViewController {
     
     fileprivate var all = [String]()
     fileprivate var selected = [String]()
+    fileprivate var notSelected = [String]()
     fileprivate var recommends = [String]()
-    fileprivate var recommendsAll = [String]()
+    fileprivate var recommendsOriginal = [String]()
     fileprivate var remains = [String]()
+    fileprivate var searched = [String]()
     fileprivate var isSearching = false
     
     let cellId = "cellId"
@@ -51,8 +53,9 @@ extension ViewController {
     
     func setupData() {
         all = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" ]
-        recommendsAll = [ "k", "l", "m", "n" ]
-        recommends = recommendsAll
+        notSelected = all
+        recommendsOriginal = [ "k", "l", "m", "n" ]
+        recommends = recommendsOriginal
         recommends.forEach { item in
             remains = all.filter({ $0 != item })
         }
@@ -60,10 +63,10 @@ extension ViewController {
     
     func updateSelectedItem(item: String, indexPath: IndexPath) {
         
-        if selected.count > 0 && indexPath.section == 0 {
+        if !isSearching && selected.count > 0 && indexPath.section == 0 {
             
             // back to the array where originaly belonged to
-            recommendsAll.contains(item)
+            recommendsOriginal.contains(item)
                 ? recommends.append(item)
                 : remains.append(item)
             
@@ -81,7 +84,14 @@ extension ViewController {
             }
         }
         
+        // update not selected items
+        notSelected = []
+        all.forEach { item in
+            if !selected.contains(item) { notSelected.append(item) }
+        }
+        
         // update table
+        resetSearch()
         tableView.reloadData()
     }
 }
@@ -95,11 +105,20 @@ extension ViewController: UISearchBarDelegate {
         searchbar.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    func getSeachText() -> String {
+        guard let seachText = searchbar.text else { return "" }
+        return seachText
+    }
+    
+    func resetSearch() {
         isSearching = false
-        searchBar.showsCancelButton = false
+        searchbar.showsCancelButton = false
         view.endEditing(true)
-        searchBar.text = ""
+        searchbar.text = ""
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        resetSearch()
         tableView.reloadData()
     }
     
@@ -108,6 +127,15 @@ extension ViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = true
         tableView.reloadData()
         return true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+        searched = []
+        notSelected.forEach { item in
+            if item.lowercased().contains(searchText) { searched.append(item) }
+        }
+        tableView.reloadData()
     }
 }
 
@@ -122,7 +150,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearching { return selected.count > 0 ? remains.count : all.count }
+        if isSearching { return getSeachText().count > 0 ? searched.count : notSelected.count  }
         if selected.count == 0 { return section == 0 ? recommends.count : remains.count }
         return section == 0 ? selected.count : remains.count
     }
@@ -142,9 +170,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         if isSearching {
-            cell.label.text = selected.count > 0
-                ? remains[indexPath.row]
-                : all[indexPath.row]
+            cell.label.text = getSeachText().count > 0
+                ? searched[indexPath.row]
+                : notSelected[indexPath.row]
             cell.imgView.isHidden = true
         } else if (selected.count == 0) {
             cell.label.text = indexPath.section == 0
