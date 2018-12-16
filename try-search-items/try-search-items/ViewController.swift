@@ -133,7 +133,9 @@ extension ViewController: UISearchBarDelegate {
         print(searchText)
         searched = []
         notSelected.forEach { item in
-            if item.lowercased().contains(searchText) { searched.append(item) }
+            if item.lowercased().contains(searchText.lowercased()) {
+                searched.append(item)
+            }
         }
         tableView.reloadData()
     }
@@ -145,6 +147,7 @@ extension ViewController: UISearchBarDelegate {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     func setupTable() {
+        tableView.rowHeight = 60
         view.addSubview(tableView)
         tableView.anchor(searchbar.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
@@ -189,6 +192,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             print("selected item is \(item)")
             self.updateSelectedItem(item: item, indexPath: indexPath)
         }
+        cell.selectionStyle = .none
         return cell
     }
 }
@@ -204,7 +208,7 @@ class TableViewCell: UITableViewCell {
     
     lazy var imgView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "check")
+        imageView.image = UIImage(named: "tag-checked")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -228,9 +232,9 @@ class TableViewCell: UITableViewCell {
         addSubview(label)
         addSubview(imgView)
         
-        label.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 0, rightConstant: 50, widthConstant: 0, heightConstant: 0)
+        label.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 20, bottomConstant: 0, rightConstant: 80, widthConstant: 0, heightConstant: 0)
         
-        imgView.anchor(topAnchor, left: label.rightAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 5, rightConstant: 16, widthConstant: 50, heightConstant: 0)
+        imgView.anchor(topAnchor, left: label.rightAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 20, leftConstant: 20, bottomConstant: 20, rightConstant: 20, widthConstant: 40, heightConstant: 0)
     }
     
     func addSelectedHandler(callback: @escaping (String) -> Void = {_ in }) {
