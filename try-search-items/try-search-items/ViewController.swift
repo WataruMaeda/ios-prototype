@@ -52,7 +52,7 @@ class ViewController: UIViewController {
     }
     
     @objc func tappedAddButton() {
-        print("aaa")
+        print(selected)
     }
 }
 
@@ -164,16 +164,28 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearching { return getSeachText().count > 0 ? searched.count : notSelected.count  }
         if selected.count == 0 { return section == 0 ? recommends.count : remains.count }
+        if recommends.count > 0 {
+            if section == 0 { return selected.count }
+            if section == 1 { return recommends.count }
+            return remains.count
+        }
         return section == 0 ? selected.count : remains.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return isSearching ? 1 : 2
+        if isSearching { return 1 }
+        if selected.count == 0 { return 2 }
+        return recommends.count > 0 ? 3 : 2
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if isSearching { return "All items" }
         if selected.count == 0 { return section == 0 ? "Recommends" : "All items" }
+        if recommends.count > 0 {
+            if section == 0 { return "Selected Items" }
+            if section == 1 { return "Recommends" }
+            return "All Items"
+        }
         return section == 0 ? "Selected Items" :  "All items"
     }
     
@@ -192,10 +204,21 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 : remains[indexPath.row]
             cell.imgView.isHidden = true
         } else {
-            cell.label.text = indexPath.section == 0
-                ? selected[indexPath.row]
-                : remains[indexPath.row]
-            cell.imgView.isHidden = indexPath.section != 0
+            if recommends.count > 0 {
+                if indexPath.section == 0 {
+                    cell.label.text = selected[indexPath.row]
+                } else if indexPath.section == 1 {
+                    cell.label.text = recommends[indexPath.row]
+                } else {
+                    cell.label.text = remains[indexPath.row]
+                }
+                cell.imgView.isHidden = indexPath.section != 0
+            } else {
+                cell.label.text = indexPath.section == 0
+                    ? selected[indexPath.row]
+                    : remains[indexPath.row]
+                cell.imgView.isHidden = indexPath.section != 0
+            }
         }
         cell.addSelectedHandler { item in
             print("selected item is \(item)")
