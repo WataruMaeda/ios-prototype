@@ -171,6 +171,9 @@ extension ViewController: UISearchBarDelegate {
                 searched.append(item)
             }
         }
+        if (searchText.count > 0 && searched.count == 0) {
+            searched.append("新しく「\(searchText)」を追加")
+        }
         tableView.reloadData()
     }
 }
@@ -207,7 +210,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         if isSearching { return "すべてのタグ" }
         if selected.count == 0 { return section == 0 ? "おすすめタグ" : "すべてのタグ" }
         if recommends.count > 0 {
-            if section == 0 { return "選択されたタグ" }
+            if section == 0 { return "選択したタグ" }
             if section == 1 { return "おすすめタグ" }
             return "すべてのタグ"
         }
@@ -304,6 +307,16 @@ class TableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        if selected { callback(label.text ?? "") }
+        if selected {
+            let text = label.text ?? ""
+            let item = text.replacingOccurrences(of: "新しく「",
+                                                 with: "",
+                                                 options: .literal,
+                                                 range: nil)
+            callback(item.replacingOccurrences(of: "」を追加",
+                                               with: "",
+                                               options: .literal,
+                                               range: nil))
+        }
     }
 }
