@@ -23,15 +23,20 @@ class ViewController: UIViewController {
     
     fileprivate lazy var searchbar: UISearchBar = {
         let search = UISearchBar()
+        search.isTranslucent = false
+        search.backgroundImage = UIImage()
+        search.placeholder = "タグ名を入力"
+        search.barTintColor = UIColor(red:0.937, green:0.937, blue:0.937, alpha:1.000)
+//        search.tintColor = UIColor(red:0.983, green:0.503, blue:0.516, alpha:1.000)
         search.delegate = self
         search.showsScopeBar = true
-        search.placeholder = "Search items"
         return search
     }()
     
     fileprivate lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(TableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.backgroundColor = UIColor(red:0.976, green:0.977, blue:0.976, alpha:1.000)
         tableView.dataSource = self
         tableView.delegate = self
         return tableView
@@ -47,8 +52,9 @@ class ViewController: UIViewController {
     }
     
     func setupNavigationItems() {
-        title = "Search Items"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(self.tappedAddButton))
+        title = "タグの追加"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(self.tappedAddButton))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "キャンセル", style: .plain, target: self, action: #selector(self.tappedAddButton))
     }
     
     @objc func tappedAddButton() {
@@ -61,12 +67,31 @@ class ViewController: UIViewController {
 extension ViewController {
     
     func setupData() {
-        all = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" ]
+        all = [
+            "ハロウィンコレクション2018",
+            "ナチュラルメイク",
+            "ギャルメイク",
+            "猫メイク",
+            "オルチャンメイク",
+            "ピンクメイク",
+            "ゆめかわメイク",
+            "プチクラ",
+            "ものまねメイク",
+            "時短メイク"
+        ]
+        recommendsOriginal = [
+            "ハロウィンコレクション2018",
+            "ナチュラルメイク",
+            "ギャルメイク",
+            "猫メイク"
+        ]
+        remains = all
         notSelected = all
-        recommendsOriginal = [ "k", "l", "m", "n" ]
         recommends = recommendsOriginal
         recommends.forEach { item in
-            remains = all.filter({ $0 != item })
+            if let idx = remains.index(of: item) {
+                remains.remove(at: idx)
+            }
         }
     }
     
@@ -179,14 +204,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if isSearching { return "All items" }
-        if selected.count == 0 { return section == 0 ? "Recommends" : "All items" }
+        if isSearching { return "すべてのタグ" }
+        if selected.count == 0 { return section == 0 ? "おすすめタグ" : "すべてのタグ" }
         if recommends.count > 0 {
-            if section == 0 { return "Selected Items" }
-            if section == 1 { return "Recommends" }
-            return "All Items"
+            if section == 0 { return "選択されたタグ" }
+            if section == 1 { return "おすすめタグ" }
+            return "すべてのタグ"
         }
-        return section == 0 ? "Selected Items" :  "All items"
+        return section == 0 ? "選択したタグ" :  "すべてのタグ"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
