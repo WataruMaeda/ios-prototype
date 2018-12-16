@@ -40,10 +40,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         edgesForExtendedLayout = []
-        title = "Search Items"
+        setupNavigationItems()
         setupData()
         setupSearchBar()
         setupTable()
+    }
+    
+    func setupNavigationItems() {
+        title = "Search Items"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(self.tappedAddButton))
+    }
+    
+    @objc func tappedAddButton() {
+        print("aaa")
     }
 }
 
