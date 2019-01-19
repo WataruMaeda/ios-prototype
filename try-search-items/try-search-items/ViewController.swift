@@ -66,19 +66,21 @@ class ViewController: UIViewController {
 
 extension ViewController {
     
+    func getAllTags() -> [String] {
+        do {
+            if let path = Bundle.main.path(forResource: "makey-tags-all", ofType: "txt"){
+                let data = try String(contentsOfFile:path, encoding: String.Encoding.utf8)
+                return data.components(separatedBy: "\n")
+            }
+        } catch let err as NSError {
+            print(err)
+            return []
+        }
+        return []
+    }
+    
     func setupData() {
-        all = [
-            "ハロウィンコレクション2018",
-            "ナチュラルメイク",
-            "ギャルメイク",
-            "猫メイク",
-            "オルチャンメイク",
-            "ピンクメイク",
-            "ゆめかわメイク",
-            "プチクラ",
-            "ものまねメイク",
-            "時短メイク"
-        ]
+        all = getAllTags()
         recommendsOriginal = [
             "ハロウィンコレクション2018",
             "ナチュラルメイク",
