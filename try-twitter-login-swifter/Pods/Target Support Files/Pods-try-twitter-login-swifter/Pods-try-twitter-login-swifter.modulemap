@@ -1,6 +1,0 @@
-framework module Pods_try_twitter_login_swifter {
-  umbrella header "Pods-try-twitter-login-swifter-umbrella.h"
-
-  export *
-  module * { export * }
-}
