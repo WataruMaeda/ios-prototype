@@ -48,7 +48,20 @@ enum CalculatorButton: String {
   }
 }
 
+// Env variable
+// You can treat this as the grobal apprication state
+class GrovalEnvironemnt: ObservableObject {
+  
+  @Published var display = ""
+
+  func receiveInput(input: CalculatorButton) {
+    self.display = input.title
+  }
+}
+
 struct ContentView: View {
+  
+  @EnvironmentObject var env: GrovalEnvironemnt
   
   let buttons: [[CalculatorButton]] = [
     [.ac, .plusMinus, .percent, .devide],
@@ -66,38 +79,48 @@ struct ContentView: View {
       VStack(spacing: 12) {
         HStack {
           Spacer()
-          Text("42").font(.system(size: 64)).foregroundColor(.white)
+          Text(env.display).font(.system(size: 64)).foregroundColor(.white)
         }.padding()
         
         ForEach(buttons, id: \.self) { row in
           HStack(spacing: 12) {
             ForEach(row, id: \.self) { button in
-              
-              Button(action: {
-                // actions
-              }) {
-                Text(button.title).font(.system(size: 32))
-                  .frame(width: self.buttonWidth(), height: self.buttonWidth())
-                  .foregroundColor(.white)
-                  .background(button.backgroundColor)
-                  .cornerRadius(self.buttonWidth() / 2)
-                
-              }
-              
+              // call view
+              CalculatorButtonView(button: button)
             }
           }
         }
       }.padding(.bottom)
     }
   }
+}
+
+struct CalculatorButtonView: View {
   
-  func buttonWidth() -> CGFloat {
+  var button: CalculatorButton
+  @EnvironmentObject var env: GrovalEnvironemnt
+  
+  var body: some View {
+    Button(action: {
+      // actions
+      self.env.receiveInput(input: self.button)
+    }) {
+      Text(button.title).font(.system(size: 32))
+        .frame(width: self.buttonWidth(), height: self.buttonWidth())
+        .foregroundColor(.white)
+        .background(button.backgroundColor)
+        .cornerRadius(self.buttonWidth() / 2)
+      
+    }
+  }
+  
+  private func buttonWidth() -> CGFloat {
     return (UIScreen.main.bounds.width - 5 * 12) / 4
   }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+      ContentView().environmentObject(GrovalEnvironemnt())
     }
 }
