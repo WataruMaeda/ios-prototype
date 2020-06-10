@@ -13,41 +13,76 @@
 
 import SwiftUI
 
-struct User: Identifiable {
+struct Animal: Identifiable {
   let id: Int
-  let username, message, imageName: String
+  let name, message, imageName: String
 }
 
 struct ContentView: View {
-  let users: [User] = [
-    .init(id: 0, username: "Dog", message: "iPhone is now on sale", imageName: "dog"),
-    .init(id: 1, username: "Cat", message: "iPhone is now on sale", imageName: "cat"),
-    .init(id: 2, username: "Bird", message: "iPhone is now on sale iPhone is now on sale iPhone is now on sale iPhone is now on sale iPhone is now on sale iPhone is now on sale", imageName: "bird"),
+  let animals: [Animal] = [
+    .init(id: 0, name: "Dog", message: "Baw Baw", imageName: "dog"),
+    .init(id: 1, name: "Cat", message: "Mew", imageName: "cat"),
+    .init(id: 2, name: "Bird", message: "Pipipipi", imageName: "bird"),
   ]
 
   var body: some View {
     NavigationView {
       List {
-        ForEach(users, id: \.id) { user in
-          UserView(user: user)
+        VStack {
+          VStack(alignment: .leading) {
+          Text("Trending").padding(.init(top: 12, leading: 0, bottom: 12, trailing: 0))
+          ScrollView(.horizontal) {
+              HStack {
+                ForEach(animals, id: \.id) { animal in
+                  FeatureView(animal: animal)
+                }
+              }
+            }
+          }
+        }
+        ForEach(animals, id: \.id) {
+          UserView(animal: $0)
         }
       }.navigationBarTitle(Text("Dynamic List"))
     }
   }
 }
 
+struct FeatureView: View {
+  var animal: Animal
+  var body: some View {
+    NavigationLink(destination: FeatureDetailView(animal: animal)) {
+      VStack(alignment: .leading) {
+        Image(animal.imageName).renderingMode(.original).frame(width: 100, height: 100).padding(.init(top: 5, leading: 0, bottom: 5, trailing: 0)).clipped().cornerRadius(10)
+        Text(animal.name).foregroundColor(.primary).font(.system(size: 14)).lineLimit(nil)
+      }
+    }
+  }
+}
+
+struct FeatureDetailView: View {
+  var animal: Animal
+  var body: some View {
+    VStack {
+      Image(animal.imageName)
+      Text(animal.name)
+      Text(animal.message)
+    }
+  }
+}
+
 struct UserView: View {
-  let user: User
+  let animal: Animal
   var body: some View {
     HStack {
-      Image(user.imageName)
+      Image(animal.imageName)
       .resizable()
         .frame(width: 70, height: 70)
         .clipShape(Circle())
         .clipped()
           VStack (alignment: .leading) {
-        Text(user.username).font(.headline)
-        Text(user.message).font(.caption)
+        Text(animal.name).font(.headline)
+        Text(animal.message).font(.caption)
         }.padding(.leading, 8)
     }.padding(.init(top: 12, leading: 0, bottom: 12, trailing: 0))
   }
